@@ -1,0 +1,90 @@
+<!--
+  ~ Scrabble Helper Module 2015.
+  ~ Written by Sylvain Gourio
+  ~ sylvain.gourio@gmail.com
+  -->
+<div class="container">
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
+
+  <div data-ng-init="init()">
+    <div class="row">
+      <div class="col-md-4">
+        <ul class="draw" ng-model="draw"> <!-- DRAW -->
+          <li ng-repeat="tile in draw track by $index" class="tile">
+            <img  ng-src="{{tile.imageURL}}" drag="true" data-value="{{tile}}" data-from="draw" data-index="{{$index}}"/>
+            <a ng-click="unchooseLetter($index)"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a ng-if="tile.tileType == 'wildcard'" ns-popover ns-popover-template="popover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(tile)"><span class="glyphicon glyphicon-question-sign"></span></a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-default btn-sm" type="button" ng-click="clearDraw()" ng-show="!finished">Vider</button>
+        <button class="btn btn-default btn-sm" type="button" ng-click="randomDraw()" ng-show="!finished">Nouveau tirage aléatoire</button>
+        <button class="btn btn-default btn-sm" type="button" ng-click="displayDeck = !displayDeck" ng-show="!finished">Choisir</button>
+        <button class="btn btn-default btn-sm" type="button" ng-click="init()">Nouveau Jeu</button>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-8">
+        <div class="board" drop><!-- BOARD -->
+          <ul class="rows">
+            <li ng-repeat="row in board.squares" ng-init="lineIndex = $index">
+              <ul class="columns">
+                <li ng-repeat="square in row" ng-style="{{square.style}}" class="square">
+                  <img  ng-src="{{square.droppedTile.tile.imageURL}}" ng-if="square.justDropped" drag="true" drag-from="board" data-value="{{square.droppedTile.tile}}" data-row="{{lineIndex}}" data-column="{{$index}}"/>
+                  <img  ng-src="{{square.droppedTile.tile.imageURL}}" ng-if="!square.justDropped"/>
+                  <a ng-if="square.droppedTile.tile.tileType == 'wildcard' && square.justDropped" ns-popover ns-popover-template="popover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(square.droppedTile.tile)"><span class="glyphicon glyphicon-question-sign"></span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+        <div class="row" ng-show="displayDeck">
+          <div class="deck col-md-12"> <!-- DECK -->
+              <img  width="24" ng-src="{{letter.imageURL}}" ng-repeat="letter in deck track by $index" ng-click="chooseLetter($index)"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            Tour #{{currentTurnNumber}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" > <!-- SUGGESTIONS -->
+            <div class="loader" ng-if="callingFindWords">Recherche des meilleurs mots possibles<div class="loader-inner ball-clip-rotate"><div></div></div></div>
+            <div ng-if="suggestions.length > 0">
+              <span>Choisissez le mot à placer:</span>
+              <ul class="suggestions">
+                <li ng-repeat="suggest in suggestions" ng-click="putWord($index)" ng-class="{ 'selectedSuggestWord': $index == selectedSuggestIndex }">
+                    {{suggest.points + 'pts - ' + suggest.reference + ' - '}}<span>{{suggest.value}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" ng-if="selectedSuggestIndex >= 0">
+            <button class="btn btn-default" type="button" ng-click="validRound()">Valider</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-default" type="button" ng-click="createGame()" ng-if="finished">Enregistrer la partie</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/ng-template" id="popover">
+    <ul class="jokerPopover">
+      <li ng-repeat="n in ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']">
+        <img  ng-src="{{'/assets/images/lettres36/fr/joker/'+n+'.gif'}}" ng-click="changeJokerValue(n,$event); hidePopover()" />
+      </li>
+    </ul>
+  </script>
+</div>
