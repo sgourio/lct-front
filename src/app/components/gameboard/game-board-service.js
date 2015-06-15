@@ -14,35 +14,41 @@
  * Service in the lctUiApp.
  */
 angular.module('lct')
-  .service('gameBoardService', [ '$http', 'apiRoot', '$log', function ($http, apiRoot, $log) {
+  .service('gameBoardService', [ '$http', 'apiRoot', '$log','$q', function ($http, apiRoot, $log, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var gameBoardService = {
 
-      getInitialFrenchDeck : function(callback){
-        $http.get(apiRoot + '/board/fr/deck/init').
-          success(function (data) {
-            for (var i = data.length - 1; i >= 0; i--) {
-              if( data[i].tileType !== 'wildcard' ) {
-                data[i].imageURL = 'assets/images/lettres36/fr/normal/' + data[i].value+'.gif';
-              }else{
-                data[i].imageURL = 'assets/images/lettres36/fr/normal/wildcard.gif';
+      getInitialFrenchDeck : function(){
+        return $q(function(resolve, reject) {
+          $http.get(apiRoot + '/board/fr/deck/init').
+            success(function (data) {
+              for (var i = data.length - 1; i >= 0; i--) {
+                if (data[i].tileType !== 'wildcard') {
+                  data[i].imageURL = 'assets/images/lettres36/fr/normal/' + data[i].value + '.gif';
+                } else {
+                  data[i].imageURL = 'assets/images/lettres36/fr/normal/wildcard.gif';
+                }
               }
-            }
-            callback(data);
-          }).
-          error(function (data, status) {
-            $log.error('Service ' + apiRoot + '/board/fr/deck/init' +' respond ' + status);
-          });
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service ' + apiRoot + '/board/fr/deck/init' + ' respond ' + status);
+              reject();
+            });
+        });
       },
 
-      getInitialScrabbleBoardGame : function(callback){
-        $http.get(apiRoot + '/board/fr/empty').
-          success(function (data) {
-            callback(data);
-          }).
-          error(function (data, status) {
-            $log.error('Service ' + apiRoot + '/board/fr/empty' +' respond ' + status);
-          });
+      getInitialScrabbleBoardGame : function(){
+        return $q(function(resolve, reject) {
+          $http.get(apiRoot + '/board/fr/empty').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service ' + apiRoot + '/board/fr/empty' + ' respond ' + status);
+              reject();
+            });
+        });
       },
 
       squarePosition : function (row, column, squareHeight, squareWitdh, squareOffSetY, squareOffSetX) {
@@ -255,31 +261,32 @@ angular.module('lct')
         this.sortTiles(deck);
       },
 
-      findWords : function(draw, board, possibleWords, successCallback){
-        var boadClone = JSON.parse(JSON.stringify(board));
-        var drawClone = draw.slice(0);
-        this.clearBoard(boadClone,drawClone);
-        var boardGameQueryBean = {
-          tileList: drawClone,
-          boardGame: boadClone
-        };
+      findWords : function(draw, board, possibleWords){
+        return $q(function(resolve, reject) {
+          var boadClone = JSON.parse(JSON.stringify(board));
+          var drawClone = draw.slice(0);
+          gameBoardService.clearBoard(boadClone, drawClone);
+          var boardGameQueryBean = {
+            tileList: drawClone,
+            boardGame: boadClone
+          };
 
-        if( possibleWords.length > 0 ) {
-          possibleWords.splice(0, possibleWords.length);
-        }
-        $http.post(apiRoot + '/board/fr/bestword', boardGameQueryBean).
-          success(function (data) {
-            if( possibleWords.length > 0 ) {
-              possibleWords.splice(0, possibleWords.length);
-            }
-            Array.prototype.push.apply(possibleWords, data);
-            if(typeof successCallback === 'function'){
-              successCallback();
-            }
-          }).
-          error(function (data, status) {
-            $log.error('Service ' + apiRoot + '/board/fr/bestword' +' respond ' + status);
-          });
+          if (possibleWords.length > 0) {
+            possibleWords.splice(0, possibleWords.length);
+          }
+          $http.post(apiRoot + '/board/fr/bestword', boardGameQueryBean).
+            success(function (data) {
+              if (possibleWords.length > 0) {
+                possibleWords.splice(0, possibleWords.length);
+              }
+              Array.prototype.push.apply(possibleWords, data);
+              resolve();
+            }).
+            error(function (data, status) {
+              $log.error('Service ' + apiRoot + '/board/fr/bestword' + ' respond ' + status);
+              reject();
+            });
+        });
       },
 
       putWord : function(board, draw, suggest){

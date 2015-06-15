@@ -3,12 +3,21 @@
   ~ Written by Sylvain Gourio
   ~ sylvain.gourio@gmail.com
   -->
-<div class="container">
-  <oauth
-    site="https://accounts.google.com"
-    authorize-path="/o/oauth2/auth"
-    client-id="232967929857-ilihjfcnbr6cnd14mnc1bhff4jlk8ct8.apps.googleusercontent.com"
-    redirect-uri="http://localhost:3000"
-    scope="email profile">
-  </oauth>
+<div class="container social">
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <a class="btn btn-lg btn-block btn-social btn-google" ng-click="authenticate('google')" ng-if="!isAuthenticated()">
+        <i class="fa fa-google"></i>
+        Connexion Google
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-lg btn-block btn-social btn-facebook" ng-click="authenticate('facebook')" ng-if="!isAuthenticated()">
+        <i class="fa fa-facebook"></i>
+        Connexion Facebook
+      </a>
+    </div>
+  </div>
 </div>

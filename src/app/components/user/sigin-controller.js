@@ -7,14 +7,22 @@
 'use strict';
 
 angular.module('lct')
-  .controller('SignInCtrl', function ($scope,$location, AccessToken, $state, $log) {
+  .controller('SignInCtrl', function ($scope,$location, $state, $log, $auth, $window) {
 
-    $scope.$on('oauth:login', function() {
-      $log.info('Try to connect...');
-    });
 
-    $scope.$on('oauth:logout', function() {
-      $state.transitionTo('home');
-    });
+    $scope.authenticate = function(provider) {
+      $auth.link(provider).then(function (response){
+        $auth.setToken(response);
+        var toState = $window.sessionStorage.toState || 'home';
+        $state.transitionTo(toState);
+      });
+    };
+
+    $scope.logout = function(){
+      $auth.logout();
+    };
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
 
   });

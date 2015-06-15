@@ -22,6 +22,7 @@
         <button class="btn btn-default btn-sm" type="button" ng-click="randomDraw()" ng-show="!finished">Nouveau tirage aléatoire</button>
         <button class="btn btn-default btn-sm" type="button" ng-click="displayDeck = !displayDeck" ng-show="!finished">Choisir</button>
         <button class="btn btn-default btn-sm" type="button" ng-click="init()">Nouveau Jeu</button>
+        <button class="btn btn-default btn-sm" type="button" ng-click="auto()">Nouveau Jeu Auto</button>
 
       </div>
     </div>
@@ -75,8 +76,30 @@
             <button class="btn btn-default" type="button" ng-click="createGame()" ng-if="finished">Enregistrer la partie</button>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+          <div class="alert alert-success" ng-show="showSuccessAlert">
+            <button type="button" class="close" data-ng-click="showSuccessAlert = false" >×</button>
+            <strong>Partie enregistrée</strong>
+          </div>
+        </div>
 
       </div>
+    </div>
+    <div class="col-lg-3 col-md-4">
+      <table class="table">
+        <thead>
+          <tr><td>Tour</td><td>Mot</td><td>Points</td><td>Total</td></tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="round in game.roundList" ng-init="total = 0">
+            <td>{{$index + 1}}</td>
+            <td>{{round.droppedWord.reference + ' ' + round.droppedWord.value}}</td>
+            <td>{{round.droppedWord.points}}</td>
+            <td>{{totalScore($index)}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

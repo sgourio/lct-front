@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap','oauth'])
-  .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider) {
+angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer'])
+  .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider, $authProvider) {
     $stateProvider
       .state('home', {
         url: '/',
@@ -24,36 +24,28 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         controller: 'SignInCtrl'
       });
 
-    $stateProvider
-      .state('access_token', {
-        url:'/access_token=:accessToken',
-        template: '',
-        controller: function ($location, AccessToken, $window, $state, $http, apiRoot, userService) {
-          var hash = $location.path().substr(1);
-          AccessToken.setTokenFromString(hash);
-          userService.googleInfo(function(displayName){
-            userService.authenticate(displayName);
-          });
-        }
-      });
-
     $urlRouterProvider.otherwise('/');
 
-    $provide.value('apiRoot', angular.element('#apiRoot').attr('href'));
+    var apiRoot = angular.element('#apiRoot').attr('href');
+    $provide.value('apiRoot', apiRoot);
 
-    $httpProvider.interceptors.push(function($q, AccessToken) {
-      return {
-        'request': function(config) {
-          if( AccessToken.get() ) {
-            config.headers.Token = AccessToken.get().access_token;
-          }
-          return config;
-        }
-      };
+    $authProvider.facebook({
+      clientId: '274714975961675',
+      url: apiRoot + '/auth/facebook'
     });
-  }).run(function ($rootScope, $state, AccessToken, $window) {
+
+    $authProvider.google({
+      clientId: '232967929857-ilihjfcnbr6cnd14mnc1bhff4jlk8ct8.apps.googleusercontent.com',
+      url: apiRoot + '/auth/google'
+    });
+
+    $authProvider.twitter({
+      url: apiRoot + '/auth/twitter'
+    });
+
+  }).run(function ($rootScope, $state, $auth, $window) {
     $rootScope.$on('$stateChangeStart', function(event, toState){
-      if (toState.authenticate && AccessToken.get() === null){
+      if (toState.authenticate && !$auth.isAuthenticated()){
         // User isn’t authenticated and must be
         $window.sessionStorage.toState = toState.name;
         $state.transitionTo('signin');

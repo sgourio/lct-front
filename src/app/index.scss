@@ -101,6 +101,10 @@ ul{
     padding-bottom: 0px;
   }
 
+  .navbar-right{
+    margin-right: 0;
+  }
+
   .navbar-brand{
     padding-top: 0px;
     padding-bottom: 0px;
@@ -197,7 +201,9 @@ div.ball-clip-rotate > div{
   border-bottom-color: transparent;
 }
 
-
+.social a.btn{
+  margin-top: 20px;
+}
 
 
 
