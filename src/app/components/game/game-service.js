@@ -43,6 +43,18 @@ angular.module('lct')
           error(function (data, status) {
             $log.error('Service ' + apiRoot + '/game/fr/' + game.id +' respond ' + status);
           });
+      },
+
+      list: function(callbackOk){
+        $log.info('apiRoot ' + apiRoot);
+        $http.get(apiRoot + '/game/fr/').
+          success(function (data) {
+            $log.info('gameList: ' + data);
+            callbackOk(data);
+          }).
+          error(function (data, status) {
+            $log.error('Service GET ' + apiRoot + '/game/fr/' +' respond ' + status);
+          });
       }
     };
     return gameService;

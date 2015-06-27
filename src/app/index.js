@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer'])
+angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover'])
   .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider, $authProvider) {
     $stateProvider
       .state('home', {
@@ -22,6 +22,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         url: '/signin',
         templateUrl: 'app/components/user/signin.html',
         controller: 'SignInCtrl'
+      });
+
+    $stateProvider
+      .state('gameList', {
+        url: '/game/list',
+        templateUrl: 'app/components/game/list/game-list.html',
+        controller: 'GameListCtrl'
       });
 
     $urlRouterProvider.otherwise('/');

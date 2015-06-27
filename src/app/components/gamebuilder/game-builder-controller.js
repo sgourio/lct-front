@@ -82,7 +82,7 @@ angular.module('lct')
     };
 
     $scope.randomDraw = function(){
-      return $q(function(resolve, reject) {
+      return $q(function(resolve) {
         gameBoardService.randomDraw($scope.board, $scope.draw, $scope.deck, $scope.currentTurnNumber);
         $scope.findWords().then( function(){
           resolve();
@@ -132,7 +132,7 @@ angular.module('lct')
           gameBoardService.newRoundDraw($scope.board, $scope.draw, $scope.deck, $scope.currentTurnNumber);
           $scope.findWords().then(function(){
             resolve();
-          }).catch(function (error){
+          }).catch(function (){
             reject();
           });
         }
@@ -179,7 +179,7 @@ angular.module('lct')
       $scope.init().then(function(){
         play();
       });
-    }
+    };
 
   }]);
 

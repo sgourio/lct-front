@@ -94,7 +94,7 @@
         <tbody>
           <tr ng-repeat="round in game.roundList" ng-init="total = 0">
             <td>{{$index + 1}}</td>
-            <td>{{round.droppedWord.reference + ' ' + round.droppedWord.value}}</td>
+            <td class="reference"><span>{{round.droppedWord.reference}}</span>&nbsp;{{round.droppedWord.value}}</td>
             <td>{{round.droppedWord.points}}</td>
             <td>{{totalScore($index)}}</td>
           </tr>

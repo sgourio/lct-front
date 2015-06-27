@@ -12,7 +12,7 @@ angular.module('lct')
       if( $auth.isAuthenticated() ) {
         return $auth.getPayload().sub;
       }else{
-        return "";
+        return '';
       }
     };
     $scope.date = new Date();
