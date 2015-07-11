@@ -8,7 +8,7 @@
  * Controller of the lctUiApp
  */
 angular.module('lct')
-  .controller('GameBuilderCtrl', ['$scope', '$q', '$http','gameBoardService', 'gameService', function ($scope, $q, $http, gameBoardService, gameService) {
+  .controller('GameBuilderCtrl', ['$scope', '$q', '$http', '$modal', '$log', 'gameBoardService', 'gameService', function ($scope, $q, $http, $modal, $log, gameBoardService, gameService) {
 
     var squareWitdh = 37;
     var squareHeight = 37;
@@ -32,6 +32,7 @@ angular.module('lct')
         $scope.selectedSuggestIndex = -1;
         $scope.showSuccessAlert = false;
         $scope.finished = false;
+        $scope.Math = window.Math;
         $scope.game = {
           lang: 'fr',
           name: '',
@@ -121,6 +122,7 @@ angular.module('lct')
       return $q(function(resolve, reject) {
         var droppedWord = $scope.suggestions[$scope.selectedSuggestIndex];
         var round = gameBoardService.validRound($scope.board, $scope.draw, droppedWord);
+        $scope.game.roundList = $scope.game.roundList.slice(0,$scope.currentTurnNumber-1);
         $scope.game.roundList.push(round);
         $scope.currentTurnNumber++;
         $scope.suggestions = [];
@@ -135,6 +137,26 @@ angular.module('lct')
           }).catch(function (){
             reject();
           });
+        }
+      });
+    };
+
+    $scope.goToTurn = function(index){
+      gameBoardService.getInitialScrabbleBoardGame().then(function (data) {
+        $scope.board = data;
+        for (var i = 0; i < 15; i++) {
+          for (var j = 0; j < 15; j++) {
+            var position = gameBoardService.squarePosition(i, j, squareHeight, squareWitdh, squareOffSetY, squareOffSetX);
+            $scope.board.squares[i][j].style = {top: position.top, left: position.left};
+          }
+        }
+        $scope.board.middleSquare = $scope.board.squares[7][7];
+        return data;
+      }).then(function() {
+        for( var i = 0 ; i < index ; i++){
+          $log.info(i);
+          gameBoardService.putWord($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
+          gameBoardService.validRound($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
         }
       });
     };
@@ -181,5 +203,36 @@ angular.module('lct')
       });
     };
 
+    $scope.openSaveGameModal = function(){
+        var modalInstance = $modal.open({
+          animation: $scope.animationsEnabled,
+          templateUrl: 'saveModal',
+          controller: 'ModalSaveGameCtrl',
+          resolve: {
+            game: $scope.game
+          }
+      });
+      modalInstance.result.then(function (name) {
+        $scope.game.name = name;
+        $scope.createGame();
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
   }]);
+
+
+angular.module('lct').controller('ModalSaveGameCtrl',[ '$scope', '$modalInstance', 'game', function ($scope, $modalInstance, game) {
+
+  $scope.game = game;
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.game.name);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+}]);
 
