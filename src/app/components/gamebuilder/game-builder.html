@@ -9,11 +9,11 @@
   <div data-ng-init="init()">
     <div class="row">
       <div class="col-md-4">
-        <ul class="draw" ng-model="draw"> <!-- DRAW -->
-          <li ng-repeat="tile in draw track by $index" class="tile">
-            <img  ng-src="{{tile.imageURL}}" drag="true" data-value="{{tile}}" data-from="draw" data-index="{{$index}}"/>
+        <ul class="draw"> <!-- DRAW -->
+          <li ng-repeat="droppedTile in draw track by $index" class="tile">
+            <img  ng-src="{{tileImageUrl(droppedTile.tile, droppedTile.value)}}" drag="true" data-value="{{droppedTile}}" data-from="draw" data-index="{{$index}}"/>
             <a ng-click="unchooseLetter($index)"><span class="glyphicon glyphicon-remove-sign"></span></a>
-            <a ng-if="tile.tileType == 'wildcard'" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(tile)"><span class="glyphicon glyphicon-question-sign"></span></a>
+            <a ng-if="droppedTile.tile.tileType == 'wildcard'" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(droppedTile)"><span class="glyphicon glyphicon-question-sign"></span></a>
           </li>
         </ul>
       </div>
@@ -33,9 +33,9 @@
           <ul class="rows">
             <li ng-repeat="row in board.squares" ng-init="lineIndex = $index">
               <ul class="columns">
-                <li ng-repeat="square in row" ng-style="{{square.style}}" class="square">
-                  <img  ng-src="{{square.droppedTile.tile.imageURL}}" ng-if="square.justDropped" drag="true" drag-from="board" data-value="{{square.droppedTile.tile}}" data-row="{{lineIndex}}" data-column="{{$index}}"/>
-                  <img  ng-src="{{square.droppedTile.tile.imageURL}}" ng-if="!square.justDropped"/>
+                <li ng-repeat="square in row" ng-style="{{ ::{top:squarePosition(lineIndex, $index).top, left:squarePosition(lineIndex, $index).left} }}" class="square">
+                  <img  ng-src="{{tileImageUrl(square.droppedTile.tile, square.droppedTile.value)}}" ng-if="square.droppedTile && square.justDropped" drag="true" drag-from="board" data-value="{{square.droppedTile}}" data-row="{{lineIndex}}" data-column="{{$index}}"/>
+                  <img  ng-src="{{tileImageUrl(square.droppedTile.tile, square.droppedTile.value)}}" ng-if="square.droppedTile && !square.justDropped"/>
                   <a ng-if="square.droppedTile.tile.tileType == 'wildcard' && square.justDropped" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(square.droppedTile.tile)"><span class="glyphicon glyphicon-question-sign"></span></a>
                 </li>
               </ul>
@@ -46,7 +46,7 @@
       <div class="col-lg-3 col-md-4">
         <div class="row" ng-show="displayDeck">
           <div class="deck col-md-12"> <!-- DECK -->
-              <img  width="24" ng-src="{{letter.imageURL}}" ng-repeat="letter in deck track by $index" ng-click="chooseLetter($index)"/>
+              <img  width="24" ng-src="{{tileImageUrl(tile)}}" ng-repeat="tile in deck track by $index" ng-click="chooseLetter($index)"/>
           </div>
         </div>
         <div class="row" ng-if="!finished">
@@ -100,7 +100,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="round in game.roundList" ng-init="total = 0">
-            <td>{{$index + 1}}</td>
+            <td ng-click="goToTurn($index+1)">{{$index + 1}}</td>
             <td class="reference"><span>{{round.droppedWord.reference}}</span>&nbsp;{{round.droppedWord.value}}</td>
             <td>{{round.droppedWord.points}}</td>
             <td>{{totalScore($index)}}</td>

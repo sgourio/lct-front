@@ -22,8 +22,36 @@ angular.module('lct')
       boardOffset = angular.element('.board').offset();
     });
 
+    $scope.$watch(function(scope) { return $scope.currentTurnNumber },
+      function(newValue, oldValue, $scope) {
+        if( $scope.game.roundList[newValue-1] ) {
+          var activeRound = gameBoardService.getActiveRound($scope.game, newValue);
+          $scope.board = JSON.parse(JSON.stringify(activeRound.board));
+          $scope.deck = JSON.parse(JSON.stringify(activeRound.deck));
+          var draw = JSON.parse(JSON.stringify(activeRound.draw));
+          for( var l = 0 ; l < draw.length; l++){
+            var droppedTile = {
+              tile: draw[l],
+              value: draw[l].value
+            }
+            $scope.draw.push(droppedTile);
+          }
+          //$scope.findWords();
+
+          //$scope.board = JSON.parse(JSON.stringify($scope.initialBoard));
+          //for( var i = 0 ; i < newValue ; i++){
+          //  gameBoardService.putWord($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
+          //  gameBoardService.validRound($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
+          //  $scope.draw = $scope.game.roundList[i].draw;
+          //}
+
+        }
+      }
+    );
+
     $scope.init = function() {
       return $q(function(resolve, reject) {
+        $scope.Math = window.Math;
         $scope.displayPopover = false;
         $scope.displayDeck = false;
         $scope.currentJoker = null;
@@ -32,38 +60,42 @@ angular.module('lct')
         $scope.selectedSuggestIndex = -1;
         $scope.showSuccessAlert = false;
         $scope.finished = false;
-        $scope.Math = window.Math;
         $scope.game = {
           lang: 'fr',
           name: '',
           roundList: []
         };
         $scope.draw = [];
+
+
         $scope.currentTurnNumber = 1;
 
-        gameBoardService.getInitialScrabbleBoardGame().then(function (data) {
-          $scope.board = data;
-          for (var i = 0; i < 15; i++) {
-            for (var j = 0; j < 15; j++) {
-              var position = gameBoardService.squarePosition(i, j, squareHeight, squareWitdh, squareOffSetY, squareOffSetX);
-              $scope.board.squares[i][j].style = {top: position.top, left: position.left};
-            }
-          }
-          $scope.board.middleSquare = $scope.board.squares[7][7];
-          return data;
-        }).then(function() {
-          return gameBoardService.getInitialFrenchDeck();
-        }).then(function (data) {
-          $scope.deck = data;
+        gameBoardService.init().then( function(){
+          $scope.board = JSON.parse(JSON.stringify(gameBoardService.initialBoardGame));
+          $scope.deck = JSON.parse(JSON.stringify(gameBoardService.initialFrenchDeck));
           gameBoardService.sortTiles($scope.deck);
           return $scope.randomDraw();
-        }).then( function(){
-          resolve();
-        }).catch( function(){
-          reject();
         });
+
       });
 
+
+    };
+
+    $scope.squarePosition = function(row, column){
+      return gameBoardService.squarePosition(row, column, squareHeight, squareWitdh, squareOffSetY, squareOffSetX);
+    };
+
+    $scope.tileImageUrl = function(tile, jokerValue){
+      if (tile.tileType !== 'wildcard') {
+        return 'assets/images/lettres36/fr/normal/' + tile.value + '.gif';
+      } else {
+        if( jokerValue && jokerValue !== '?' ){
+          return '/assets/images/lettres36/fr/joker/'+ jokerValue +'.gif';
+        }else{
+          return 'assets/images/lettres36/fr/normal/wildcard.gif';
+        }
+      }
     };
 
     $scope.chooseLetter = function(index){
@@ -91,12 +123,11 @@ angular.module('lct')
       });
     };
 
-    $scope.startChangeJokerValue = function(tile){
-      $scope.currentJoker = tile;
+    $scope.startChangeJokerValue = function(droppedTile){
+      $scope.currentJoker = droppedTile;
     };
 
     $scope.changeJokerValue = function(letter){
-      $scope.currentJoker.imageURL = '/assets/images/lettres36/fr/joker/'+letter+'.gif';
       $scope.currentJoker.value = letter;
     };
 
@@ -142,23 +173,7 @@ angular.module('lct')
     };
 
     $scope.goToTurn = function(index){
-      gameBoardService.getInitialScrabbleBoardGame().then(function (data) {
-        $scope.board = data;
-        for (var i = 0; i < 15; i++) {
-          for (var j = 0; j < 15; j++) {
-            var position = gameBoardService.squarePosition(i, j, squareHeight, squareWitdh, squareOffSetY, squareOffSetX);
-            $scope.board.squares[i][j].style = {top: position.top, left: position.left};
-          }
-        }
-        $scope.board.middleSquare = $scope.board.squares[7][7];
-        return data;
-      }).then(function() {
-        for( var i = 0 ; i < index ; i++){
-          $log.info(i);
-          gameBoardService.putWord($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
-          gameBoardService.validRound($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
-        }
-      });
+      $scope.currentTurnNumber = index; // there is a watch on this
     };
 
     $scope.createGame = function(){

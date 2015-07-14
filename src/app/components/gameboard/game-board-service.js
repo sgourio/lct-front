@@ -18,6 +18,9 @@ angular.module('lct')
     // AngularJS will instantiate a singleton by calling "new" on this function
     var gameBoardService = {
 
+      initialFrenchDeck : null,
+      initialBoardGame : null,
+
       getInitialFrenchDeck : function(){
         return $q(function(resolve, reject) {
           $http.get(apiRoot + '/board/fr/deck/init').
@@ -81,26 +84,17 @@ angular.module('lct')
       },
 
 
-      moveDrawToBoard : function(draw, board, tile, drawIndex, row, column, jokerValue) {
+      moveDrawToBoard : function(draw, board, droppedTile, drawIndex, row, column) {
         var targetSquare = board.squares[row][column];
-        var value = tile.value;
-        if (typeof jokerValue !== 'undefined'){
-          value = jokerValue;
-        }
         if (typeof targetSquare.droppedTile === 'undefined' || targetSquare.droppedTile === null){
-          targetSquare.droppedTile = {
-            tile :tile,
-            value : value
-          };
-          if( targetSquare.droppedTile.tile.tileType === 'wildcard'){
-            targetSquare.droppedTile.tile.value = '?';
-          }
+          targetSquare.droppedTile = droppedTile;
+
           targetSquare.justDropped = true;
           draw.splice(drawIndex, 1);
           return true;
         }else if(targetSquare.justDropped){
-          var switchedTile = targetSquare.droppedTile.tile;
-          targetSquare.droppedTile.tile = tile;
+          var switchedTile = targetSquare.droppedTile;
+          targetSquare.droppedTile.tile = droppedTile;
           draw.splice(drawIndex, 1, switchedTile);
           return true;
         }
@@ -118,21 +112,18 @@ angular.module('lct')
         }
       },
 
-      moveBoardToBoard : function(board, tile, row, column, originLine, originColumn){
+      moveBoardToBoard : function(board, droppedTile, row, column, originLine, originColumn){
         var targetSquare = board.squares[row][column];
         var originSquare = board.squares[originLine][originColumn];
         if (typeof targetSquare.droppedTile === 'undefined' || targetSquare.droppedTile === null){
-          targetSquare.droppedTile = {
-            tile :tile,
-            value : tile.value
-          };
+          targetSquare.droppedTile = droppedTile;
           targetSquare.justDropped = true;
           originSquare.droppedTile = null;
           originSquare.justDropped = false;
           return true;
         }else if(targetSquare.justDropped){
           originSquare.droppedTile = targetSquare.droppedTile;
-          targetSquare.droppedTile.tile = tile;
+          targetSquare.droppedTile = droppedTile;
           return true;
         }
         return false;
@@ -163,7 +154,7 @@ angular.module('lct')
         for( var i = 0 ; i < board.squares.length; i++){
           for( var j = 0; j < board.squares[i].length; j++){
             if( board.squares[i][j].justDropped ) {
-              draw.push(board.squares[i][j].droppedTile.tile);
+              draw.push(board.squares[i][j].droppedTile);
               board.squares[i][j].droppedTile = null;
               board.squares[i][j].justDropped = false;
             }
@@ -171,18 +162,18 @@ angular.module('lct')
         }
       },
 
-      getTilesFrom : function (board, draw){
-        var result = [];
-        for( var i = 0 ; i < board.squares.length; i++){
-          for( var j = 0; j < board.squares[i].length; j++){
-            if( board.squares[i][j].justDropped ) {
-              result.push(board.squares[i][j].droppedTile);
-            }
-          }
-        }
-        Array.prototype.push.apply(result, draw);
-        return result;
-      },
+      //getTilesFrom : function (board, draw){
+      //  var result = [];
+      //  for( var i = 0 ; i < board.squares.length; i++){
+      //    for( var j = 0; j < board.squares[i].length; j++){
+      //      if( board.squares[i][j].justDropped ) {
+      //        result.push(board.squares[i][j].droppedTile);
+      //      }
+      //    }
+      //  }
+      //  Array.prototype.push.apply(result, draw);
+      //  return result;
+      //},
 
 
       randomDraw : function(board, draw, deck, turnNumber){
@@ -245,18 +236,17 @@ angular.module('lct')
         }
 
         if( draw.length < left) {
-          draw.push(deck[index]);
+          var droppedTile = {
+            tile: deck[index],
+            value: deck[index].value
+          };
+          draw.push(droppedTile);
           deck.splice(index, 1);
         }
       },
 
       undrawTile : function(draw, deck, index){
-        var tile = draw[index];
-        if( tile.tileType === 'wildcard'){
-          tile.value='?';
-          tile.imageURL = '/assets/images/lettres36/fr/normal/wildcard.gif';
-        }
-        deck.push(draw[index]);
+        deck.push(draw[index].tile);
         draw.splice(index, 1);
         this.sortTiles(deck);
       },
@@ -267,9 +257,12 @@ angular.module('lct')
           var drawClone = draw.slice(0);
           gameBoardService.clearBoard(boadClone, drawClone);
           var boardGameQueryBean = {
-            tileList: drawClone,
+            tileList: [],
             boardGame: boadClone
           };
+          for( var i = 0 ; i < drawClone.length ; i++){
+            boardGameQueryBean.tileList.push(drawClone[i].tile);
+          }
 
           if (possibleWords.length > 0) {
             possibleWords.splice(0, possibleWords.length);
@@ -298,22 +291,21 @@ angular.module('lct')
         for (var k = 0; k < suggest.squareList.length; k++) {
           if( !board.squares[i][j].justDropped) {
             var droppedTile = suggest.squareList[k].droppedTile;
-            if(droppedTile.tile.tileType !== 'wildcard') {
+            //if(droppedTile.tile.tileType !== 'wildcard') {
               for (var l = 0; l < draw.length; l++) {
-                if (draw[l].value === droppedTile.tile.value) {
-                  this.moveDrawToBoard(draw, board, draw[l], l, i, j);
+                if (draw[l].tile.value === droppedTile.tile.value) {
+                  this.moveDrawToBoard(draw, board, droppedTile, l, i, j);
                   break;
                 }
               }
-            }else{
-              for (var m = 0; m < draw.length; m++) {
-                if (draw[m].tileType === 'wildcard') {
-                  draw[m].imageURL = '/assets/images/lettres36/fr/joker/'+droppedTile.value+'.gif';
-                  this.moveDrawToBoard(draw, board, draw[m], m, i, j, droppedTile.value);
-                  break;
-                }
-              }
-            }
+            //}else{
+            //  for (var m = 0; m < draw.length; m++) {
+            //    if (draw[m].tile.tileType === 'wildcard') {
+            //      this.moveDrawToBoard(draw, board, droppedTile, m, i, j);
+            //      break;
+            //    }
+            //  }
+            //}
           }
           if( suggest.horizontal){
             j++;
@@ -358,7 +350,7 @@ angular.module('lct')
         var isVowelLeft = !this.isOnlyConsonnant(deck);
         var isConsonnantLeft = !this.isOnlyVowel(deck);
         for( var i = 0 ; i < draw.length; i++){
-          var tile = draw[i];
+          var tile = draw[i].tile;
           if( tile.tileType === 'consonant' || tile.tileType === 'y' || tile.tileType === 'wildcard'){
             consonnants++;
           }
@@ -395,8 +387,83 @@ angular.module('lct')
         Array.prototype.push.apply(allTiles, draw);
         Array.prototype.push.apply(allTiles, deck);
         return allTiles.length <= 1 || this.isOnlyVowel(allTiles) || this.isOnlyConsonnant(allTiles);
-      }
+      },
 
+      /**
+       * Get the current round from game
+       * @param game
+       * @param roundNumber
+       */
+      getActiveRound : function(game, roundNumber) {
+        var activeRound = {
+          deck: JSON.parse(JSON.stringify(gameBoardService.initialFrenchDeck)),
+          draw: [],
+          board: JSON.parse(JSON.stringify(gameBoardService.initialBoardGame))
+        };
+
+        for (var i = 0; i < roundNumber; i++) {
+          var round = game.roundList[i];
+          if (!round) {
+            break;
+          }
+          var row = round.droppedWord.row;
+          var column = round.droppedWord.column;
+          for (var k = 0; k < round.droppedWord.squareList.length; k++) {
+            activeRound.board.squares[row][column] = round.droppedWord.squareList[k];
+
+            if (round.droppedWord.horizontal) {
+              column++;
+            } else {
+              row++;
+            }
+            if( i === (roundNumber - 1) ){
+              // current turn
+              activeRound.board.squares[row][column].justDropped = true;
+            }else{
+              activeRound.board.squares[row][column].justDropped = false;
+            }
+          }
+
+          for( var l = 0 ; l < round.draw.length; l++){
+            var tile = round.draw[l];
+            for( var m = 0 ; m < activeRound.deck.length; m++){
+              if( tile.tile.value === activeRound.deck[m].value ){
+                activeRound.deck.splice(m,1);
+                break;
+              }
+            }
+          }
+
+          if( i === (roundNumber - 1) ){
+            // current turn
+            activeRound.draw = round.draw;
+          }
+        };
+        return activeRound;
+      },
+
+      init : function(){
+        return $q(function(resolve, reject) {
+          gameBoardService.getInitialScrabbleBoardGame().then(function (data) {
+            gameBoardService.initialBoardGame = data;
+            gameBoardService.initialBoardGame.middleSquare = gameBoardService.initialBoardGame.squares[7][7];
+            return data;
+          }).then(function() {
+            return gameBoardService.getInitialFrenchDeck();
+          }).then(function (data){
+            gameBoardService.initialFrenchDeck = data;
+          }).then( function(){
+            resolve();
+          }).catch( function(){
+            reject();
+          });
+        });
+      }
     };
+
+    gameBoardService.init();
+
+
+
     return gameBoardService;
   }]);
