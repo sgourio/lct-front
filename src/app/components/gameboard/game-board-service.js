@@ -406,39 +406,32 @@ angular.module('lct')
           if (!round) {
             break;
           }
-          var row = round.droppedWord.row;
-          var column = round.droppedWord.column;
-          for (var k = 0; k < round.droppedWord.squareList.length; k++) {
-            activeRound.board.squares[row][column] = round.droppedWord.squareList[k];
-
-            if (round.droppedWord.horizontal) {
-              column++;
-            } else {
-              row++;
-            }
-            if( i === (roundNumber - 1) ){
-              // current turn
-              activeRound.board.squares[row][column].justDropped = true;
-            }else{
+          if( i !== (roundNumber - 1) ) { // put previous turn word
+            var row = round.droppedWord.row;
+            var column = round.droppedWord.column;
+            for (var k = 0; k < round.droppedWord.squareList.length; k++) {
+              activeRound.board.squares[row][column] = round.droppedWord.squareList[k];
               activeRound.board.squares[row][column].justDropped = false;
+              if (round.droppedWord.horizontal) {
+                column++;
+              } else {
+                row++;
+              }
             }
           }
 
           for( var l = 0 ; l < round.draw.length; l++){
             var tile = round.draw[l];
             for( var m = 0 ; m < activeRound.deck.length; m++){
-              if( tile.tile.value === activeRound.deck[m].value ){
+              if( tile.value === activeRound.deck[m].value ){
                 activeRound.deck.splice(m,1);
                 break;
               }
             }
           }
 
-          if( i === (roundNumber - 1) ){
-            // current turn
-            activeRound.draw = round.draw;
-          }
         };
+        activeRound.draw = game.roundList[roundNumber-1].draw;
         return activeRound;
       },
 

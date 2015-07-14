@@ -28,14 +28,16 @@ angular.module('lct')
           var activeRound = gameBoardService.getActiveRound($scope.game, newValue);
           $scope.board = JSON.parse(JSON.stringify(activeRound.board));
           $scope.deck = JSON.parse(JSON.stringify(activeRound.deck));
+          $scope.draw = [];
           var draw = JSON.parse(JSON.stringify(activeRound.draw));
           for( var l = 0 ; l < draw.length; l++){
             var droppedTile = {
               tile: draw[l],
               value: draw[l].value
-            }
+            };
             $scope.draw.push(droppedTile);
           }
+          $scope.findWords();
           //$scope.findWords();
 
           //$scope.board = JSON.parse(JSON.stringify($scope.initialBoard));
