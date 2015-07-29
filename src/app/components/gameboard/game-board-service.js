@@ -145,7 +145,9 @@ angular.module('lct')
       },
 
       clearDraw : function(draw, deck){
-        Array.prototype.push.apply(deck, draw);
+        for( var i = 0 ; i < draw.length; i++){
+          deck.push(draw[i].tile);
+        }
         this.sortTiles(deck);
         draw.splice(0,draw.length);// empty draw
       },

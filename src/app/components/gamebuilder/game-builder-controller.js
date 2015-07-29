@@ -38,15 +38,6 @@ angular.module('lct')
             $scope.draw.push(droppedTile);
           }
           $scope.findWords();
-          //$scope.findWords();
-
-          //$scope.board = JSON.parse(JSON.stringify($scope.initialBoard));
-          //for( var i = 0 ; i < newValue ; i++){
-          //  gameBoardService.putWord($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
-          //  gameBoardService.validRound($scope.board, $scope.game.roundList[i].draw.slice(0), $scope.game.roundList[i].droppedWord);
-          //  $scope.draw = $scope.game.roundList[i].draw;
-          //}
-
         }
       }
     );
@@ -68,10 +59,7 @@ angular.module('lct')
           roundList: []
         };
         $scope.draw = [];
-
-
         $scope.currentTurnNumber = 1;
-
         gameBoardService.init().then( function(){
           $scope.board = JSON.parse(JSON.stringify(gameBoardService.initialBoardGame));
           $scope.deck = JSON.parse(JSON.stringify(gameBoardService.initialFrenchDeck));
