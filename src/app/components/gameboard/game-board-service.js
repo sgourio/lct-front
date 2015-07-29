@@ -441,7 +441,6 @@ angular.module('lct')
         return $q(function(resolve, reject) {
           gameBoardService.getInitialScrabbleBoardGame().then(function (data) {
             gameBoardService.initialBoardGame = data;
-            gameBoardService.initialBoardGame.middleSquare = gameBoardService.initialBoardGame.squares[7][7];
             return data;
           }).then(function() {
             return gameBoardService.getInitialFrenchDeck();
