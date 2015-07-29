@@ -65,6 +65,10 @@ angular.module('lct')
           $scope.deck = JSON.parse(JSON.stringify(gameBoardService.initialFrenchDeck));
           gameBoardService.sortTiles($scope.deck);
           return $scope.randomDraw();
+        }).then( function(){
+          resolve();
+        }).catch( function(){
+          reject();
         });
 
       });
