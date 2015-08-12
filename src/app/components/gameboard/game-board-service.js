@@ -432,7 +432,7 @@ angular.module('lct')
             }
           }
 
-        };
+        }
         activeRound.draw = game.roundList[roundNumber-1].draw;
         return activeRound;
       },
