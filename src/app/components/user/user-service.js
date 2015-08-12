@@ -14,9 +14,15 @@
  * Service in the lctUiApp.
  */
 angular.module('lct')
-  .service('userService', [ '$http', 'apiRoot', '$window','AccessToken', '$state', '$log', function ($http, apiRoot, $window, AccessToken, $state, $log) {
+  .service('userService', [ '$log', '$stomp', '$q', function ($log, $stomp, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
+    var userList = [];
     var userService = {
+      userList: function(callback){
+          $stomp.connect('/hello').then(function () {
+            $stomp.subscribe('/topic/gamerList', callback, {});
+        });
+      }
     };
     return userService;
   }]);
