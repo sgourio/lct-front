@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover'])
-  .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider, $authProvider) {
+angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover','ngStomp'])
+  .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider, $authProvider, $windowProvider) {
     $stateProvider
       .state('home', {
         url: '/',
@@ -33,7 +33,8 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
 
     $urlRouterProvider.otherwise('/');
 
-    var apiRoot = angular.element('#apiRoot').attr('href');
+    var location = $windowProvider.$get().location;
+    var apiRoot = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''); //angular.element('#apiRoot').attr('href');
     $provide.value('apiRoot', apiRoot);
 
     $authProvider.facebook({
