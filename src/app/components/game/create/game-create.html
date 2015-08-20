@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+  ~ Scrabble Helper Module 2015.
+  ~ Written by Sylvain Gourio
+  ~ sylvain.gourio@gmail.com
+  -->
+
+<div class="container" data-ng-init="init()">
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>1. Combien de temps entre chaque tour?</h2>
+      <form class="form">
+        <div class="radio-inline">
+        <label>
+          <input type="radio" data-ng-model="roundTime" value="60" name="roundTime"/> 1 min
+        </label>
+          </div>
+        <div class="radio-inline">
+        <label>
+          <input type="radio" data-ng-model="roundTime" value="120" name="roundTime"/> 2 min
+        </label>
+          </div>
+        <div class="radio-inline">
+        <label>
+          <input type="radio" data-ng-model="roundTime" value="180" name="roundTime"/> 3 min
+        </label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>2. Sélection d'une partie</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <game-list round-time="roundTime" owner="me" refreshable="false" selected-game="selectedGame"></game-list>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <game-list max="3" round-time="roundTime" owner="auto" refreshable="true" selected-game="selectedGame"></game-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>3. Nommer la partie</h2>
+      <input type="text" data-ng-model="gameName"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+      <button class="btn btn-primary" data-ng-click="startGame()">Démarrer</button>
+    </div>
+  </div>
+</div>

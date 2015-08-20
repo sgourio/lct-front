@@ -15,15 +15,16 @@
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ active: isActive('/')}"><a href="#/" >Accueil</a></li>
-              <li ng-class="{ active: isActive('/gameBuilder')}"><a ng-href="#/gameBuilder">Construire un jeu</a></li>
-              <li><a ng-href="#/game/list">Jouer</a></li>
+              <li ng-class="{ active: isActive('/')}"><a ui-sref="home" >Accueil</a></li>
+              <li ng-class="{ active: isActive('/gameBuilder')}"><a ui-sref="builder">Construire un jeu</a></li>
+              <li  ng-class="{ active: isActive('/game/')}"><a ui-sref="gameList">Jouer</a></li>
               <li><a ng-href="#/">Contact</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
               <li><a ng-show="!isAuthenticated()" ui-sref="signin">Connexion</a></li>
               <li><a ng-show="isAuthenticated()" ng-click="logout()" href="javascript:void(0)"><span ng-bind="username()"></span> Déconnexion</a></li>
+              <li><a ng-show="isAdmin()" href="javascript:void(0)" ui-sref="admin">Admin</a></li>
             </ul>
           </div>
         </div>

@@ -7,12 +7,14 @@
 'use strict';
 
 angular.module('lct')
-  .controller('SignInCtrl', function ($scope,$location, $state, $log, $auth, $window) {
-
-
+  .controller('SignInCtrl', ['$scope', '$location', '$state', '$log', '$auth', '$window', 'userService', function ($scope,$location, $state, $log, $auth, $window, userService) {
     $scope.authenticate = function(provider) {
       $auth.link(provider).then(function (response){
         $auth.setToken(response);
+        userService.isAdmin().then(function(isAdmin){
+          $auth.admin=isAdmin;
+          $window.sessionStorage.admin = isAdmin;
+        });
         var toState = $window.sessionStorage.toState || 'home';
         $state.transitionTo(toState);
       });
@@ -25,4 +27,4 @@ angular.module('lct')
       return $auth.isAuthenticated();
     };
 
-  });
+  }]);

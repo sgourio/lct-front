@@ -1,0 +1,22 @@
+{{::title}}
+<table class="table table-striped table-condensed table-hover select-table" ng-if="games.length > 0">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Créateur</th>
+      <th>Nombre de tours</th>
+      <th>Temps estimé</th>
+      <th>Score max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="game in games" id="{{::game.id}}" ng-class="{ 'success': game.id == selectedGame }" data-ng-click="selectGame(game.id)">
+      <td class="text-uppercase text-info">{{::game.name}}</td>
+      <td class="author">{{::game.authorName}}</td>
+      <td class="nbRounds">{{::game.rounds}}</td>
+      <td class="duration">{{duration(roundTime, game.rounds)}}</td>
+      <td class="maxScore">{{::game.maxScore}} pts</td>
+    </tr>
+  </tbody>
+</table>
+<a class="btn" ng-if="canRefresh" ng-click="reload()"><i class="fa fa-refresh"></i> Recharger</a>

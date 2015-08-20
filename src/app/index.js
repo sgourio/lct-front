@@ -28,8 +28,27 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       .state('gameList', {
         url: '/game/list',
         templateUrl: 'app/components/game/list/game-list.html',
-        controller: 'GameListCtrl'
+        controller: 'GameListCtrl',
+        authenticate: true
       });
+
+    $stateProvider
+      .state('gameCreate', {
+        url: '/game/create',
+        templateUrl: 'app/components/game/create/game-create.html',
+        controller: 'GameCreateCtrl',
+        authenticate: true
+      });
+
+    $stateProvider
+      .state('admin', {
+        url: '/admin',
+        templateUrl: 'app/components/admin/admin.html',
+        controller: 'AdminCtrl',
+        authenticate: true,
+        admin: true
+      });
+
 
     $urlRouterProvider.otherwise('/');
 
@@ -55,6 +74,11 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
     $rootScope.$on('$stateChangeStart', function(event, toState){
       if (toState.authenticate && !$auth.isAuthenticated()){
         // User isn’t authenticated and must be
+        $window.sessionStorage.toState = toState.name;
+        $state.transitionTo('signin');
+        event.preventDefault();
+      }
+      if( toState.admin && !$auth.admin){
         $window.sessionStorage.toState = toState.name;
         $state.transitionTo('signin');
         event.preventDefault();

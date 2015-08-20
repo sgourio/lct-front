@@ -60,7 +60,7 @@ function proxyMiddleware(req, res, next) {
    * for your needs. If you can, you could also check on a context in the url which
    * may be more reliable but can't be generic.
    */
-  gutil.log('Proxy is running! ' + req.url);
+  //gutil.log('Proxy is running! ' + req.url);
   if( /^\/$/.test(req.url)){
     next();
   }else
