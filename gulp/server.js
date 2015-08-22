@@ -1,8 +1,8 @@
 'use strict';
 
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
-var browserSyncSpa = require('browser-sync-spa');
 
 var util = require('util');
 
@@ -20,25 +20,52 @@ module.exports = function(options) {
       };
     }
 
-    var server = {
-      baseDir: baseDir,
-      routes: routes
-    };
+    //var server = {
+    //  baseDir: baseDir,
+    //  routes: routes
+    //};
+    //
+    //gutil.log('Proxy ' + middleware().length);
+    //if(middleware().length > 0) {
+    //  server.middleware = middleware();
+    //}
 
-    if(middleware.length > 0) {
-      server.middleware = middleware;
-    }
-
-    browserSync.instance = browserSync.init({
+    browserSync.create().init({
       startPath: '/',
-      server: server,
-      browser: browser
+      server: {
+        baseDir: baseDir,
+        routes: routes,
+        middleware: middleware()
+      },
+      online: false,
+      open: false
     });
+
+    //browserSync.create().init({
+    //  port:4000,
+    //  online: false,
+    //  open: false,
+    //  proxy: {
+    //    target: 'http://localhost:8080/',
+    //    ws: true,
+    //    middleware: function (req, res, next) {
+    //      console.log(req.url);
+    //      next();
+    //    }
+    //  },
+    //  socket: {
+    //    port: 4001
+    //  },
+    //  ui: {
+    //    port: 3005
+    //  },
+    //  browser: browser
+    //});
   }
 
-  browserSync.use(browserSyncSpa({
-    selector: '[ng-app]'// Only needed for angular apps
-  }));
+  //browserSync.use(browserSyncSpa({
+  //  selector: '[ng-app]'// Only needed for angular apps
+  //}));
 
   gulp.task('serve', ['watch'], function () {
     browserSyncInit([options.tmp + '/serve', options.src]);

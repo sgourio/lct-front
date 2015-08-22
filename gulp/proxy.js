@@ -16,16 +16,19 @@
 'use strict';
 
 var httpProxy = require('http-proxy');
+var gutil = require('gulp-util');
 var chalk = require('chalk');
 
 /*
  * Location of your backend server
  */
-var proxyTarget = 'http://server/context/';
+var proxyTarget = 'http://localhost:8080/';
 
 var proxy = httpProxy.createProxyServer({
-  target: proxyTarget
+  target: proxyTarget,
+  ws: true
 });
+
 
 proxy.on('error', function(error, req, res) {
   res.writeHead(500, {
@@ -34,6 +37,15 @@ proxy.on('error', function(error, req, res) {
 
   console.error(chalk.red('[Proxy]'), error);
 });
+
+ //
+ // Listen to the `upgrade` event and proxy the
+ // WebSocket requests as well.
+ //
+ proxy.on('upgrade', function (req, socket, head) {
+   gutil.log('web-socket');
+   proxy.ws(req, socket, head);
+ });
 
 /*
  * The proxy middleware is an Express middleware added to BrowserSync to
@@ -48,6 +60,10 @@ function proxyMiddleware(req, res, next) {
    * for your needs. If you can, you could also check on a context in the url which
    * may be more reliable but can't be generic.
    */
+  //gutil.log('Proxy is running! ' + req.url);
+  if( /^\/$/.test(req.url)){
+    next();
+  }else
   if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url)) {
     next();
   } else {
@@ -63,5 +79,5 @@ function proxyMiddleware(req, res, next) {
 
 //module.exports = [proxyMiddleware];
 module.exports = function() {
-  return [];
+  return [proxyMiddleware];
 };

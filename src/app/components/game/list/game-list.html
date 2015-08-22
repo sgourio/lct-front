@@ -7,10 +7,13 @@
 
 <div class="container">
   <div ng-include="'app/components/navbar/navbar.html'"></div>
-
+  <a ng-href="#/game/create">Créer une nouvelle partie</a>
   <div data-ng-init="init()">
-    game list
-
-    {{games}}
+    <div class="row">
+      <div class="col-md-9">
+        <play-game-list></play-game-list>
+      </div>
+    </div>
+    <connected-users></connected-users>
   </div>
 </div>

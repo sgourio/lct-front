@@ -8,7 +8,7 @@
  * Controller of the lctUiApp
  */
 angular.module('lct')
-  .controller('GameBuilderCtrl', ['$scope', '$q', '$http', '$modal', '$log', 'gameBoardService', 'gameService', function ($scope, $q, $http, $modal, $log, gameBoardService, gameService) {
+  .controller('GameBuilderCtrl', ['$scope', '$q', '$http', '$modal', '$log', 'gameBoardService', 'gameService', '$window', function ($scope, $q, $http, $modal, $log, gameBoardService, gameService, $window) {
 
     var squareWitdh = 37;
     var squareHeight = 37;
@@ -22,7 +22,7 @@ angular.module('lct')
       boardOffset = angular.element('.board').offset();
     });
 
-    $scope.$watch(function(scope) { return $scope.currentTurnNumber },
+    $scope.$watch(function($scope) { return $scope.currentTurnNumber; },
       function(newValue, oldValue, $scope) {
         if( $scope.game.roundList[newValue-1] ) {
           var activeRound = gameBoardService.getActiveRound($scope.game, newValue);
@@ -44,7 +44,7 @@ angular.module('lct')
 
     $scope.init = function() {
       return $q(function(resolve, reject) {
-        $scope.Math = window.Math;
+        $scope.Math = $window.Math;
         $scope.displayPopover = false;
         $scope.displayDeck = false;
         $scope.currentJoker = null;

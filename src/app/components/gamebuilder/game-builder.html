@@ -12,8 +12,8 @@
         <ul class="draw"> <!-- DRAW -->
           <li ng-repeat="droppedTile in draw track by $index" class="tile">
             <img  ng-src="{{tileImageUrl(droppedTile.tile, droppedTile.value)}}" drag="true" data-value="{{droppedTile}}" data-from="draw" data-index="{{$index}}"/>
-            <a ng-click="unchooseLetter($index)"><span class="glyphicon glyphicon-remove-sign"></span></a>
-            <a ng-if="droppedTile.tile.tileType == 'wildcard'" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(droppedTile)"><span class="glyphicon glyphicon-question-sign"></span></a>
+            <a ng-click="unchooseLetter($index)"><i class="fa fa-trash-o"></i></a>
+            <a ng-if="droppedTile.tile.tileType == 'wildcard'" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(droppedTile)"><i class="fa fa-question"></i></a>
           </li>
         </ul>
       </div>
@@ -36,7 +36,7 @@
                 <li ng-repeat="square in row" ng-style="{{ ::{top:squarePosition(lineIndex, $index).top, left:squarePosition(lineIndex, $index).left} }}" class="square">
                   <img  ng-src="{{tileImageUrl(square.droppedTile.tile, square.droppedTile.value)}}" ng-if="square.droppedTile && square.justDropped" drag="true" drag-from="board" data-value="{{square.droppedTile}}" data-row="{{lineIndex}}" data-column="{{$index}}"/>
                   <img  ng-src="{{tileImageUrl(square.droppedTile.tile, square.droppedTile.value)}}" ng-if="square.droppedTile && !square.justDropped"/>
-                  <a ng-if="square.droppedTile.tile.tileType == 'wildcard' && square.justDropped" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(square.droppedTile.tile)"><span class="glyphicon glyphicon-question-sign"></span></a>
+                  <a ng-if="square.droppedTile.tile.tileType == 'wildcard' && square.justDropped" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(square.droppedTile)"><i class="fa fa-question"></i></a>
                 </li>
               </ul>
             </li>

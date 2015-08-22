@@ -1,0 +1,25 @@
+<table class="table table-striped table-condensed table-hover select-table" ng-if="games.length > 0">
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Créateur</th>
+    <th>Tour actuel</th>
+    <th>Début</th>
+    <th>Fin</th>
+    <th>Nombre de joueurs</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="game in games" id="{{::game.playGameId}}">
+    <td class="text-uppercase text-info">{{::game.name}}</td>
+    <td>{{::game.owner}}</td>
+    <td>{{::game.actualRoundNumber}}</td>
+    <td ng-if="game.startDate !== null">{{::game.startDate}}</td>
+    <td ng-if="game.startDate === null">Pas encore démarré</td>
+    <td>{{::game.endDate}}</td>
+    <td>{{::game.nbPlayers}}</td>
+    <td><button class="btn btn-sm" data-ng-click="goGame(game.playGameId)">Rejoindre</button></td>
+  </tr>
+  </tbody>
+</table>
