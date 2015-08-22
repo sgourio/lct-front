@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var zip = require('gulp-zip');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -83,6 +84,12 @@ module.exports = function(options) {
 
   gulp.task('clean', function (done) {
     $.del([options.dist + '/', options.tmp + '/'], done);
+  });
+
+  gulp.task('zip', ['build'], function () {
+    return gulp.src('dist/**')
+      .pipe(zip('lct-front.zip'))
+      .pipe(gulp.dest('dist'));
   });
 
   gulp.task('build', ['html', 'fonts', 'other']);
