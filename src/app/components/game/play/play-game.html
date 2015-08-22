@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<div class="container">
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
+  <div ng-if="opened">
+  opened
+    <user-list game-id=""></user-list>
+    <opened-actions></opened-actions>
+  </div>
+
+  <div ng-if="running">
+  running
+  </div>
+
+  <div ng-if="ended">
+  ended
+  </div>
+</div>

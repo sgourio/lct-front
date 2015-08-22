@@ -73,7 +73,6 @@ angular.module('lct')
 
       listOpenedGames: function(){
         return $q(function(resolve, reject) {
-          $log.info('apiRoot ' + apiRoot);
           $http.get(apiRoot + '/play/games/').
             success(function (data) {
                 resolve(data);
@@ -97,6 +96,32 @@ angular.module('lct')
             }).
             error(function (data, status) {
               $log.error('Service PUT ' + apiRoot + '/play/openGame' +' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      playGameMetaData: function(playGameId){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/play/game/'+playGameId).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/play/game/'+ playGameId +' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      joinGame: function(playGameId){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/play/game/'+playGameId+'/join').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/play/game/'+ playGameId +'/join respond ' + status);
               reject();
             });
         });

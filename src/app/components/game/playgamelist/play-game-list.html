@@ -7,10 +7,11 @@
     <th>Début</th>
     <th>Fin</th>
     <th>Nombre de joueurs</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="game in games" id="{{::game.id}}">
+  <tr ng-repeat="game in games" id="{{::game.playGameId}}">
     <td class="text-uppercase text-info">{{::game.name}}</td>
     <td>{{::game.owner}}</td>
     <td>{{::game.actualRoundNumber}}</td>
@@ -18,6 +19,7 @@
     <td ng-if="game.startDate === null">Pas encore démarré</td>
     <td>{{::game.endDate}}</td>
     <td>{{::game.nbPlayers}}</td>
+    <td><button class="btn btn-sm" data-ng-click="goGame(game.playGameId)">Rejoindre</button></td>
   </tr>
   </tbody>
 </table>

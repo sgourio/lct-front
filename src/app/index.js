@@ -49,6 +49,14 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         admin: true
       });
 
+    $stateProvider
+      .state('play', {
+        url: '/play/:playGameId',
+        templateUrl: 'app/components/game/play/play-game.html',
+        controller: 'PlayGameCtrl',
+        authenticate: true
+      });
+
 
     $urlRouterProvider.otherwise('/');
 
