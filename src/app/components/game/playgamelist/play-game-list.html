@@ -19,7 +19,7 @@
     <td ng-if="game.startDate === null">Pas encore démarré</td>
     <td>{{::game.endDate}}</td>
     <td>{{::game.nbPlayers}}</td>
-    <td><button class="btn btn-sm" data-ng-click="goGame(game.playGameId)">Rejoindre</button></td>
+    <td><button class="btn btn-xs" data-ng-click="joinGame(game.playGameId)"><i class="fa fa-play"></i> Rejoindre</button></td>
   </tr>
   </tbody>
 </table>

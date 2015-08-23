@@ -8,11 +8,11 @@ angular.module('lct')
       },
       templateUrl: 'app/components/game/playgamelist/play-game-list.html',
       controller: function($scope){
-        $scope.goGame = function(playGameId){
+        $scope.viewGame = function(playGameId){
           $state.go('play',{playGameId: playGameId});
         };
         $scope.joinGame = function(playGameId){
-          gameService.joinGame(playGameId).then(function(data){
+          gameService.joinGame(playGameId).then(function(){
             $state.go('play',{playGameId: playGameId});
           });
         };

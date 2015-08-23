@@ -7,11 +7,23 @@
 
 <div class="container">
   <div ng-include="'app/components/navbar/navbar.html'"></div>
-  <a ng-href="#/game/create">Créer une nouvelle partie</a>
+
   <div data-ng-init="init()">
     <div class="row">
       <div class="col-md-9">
-        <play-game-list></play-game-list>
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="panel-title">Parties en cours</h3></div>
+          <play-game-list></play-game-list>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="panel-title">Nouvelle partie</h3></div>
+          <div class="panel-body">
+            Lancer une nouvelle partie pour jouer avec vos amis.<br /><br />
+            <a class="btn btn-primary" ng-href="#/game/create">Créer une nouvelle partie</a>
+          </div>
+        </div>
       </div>
     </div>
     <connected-users></connected-users>

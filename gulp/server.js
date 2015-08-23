@@ -37,6 +37,7 @@ module.exports = function(options) {
         routes: routes,
         middleware: middleware()
       },
+      browser: "google chrome",
       online: false,
       open: false
     });

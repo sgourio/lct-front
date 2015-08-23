@@ -11,13 +11,9 @@ angular.module('lct')
     $scope.isAdmin = function(){
       return $auth.admin || $window.sessionStorage.admin;
     };
-    $scope.username = function(){
-      if( $auth.isAuthenticated() ) {
-        return $auth.getPayload().sub;
-      }else{
-        return '';
-      }
-    };
+    if( $auth.isAuthenticated() ) {
+      $scope.username = $auth.getPayload().sub;
+    }
     $scope.date = new Date();
     $scope.isActive = function (viewLocation) {
       //$log.debug('path ' + $location.path() +' ' + viewLocation + ' ' + ($location.path().startsWith(viewLocation)));

@@ -13,6 +13,16 @@
 body {
   padding: 0;
 }
+button, input, optgroup, select, textarea{
+  color: #333333;
+}
+
+.panel, .well, .jumbotron, .navbar, .modal-dialog{
+  color: #333333;
+}
+
+.container{
+}
 
 ul{
   list-style: none;
@@ -122,10 +132,14 @@ ul{
     padding-bottom: 0px;
     height: 20px;
     span{
-      font-style: italic;
       font-size: 0.8em;
     }
   }
+}
+
+.deluxe{
+  font-style: italic;
+  color: rgb(166, 150, 39);
 }
 
 .board{
@@ -210,7 +224,6 @@ ul{
 }
 
 div.ball-clip-rotate > div{
-  border-color: #333;
   border-bottom-color: transparent;
 }
 
@@ -222,6 +235,7 @@ td.reference{
   white-space: nowrap;
   span{
     color: #787878;
+    font-family: courier new, courier, monospace;
   }
 }
 

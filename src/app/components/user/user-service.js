@@ -49,7 +49,31 @@ angular.module('lct')
               reject();
             });
         });
+      },
+
+      playerList: function(playGameId){
+        return $q(function(resolve, reject) {
+          // get the list immediately
+          var url = apiRoot + '/play/game/' + playGameId + '/players';
+          $http.get(url).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + url + ' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      subscribePlayerList: function(gameId, callback){
+        // subscribe to topic gamerList to update gamerList everytime a new user is connected
+        $stomp.connect('/hello').then(function () {
+          $stomp.subscribe('/topic/players/' + gameId, callback, {});
+        });
       }
+
+
     };
     return userService;
   }]);

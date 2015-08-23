@@ -4,6 +4,10 @@ angular.module('lct')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       {
+        'title': 'Jouer au scrabble duplicate',
+        'description': 'Joue au scrabble en mode duplicate!'
+      },
+      {
         'title': 'AngularJS',
         'url': 'https://angularjs.org/',
         'description': 'HTML enhanced for web apps!',
