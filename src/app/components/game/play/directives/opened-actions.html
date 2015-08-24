@@ -1,4 +1,10 @@
 <button class="btn btn-default" ng-if="!isOwner">Se retirer</button>
-<button class="btn btn-default" ng-if="isOwner">Lancer la partie</button>
-<button class="btn btn-default" ng-if="isOwner">Lancer la partie à {{::quarterDate}}</button>
-
+<div ng-if="isOwner">
+  Lancer la partie à
+  <timepicker ng-model="timeToStart" hour-step="1" minute-step="1" show-meridian="false"></timepicker>
+  <button class="btn btn-primary" ng-click="start()">Valider</button>
+  <div class="pull-right">
+    <button class="btn btn-default" ng-if="isOwner" ng-click="startNow()">Lancer la partie maintenant</button>
+    <button class="btn btn-default" ng-if="isOwner" ng-click="startNextQuarter()">Lancer la partie à {{::quarterDate}}</button>
+  </div>
+</div>

@@ -101,6 +101,22 @@ angular.module('lct')
         });
       },
 
+      startGame: function(gameId, startDate){
+        return $q(function(resolve, reject) {
+          $http.post(apiRoot + '/play/startGame',{
+            playGameId : gameId,
+            startDate : startDate
+          }).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service POST ' + apiRoot + '/play/startGame' +' respond ' + status);
+              reject();
+            });
+        });
+      },
+
       playGameMetaData: function(playGameId){
         return $q(function(resolve, reject){
           $http.get(apiRoot + '/play/game/'+playGameId).
@@ -125,9 +141,22 @@ angular.module('lct')
               reject();
             });
         });
+      },
+
+      formatDuration : function(seconds) {
+        var secNum = parseInt(seconds, 10); // don't forget the second param
+        var hours   = Math.floor(secNum / 3600);
+        var minutes = Math.floor((secNum - (hours * 3600)) / 60);
+
+        if (minutes < 10) {minutes = '0'+minutes;}
+        var time = '';
+        if( hours > 0) {
+          time = hours + 'h' +minutes;
+        }else{
+          time = minutes + 'm';
+        }
+        return time;
       }
-
-
     };
     return gameService;
   }]);

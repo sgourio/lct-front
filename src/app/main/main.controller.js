@@ -5,7 +5,8 @@ angular.module('lct')
     $scope.awesomeThings = [
       {
         'title': 'Jouer au scrabble duplicate',
-        'description': 'Joue au scrabble en mode duplicate!'
+        'description': 'Joue au scrabble en mode duplicate!',
+        'icon' : 'star'
       },
       {
         'title': 'AngularJS',

@@ -1,22 +1,4 @@
 'use strict';
-
-function formatDuration(seconds) {
-  var secNum = parseInt(seconds, 10); // don't forget the second param
-  var hours   = Math.floor(secNum / 3600);
-  var minutes = Math.floor((secNum - (hours * 3600)) / 60);
-
-  if (minutes < 10) {minutes = '0'+minutes;}
-  var time = '';
-  if( hours > 0) {
-    time = hours + 'h' +minutes ;
-
-  }else{
-    time = minutes + 'm';
-  }
-
-  return time;
-}
-
 angular.module('lct')
   .directive('gameList', ['$log', 'gameService', function($log, gameService) {
     return {
@@ -36,7 +18,7 @@ angular.module('lct')
 
         $scope.duration = function(roundTime, nbRounds){
           var seconds = roundTime * nbRounds;
-          return formatDuration(seconds);
+          return gameService.formatDuration(seconds);
         };
 
         $scope.reload = function(){
