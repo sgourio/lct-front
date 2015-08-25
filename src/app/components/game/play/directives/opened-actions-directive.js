@@ -23,10 +23,11 @@ angular.module('lct')
           $scope.quarterDate = 'minuit l\'heure du crime';
           $scope.qDate = new Date().setDate(d.getDate() + 1).setHours(0).setMinutes(0);
         }
-        $scope.timeToStart = new Date(new Date().getTime() + 60000); // add one minute
+        var startNow = new Date(new Date().getTime() + 60000).setSeconds(0);
+        $scope.timeToStart = {date : startNow}; // add one minute
 
         $scope.start = function(){
-          gameService.startGame($scope.gameMetaData.playGameId, $scope.timeToStart);
+          gameService.startGame($scope.gameMetaData.playGameId, $scope.timeToStart.date);
         };
 
         $scope.startNow = function(){

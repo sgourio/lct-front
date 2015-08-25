@@ -15,9 +15,9 @@
     <td class="text-uppercase text-info">{{::game.name}}</td>
     <td>{{::game.owner}}</td>
     <td>{{::game.actualRoundNumber}}</td>
-    <td ng-if="game.startDate !== null">{{::game.startDate}}</td>
+    <td ng-if="game.startDate !== null">{{::game.startDate | date:"HH'h'mm" }}</td>
     <td ng-if="game.startDate === null">Pas encore démarré</td>
-    <td>{{::game.endDate}}</td>
+    <td>{{::game.endDate | date:"HH'h'mm"}}</td>
     <td>{{::game.nbPlayers}}</td>
     <td><button class="btn btn-xs" data-ng-click="joinGame(game.playGameId)"><i class="fa fa-play"></i> Rejoindre</button></td>
   </tr>

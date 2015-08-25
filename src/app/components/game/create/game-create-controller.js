@@ -20,7 +20,7 @@
  * Service in the lctUiApp.
  */
 angular.module('lct')
-  .controller('GameCreateCtrl', [ '$scope', 'gameService', function ($scope, gameService) {
+  .controller('GameCreateCtrl', [ '$scope', 'gameService', '$state', function ($scope, gameService, $state) {
     $scope.init = function() {
       gameService.list(function(data){
         $scope.games=data;
@@ -32,7 +32,7 @@ angular.module('lct')
 
       $scope.startGame = function(){
         gameService.openGame($scope.selectedGame, $scope.gameName, $scope.roundTime).then(function(playGameId){
-          // TODO
+          $state.go('play',{playGameId: playGameId});
         });
       };
     };
