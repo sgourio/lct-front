@@ -13,18 +13,25 @@ angular.module('lct')
         $scope.isOwner=$auth.getPayload().sub === $scope.gameMetaData.owner;
         var d = new Date();
         var min = d.getMinutes() < 15 ? 15 : d.getMinutes() < 30 ? 30 : d.getMinutes() < 45 ? 45 : 0;
+        var qdate = new Date();
         if( min > 0 ) {
           $scope.quarterDate = d.getHours() +'h' + min;
           $scope.qDate = new Date().setMinutes(min);
         }else if (d.getHours() < 23 ){
           $scope.quarterDate = (d.getHours() + 1) +'h';
-          $scope.qDate = new Date().setHours(d.getHours() + 1).setMinutes(0);
+          qdate.setHours(d.getHours() + 1);
+          qdate.setMinutes(0);
+          $scope.qDate = qdate;
         } else{
           $scope.quarterDate = 'minuit l\'heure du crime';
-          $scope.qDate = new Date().setDate(d.getDate() + 1).setHours(0).setMinutes(0);
+          qdate.setDate(d.getDate() + 1);
+          qdate.setHours(0);
+          qdate.setMinutes(0);
+          $scope.qDate = midnight;
         }
-        var startNow = new Date(new Date().getTime() + 60000).setSeconds(0);
-        $scope.timeToStart = {date : startNow}; // add one minute
+        var inOneMinute = new Date(new Date().getTime() + 60000);
+        inOneMinute.setSeconds(0);
+        $scope.timeToStart = {date : inOneMinute}; // add one minute
 
         $scope.start = function(){
           gameService.startGame($scope.gameMetaData.playGameId, $scope.timeToStart.date);

@@ -22,8 +22,7 @@ angular.module('lct')
       $scope.running = playGameMetaData.status === 'running';
       $scope.ended = playGameMetaData.status === 'ended';
 
-      var seconds = $scope.metaData.timeByRound * $scope.metaData.numberOfRound;
-      $scope.duration = gameService.formatDuration(seconds);
+
 
     });
   }]);

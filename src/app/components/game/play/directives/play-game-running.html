@@ -1,0 +1,21 @@
+<div ng-if="running && round != null" class="row">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        <play-game-draw round="round"></play-game-draw>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <play-game-board round="round"></play-game-board>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">Scores</h3></div>
+      <play-game-score game-meta-data="gameMetaData"></play-game-score>
+    </div>
+  </div>
+
+</div>

@@ -293,21 +293,12 @@ angular.module('lct')
         for (var k = 0; k < suggest.squareList.length; k++) {
           if( !board.squares[i][j].justDropped) {
             var droppedTile = suggest.squareList[k].droppedTile;
-            //if(droppedTile.tile.tileType !== 'wildcard') {
               for (var l = 0; l < draw.length; l++) {
                 if (draw[l].tile.value === droppedTile.tile.value) {
                   this.moveDrawToBoard(draw, board, droppedTile, l, i, j);
                   break;
                 }
               }
-            //}else{
-            //  for (var m = 0; m < draw.length; m++) {
-            //    if (draw[m].tile.tileType === 'wildcard') {
-            //      this.moveDrawToBoard(draw, board, droppedTile, m, i, j);
-            //      break;
-            //    }
-            //  }
-            //}
           }
           if( suggest.horizontal){
             j++;

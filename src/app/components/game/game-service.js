@@ -130,6 +130,19 @@ angular.module('lct')
         });
       },
 
+      currentRound: function(playGameId){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/play/game/'+playGameId+'/round/current').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/play/game/'+ playGameId +'/round/current respond ' + status);
+              reject();
+            });
+        });
+      },
+
       joinGame: function(playGameId){
         return $q(function(resolve, reject){
           $http.get(apiRoot + '/play/game/'+playGameId+'/join').
