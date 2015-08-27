@@ -10,15 +10,8 @@ angular.module('lct')
       replace: true,
       templateUrl: 'app/components/game/play/directives/play-game-draw.html',
       controller: function($scope){
-        var draw = [];
-        for( var i = 0 ; i < $scope.round.draw.length; i++) {
-          var droppedTile = {
-            tile: $scope.round.draw[i],
-            value: $scope.round.draw[i].value
-          };
-          draw.push(droppedTile);
-        }
-        $scope.draw = draw;
+        $scope.draw = $scope.round.draw;
+        $scope.board = $scope.round.boardGame; // used for drag'n'drop
 
         $scope.tileImageUrl = function(tile, jokerValue){
           if (tile.tileType !== 'wildcard') {

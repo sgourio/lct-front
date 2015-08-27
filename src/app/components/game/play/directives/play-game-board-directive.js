@@ -11,6 +11,7 @@ angular.module('lct')
       templateUrl: 'app/components/game/play/directives/play-game-board.html',
       controller: function($scope){
         $scope.board = $scope.round.boardGame;
+        $scope.draw = $scope.round.draw; // used for drag'n'drop
         var squareWitdh = 37;
         var squareHeight = 37;
         var squareOffSetX = 16;

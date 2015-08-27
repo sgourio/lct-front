@@ -25,6 +25,8 @@ angular.module('gameDrag',[])
       var boardHeight = $board.height();
 
       var initOffset = function(){
+        $board = angular.element('.board');
+        $draw = angular.element('.draw');
         drawOffset = $draw.offset();
         drawWidth = $draw.outerWidth();
         drawHeight = $draw.height();
