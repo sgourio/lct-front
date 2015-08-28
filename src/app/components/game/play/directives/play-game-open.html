@@ -5,7 +5,9 @@
       <div class="panel-body">
         <em>Partie en préparation</em> <br />
         Initiateur de la partie : {{::gameMetaData.owner}} <br/>
-        Durée de la partie : {{::duration}}
+        Durée de la partie : {{::gameDuration}}
+        <div ng-if="timer && timer > 60"><i class="fa fa-clock-o"></i> La partie démarre dans {{duration(timer)}}</div>
+        <div ng-if="timer && timer < 60"><i class="fa fa-clock-o"></i> La partie démarre dans {{timer}}sec</div>
       </div>
       <div class="panel-footer">
         <opened-actions game-meta-data="gameMetaData"></opened-actions>

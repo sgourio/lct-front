@@ -11,39 +11,50 @@ angular.module('lct')
       controller: function($scope){
         $log.info($auth.getPayload());
         $scope.isOwner=$auth.getPayload().sub === $scope.gameMetaData.owner;
-        var d = new Date();
-        var min = d.getMinutes() < 15 ? 15 : d.getMinutes() < 30 ? 30 : d.getMinutes() < 45 ? 45 : 0;
-        var qdate = new Date();
-        if( min > 0 ) {
-          $scope.quarterDate = d.getHours() +'h' + min;
-          $scope.qDate = new Date().setMinutes(min);
-        }else if (d.getHours() < 23 ){
-          $scope.quarterDate = (d.getHours() + 1) +'h';
-          qdate.setHours(d.getHours() + 1);
-          qdate.setMinutes(0);
-          $scope.qDate = qdate;
-        } else{
-          $scope.quarterDate = 'minuit l\'heure du crime';
-          qdate.setDate(d.getDate() + 1);
-          qdate.setHours(0);
-          qdate.setMinutes(0);
-          $scope.qDate = midnight;
+        $scope.displayStartDate = $scope.gameMetaData.startDate === null;
+        if($scope.displayStartDate) {
+          $scope.startAt = 'now';
+          var d = new Date();
+          var min = d.getMinutes() < 15 ? 15 : d.getMinutes() < 30 ? 30 : d.getMinutes() < 45 ? 45 : 0;
+          var qdate = new Date();
+          if (min > 0) {
+            $scope.quarterDate = d.getHours() + 'h' + min;
+            $scope.qDate = new Date().setMinutes(min);
+          } else if (d.getHours() < 23) {
+            $scope.quarterDate = (d.getHours() + 1) + 'h';
+            qdate.setHours(d.getHours() + 1);
+            qdate.setMinutes(0);
+            $scope.qDate = qdate;
+          } else {
+            $scope.quarterDate = 'minuit l\'heure du crime';
+            qdate.setDate(d.getDate() + 1);
+            qdate.setHours(0);
+            qdate.setMinutes(0);
+            $scope.qDate = qdate;
+          }
+          var inOneMinute = new Date(new Date().getTime() + 60000);
+          inOneMinute.setSeconds(0);
+          $scope.timeToStart = {date: inOneMinute}; // add one minute
+
+          $scope.start = function (startAt) {
+            if (startAt === 'now') {
+              gameService.startGame($scope.gameMetaData.playGameId, new Date(new Date().getTime() + 20000));
+            } else if (startAt === 'nextQuarter') {
+              gameService.startGame($scope.gameMetaData.playGameId, $scope.qDate);
+            } else {
+              if( $scope.timeToStart.date.getTime() < d.getTime() ) {
+                $scope.timeToStart.date.setDate(d.getDate() + 1);
+              }
+              gameService.startGame($scope.gameMetaData.playGameId, $scope.timeToStart.date);
+            }
+          };
         }
-        var inOneMinute = new Date(new Date().getTime() + 60000);
-        inOneMinute.setSeconds(0);
-        $scope.timeToStart = {date : inOneMinute}; // add one minute
 
-        $scope.start = function(){
-          gameService.startGame($scope.gameMetaData.playGameId, $scope.timeToStart.date);
-        };
-
-        $scope.startNow = function(){
-          gameService.startGame($scope.gameMetaData.playGameId, new Date(new Date().getTime() + 20000));
-        };
-
-        $scope.startNextQuarter = function(){
-          gameService.startGame($scope.gameMetaData.playGameId, $scope.qDate);
-        };
+        $scope.quitGame = function(playGameId){
+          gameService.quitGame(playGameId).then(function(){
+            $state.go('gameList');
+          });
+        }
 
       }
     };

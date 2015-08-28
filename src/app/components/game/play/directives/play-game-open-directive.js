@@ -10,13 +10,17 @@ angular.module('lct')
     return {
       restrict: 'E',
       scope: {
-        gameMetaData:'='
+        gameMetaData:'=',
+        timer:'='
       },
       templateUrl: 'app/components/game/play/directives/play-game-open.html',
       controller: function($scope){
         $scope.opened = $scope.gameMetaData.status === 'opened';
         var seconds = $scope.gameMetaData.timeByRound * $scope.gameMetaData.numberOfRound;
-        $scope.duration = gameService.formatDuration(seconds);
+        $scope.gameDuration = gameService.formatDuration(seconds);
+        $scope.duration = function(seconds){
+          return gameService.formatDuration(seconds);
+        };
       }
     };
   }]);

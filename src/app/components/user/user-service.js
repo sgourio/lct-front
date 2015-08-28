@@ -14,7 +14,7 @@
  * Service in the lctUiApp.
  */
 angular.module('lct')
-  .service('userService', [ '$log', '$stomp', '$q', '$http', 'apiRoot', function ($log, $stomp, $q, $http, apiRoot) {
+  .service('userService', [ '$log',  '$q', '$http', 'apiRoot', function ($log, $q, $http, apiRoot) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var userService = {
       userList: function(){
@@ -28,13 +28,6 @@ angular.module('lct')
               $log.error('Service GET ' + apiRoot + '/play/connectedUser' + ' respond ' + status);
               reject();
             });
-        });
-      },
-
-      subscribeUserList: function(callback){
-        // subscribe to topic gamerList to update gamerList everytime a new user is connected
-        $stomp.connect('/hello').then(function () {
-          $stomp.subscribe('/topic/gamerList', callback, {});
         });
       },
 
@@ -64,15 +57,7 @@ angular.module('lct')
               reject();
             });
         });
-      },
-
-      subscribePlayerList: function(gameId, callback){
-        // subscribe to topic gamerList to update gamerList everytime a new user is connected
-        $stomp.connect('/hello').then(function () {
-          $stomp.subscribe('/topic/players/' + gameId, callback, {});
-        });
       }
-
 
     };
     return userService;

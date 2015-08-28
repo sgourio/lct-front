@@ -156,17 +156,30 @@ angular.module('lct')
         });
       },
 
+      quitGame: function(playGameId){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/play/game/'+playGameId+'/quit').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/play/game/'+ playGameId +'/quit respond ' + status);
+              reject();
+            });
+        });
+      },
+
       formatDuration : function(seconds) {
         var secNum = parseInt(seconds, 10); // don't forget the second param
         var hours   = Math.floor(secNum / 3600);
         var minutes = Math.floor((secNum - (hours * 3600)) / 60);
 
-        if (minutes < 10) {minutes = '0'+minutes;}
         var time = '';
         if( hours > 0) {
+          if (minutes < 10) {minutes = '0'+minutes;}
           time = hours + 'h' +minutes;
         }else{
-          time = minutes + 'm';
+          time = minutes + 'min';
         }
         return time;
       }
