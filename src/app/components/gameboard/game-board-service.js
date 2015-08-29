@@ -94,7 +94,7 @@ angular.module('lct')
           return true;
         }else if(targetSquare.justDropped){
           var switchedTile = targetSquare.droppedTile;
-          targetSquare.droppedTile.tile = droppedTile;
+          targetSquare.droppedTile = droppedTile;
           draw.splice(drawIndex, 1, switchedTile);
           return true;
         }

@@ -22,18 +22,31 @@
 angular.module('lct')
   .controller('GameCreateCtrl', [ '$scope', 'gameService', '$state', function ($scope, gameService, $state) {
     $scope.init = function() {
-      gameService.list(function(data){
-        $scope.games=data;
-      });
+      //gameService.list(function(data){
+      //  $scope.games=data;
+      //});
       $scope.roundTime = 120;
       $scope.selectedGame = null;
 
       $scope.gameName='';
+      $scope.hasError = false;
 
       $scope.startGame = function(){
-        gameService.openGame($scope.selectedGame, $scope.gameName, $scope.roundTime).then(function(playGameId){
-          $state.go('play',{playGameId: playGameId});
-        });
+        $scope.hasError = false;
+        if( $scope.gameName == ''){
+          $scope.hasError = true;
+          $scope.error= 'Merci de donner un nom à votre partie.';
+        }
+        if( $scope.selectedGame === null){
+          $scope.hasError = true;
+          $scope.error= 'Il faut sélectionner une partie.';
+        }
+        if (!$scope.hasError) {
+          gameService.openGame($scope.selectedGame, $scope.gameName, $scope.roundTime).then(function (playGameId) {
+
+            $state.go('play', {playGameId: playGameId});
+          });
+        }
       };
     };
 

@@ -1,7 +1,7 @@
 
 <ul class="draw"> <!-- DRAW -->
   <li ng-repeat="droppedTile in round.draw track by $index" class="tile">
-    <img  ng-src="{{tileImageUrl(droppedTile.tile, droppedTile.value)}}" drag="true" data-value="{{droppedTile}}" data-from="round.draw" data-index="{{$index}}"/>
+    <img  ng-src="{{tileImageUrl(droppedTile.tile, droppedTile.value)}}" drag-scrabble="true" data-board="round.boardGame" data-draw="round.draw" data-value="{{droppedTile}}" data-from="draw" data-index="{{$index}}"/>
     <a ng-if="droppedTile.tile.tileType == 'wildcard'" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(droppedTile)"><i class="fa fa-question"></i></a>
   </li>
 </ul>

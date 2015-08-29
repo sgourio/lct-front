@@ -10,8 +10,20 @@ angular.module('lct')
       templateUrl: 'app/components/game/play/directives/opened-actions.html',
       controller: function($scope){
         $scope.isOwner=$auth.getPayload().sub === $scope.gameMetaData.owner;
-        $scope.displayStartDate = $scope.gameMetaData.startDate === null;
-        if($scope.displayStartDate) {
+        $scope.displayStartDate = function(){
+          return $scope.gameMetaData.startDate == null;
+        };
+        var getTimer = function() {
+          gameService.getTimer($scope.gameMetaData.playGameId).then(function (timer) {
+            $scope.timer = timer;
+          });
+        };
+
+        var started = function(){
+          getTimer();
+        };
+
+        if($scope.displayStartDate()) {
           $scope.startAt = 'now';
           var d = new Date();
           var min = d.getMinutes() < 15 ? 15 : d.getMinutes() < 30 ? 30 : d.getMinutes() < 45 ? 45 : 0;
@@ -37,14 +49,14 @@ angular.module('lct')
 
           $scope.start = function (startAt) {
             if (startAt === 'now') {
-              gameService.startGame($scope.gameMetaData.playGameId, new Date(new Date().getTime() + 20000));
+              gameService.startGame($scope.gameMetaData.playGameId, new Date(new Date().getTime() + 20000)).then(started)
             } else if (startAt === 'nextQuarter') {
-              gameService.startGame($scope.gameMetaData.playGameId, $scope.qDate);
+              gameService.startGame($scope.gameMetaData.playGameId, $scope.qDate).then(started);
             } else {
               if( $scope.timeToStart.date.getTime() < d.getTime() ) {
                 $scope.timeToStart.date.setDate(d.getDate() + 1);
               }
-              gameService.startGame($scope.gameMetaData.playGameId, $scope.timeToStart.date);
+              gameService.startGame($scope.gameMetaData.playGameId, $scope.timeToStart.date).then(started);
             }
           };
         }

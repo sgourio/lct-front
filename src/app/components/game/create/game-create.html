@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<!--
-  ~ Scrabble Helper Module 2015.
-  ~ Written by Sylvain Gourio
-  ~ sylvain.gourio@gmail.com
-  -->
-
 <div class="container" data-ng-init="init()">
   <div ng-include="'app/components/navbar/navbar.html'"></div>
   <div class="row">
@@ -44,13 +37,19 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <game-list max="3" round-time="roundTime" owner="auto" refreshable="true" selected-game="selectedGame"></game-list>
+                <game-list max="10" round-time="roundTime" owner="auto" refreshable="true" selected-game="selectedGame"></game-list>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <h3>3. Nommer la partie</h3>
                 <input type="text" data-ng-model="gameName"/>
+              </div>
+            </div>
+            <div class="row" ng-if="hasError">
+              <div class="col-md-12">
+                <br />
+                <div class="alert alert-danger">{{error}}</div>
               </div>
             </div>
             <div class="row">
@@ -63,4 +62,5 @@
         </div>
       </div>
     </div>
+  </div>
 </div>

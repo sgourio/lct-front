@@ -1,26 +1,28 @@
-<button class="btn btn-default" ng-if="!isOwner" data-ng-click="unsubscribe(gameMetaData.playGameId)">Se retirer</button>
-<div ng-if="isOwner">
+<div>
+  <button class="btn btn-default" ng-if="!isOwner" data-ng-click="unsubscribe(gameMetaData.playGameId)">Se retirer</button>
+  <div ng-if="isOwner">
 
-  <div ng-if="displayStartDate">
-    Je souhaite:
-    <form class="form">
-      <div class="radio">
-        <label>
-          <input type="radio" data-ng-model="startAt" value="now" name="startAt"/> Démarrer la partie maintenant
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" data-ng-model="startAt" value="nextQuarter" name="startAt"/> Démarrer la partie à {{::quarterDate}}
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" data-ng-model="startAt" value="at" name="startAt"/> Démarrer la partie à...
-        </label>
-        <timepicker ng-model="timeToStart.date" hour-step="1" minute-step="1" show-meridian="false" ng-show="startAt === 'at'"></timepicker>
-      </div>
-      <button class="btn btn-primary" ng-click="start(startAt)">Valider</button>
-    </form>
+    <div ng-if="displayStartDate()">
+      Je souhaite:
+      <form class="form">
+        <div class="radio">
+          <label>
+            <input type="radio" data-ng-model="startAt" value="now" name="startAt"/> Démarrer la partie maintenant
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" data-ng-model="startAt" value="nextQuarter" name="startAt"/> Démarrer la partie à {{::quarterDate}}
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" data-ng-model="startAt" value="at" name="startAt"/> Démarrer la partie à...
+          </label>
+          <timepicker ng-model="timeToStart.date" hour-step="1" minute-step="1" show-meridian="false" ng-show="startAt === 'at'"></timepicker>
+        </div>
+        <button class="btn btn-primary" ng-click="start(startAt)">Valider</button>
+      </form>
+    </div>
   </div>
 </div>
