@@ -12,7 +12,7 @@ angular.module('lct')
       controller: function($scope){
         $scope.board = $scope.round.boardGame;
         $scope.draw = $scope.round.draw; // used for drag'n'drop
-        var squareWitdh = 37;
+        var squareWidth = 37;
         var squareHeight = 37;
         var squareOffSetX = 16;
         var squareOffSetY = 14;
@@ -22,7 +22,7 @@ angular.module('lct')
           boardOffset = angular.element('.board').offset();
         });
         $scope.squarePosition = function(row, column){
-          return gameBoardService.squarePosition(row, column, squareHeight, squareWitdh, squareOffSetY, squareOffSetX);
+          return gameBoardService.squarePosition(row, column, squareHeight, squareWidth, squareOffSetY, squareOffSetX);
         };
 
         $scope.tileImageUrl = function(tile, jokerValue){

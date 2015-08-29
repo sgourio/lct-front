@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('connectedUsers', ['$log', 'userService', function($log, userService) {
+  .directive('connectedUsers', ['$log', 'userService', 'stompService', function($log, userService, stompService) {
     return {
       restrict: 'E',
       scope: {
@@ -11,7 +11,7 @@ angular.module('lct')
         userService.userList().then(function(data){
           $scope.users = data;
         });
-        userService.subscribeUserList(function(data){
+        stompService.subscribeUserList(function(data){
           $scope.users = data;
           $scope.$apply();
         });

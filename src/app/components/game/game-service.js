@@ -49,7 +49,6 @@ angular.module('lct')
         $log.info('apiRoot ' + apiRoot);
         $http.get(apiRoot + '/game/fr/').
           success(function (data) {
-            $log.info('gameList: ' + data);
             callbackOk(data);
           }).
           error(function (data, status) {
@@ -61,7 +60,6 @@ angular.module('lct')
         return $q(function(resolve, reject) {
           $http.get(apiRoot + '/game/fr/auto?max='+max).
             success(function (data) {
-              $log.info('autoList: ' + data);
               resolve(data);
             }).
             error(function (data, status) {
@@ -138,6 +136,19 @@ angular.module('lct')
             }).
             error(function (data, status) {
               $log.error('Service GET ' + apiRoot + '/play/game/'+ playGameId +'/round/current respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      getTimer: function(playGameId){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/play/game/'+playGameId+'/timer').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/play/game/'+ playGameId +'/timer respond ' + status);
               reject();
             });
         });

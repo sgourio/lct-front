@@ -9,7 +9,6 @@ angular.module('lct')
       },
       templateUrl: 'app/components/game/play/directives/opened-actions.html',
       controller: function($scope){
-        $log.info($auth.getPayload());
         $scope.isOwner=$auth.getPayload().sub === $scope.gameMetaData.owner;
         $scope.displayStartDate = $scope.gameMetaData.startDate === null;
         if($scope.displayStartDate) {

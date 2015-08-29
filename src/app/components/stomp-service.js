@@ -57,6 +57,12 @@ angular.module('lct')
         });
       },
 
+      subscribeGameMetaData: function(playGameId, callback){
+        this.init().then(function () {
+          $stomp.subscribe('/topic/game/' + playGameId +'/metadata', callback, {});
+        });
+      },
+
       subscribeTimer: function(playGameId, callback){
         this.init().then(function () {
           $stomp.subscribe('/topic/game/' + playGameId +'/timer', callback, {});

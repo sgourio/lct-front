@@ -15,7 +15,9 @@ angular.module('lct')
       },
       templateUrl: 'app/components/game/play/directives/play-game-open.html',
       controller: function($scope){
-        $scope.opened = $scope.gameMetaData.status === 'opened';
+        $scope.opened = function(gameMetaData){
+          return gameMetaData.status === 'opened';
+        };
         var seconds = $scope.gameMetaData.timeByRound * $scope.gameMetaData.numberOfRound;
         $scope.gameDuration = gameService.formatDuration(seconds);
         $scope.duration = function(seconds){
