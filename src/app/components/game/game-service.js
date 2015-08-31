@@ -193,6 +193,10 @@ angular.module('lct')
           time = minutes + 'min';
         }
         return time;
+      },
+
+      putWord : function(board){
+
       }
     };
     return gameService;

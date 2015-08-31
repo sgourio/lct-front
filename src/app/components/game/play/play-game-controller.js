@@ -45,13 +45,11 @@ angular.module('lct')
       updateTimer(playGameMetaData.playGameId);
 
       stompService.subscribeTimer(playGameMetaData.playGameId, function(timer){
-        $log.info('timer : ' + timer);
         $scope.timer=timer;
         $scope.$apply();
       });
 
       stompService.subscribeGameMetaData(playGameMetaData.playGameId, function(metaData){
-        $log.info('metadata');
         initialize(metaData);
         updateTimer(playGameMetaData.playGameId);
       });
