@@ -13,6 +13,9 @@ angular.module('lct')
           var check = playGameService.isBoardValid(board);
           if( check.valid ){
            $log.info(check.wordReference);
+            gameService.putWord($scope.round.playGameId, check.wordReference, $scope.round.roundNumber).then(function(result){
+              $log.info(result);
+            });
           }else{
             $log.info(check);
             $scope.error = check.error;

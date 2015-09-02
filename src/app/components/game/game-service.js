@@ -195,8 +195,17 @@ angular.module('lct')
         return time;
       },
 
-      putWord : function(board){
-
+      putWord : function(playGameId, wordReference, roundNumber){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/play/game/'+playGameId+'/word?wordReference=' + encodeURIComponent(wordReference) +'&roundNumber='+roundNumber).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/play/game/'+playGameId+'/word?wordReference='+wordReference+'&roundNumber='+roundNumber+' respond ' + status);
+              reject();
+            });
+        });
       }
     };
     return gameService;

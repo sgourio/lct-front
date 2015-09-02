@@ -100,7 +100,11 @@ angular.module('lct')
           while( square.droppedTile !== null && i < board.squares.length - 1){
             square = board.squares[i][column];
             if( square.droppedTile !== null ) {
-              word += square.droppedTile.value;
+              if( square.droppedTile.tile.tileType === 'wildcard' ){
+                word += '(' + square.droppedTile.value + ')';
+              }else {
+                word += square.droppedTile.value;
+              }
             }
             i++;
           }
