@@ -16,7 +16,7 @@ angular.module('lct')
         });
 
         stompService.subscribeGame($scope.gameMetaData.playGameId, function(round){
-          $log.info("change round " + round.roundNumber);
+          $log.info('change round ' + round.roundNumber);
           $scope.round = round;
           $scope.$apply();
         });

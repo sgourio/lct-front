@@ -26,7 +26,7 @@ angular.module('lct')
       if( $scope.timer > 0 ){
         $scope.timer = $scope.timer - 1;
       }
-      $timeout(function(){countDown(playGameId)}, 1000);
+      $timeout(function(){countDown(playGameId);}, 1000);
     };
 
     var init = false;

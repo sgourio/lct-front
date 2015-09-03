@@ -33,7 +33,7 @@ angular.module('lct')
 
       $scope.startGame = function(){
         $scope.hasError = false;
-        if( $scope.gameName == ''){
+        if( $scope.gameName === ''){
           $scope.hasError = true;
           $scope.error= 'Merci de donner un nom à votre partie.';
         }

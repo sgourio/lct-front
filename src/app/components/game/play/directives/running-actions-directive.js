@@ -7,6 +7,7 @@ angular.module('lct')
       scope: {
         round:'='
       },
+      replace: true,
       templateUrl: 'app/components/game/play/directives/running-actions.html',
       controller: function($scope){
         $scope.putWord = function(board){
@@ -14,13 +15,13 @@ angular.module('lct')
           if( check.valid ){
            $log.info(check.wordReference);
             gameService.putWord($scope.round.playGameId, check.wordReference, $scope.round.roundNumber).then(function(result){
-              $log.info(result);
+              $scope.wordResult = result;
             });
           }else{
             $log.info(check);
             $scope.error = check.error;
           }
-        }
+        };
       }
     };
   }]);
