@@ -1,11 +1,11 @@
 <div>
 <button class="btn" data-ng-click="putWord(round.boardGame)">Valider</button>
 <div ng-if="wordResult != null">
-  <div class="alert" role="alert" ng-class="{'alert-success':wordResult.word.valid, 'alert-danger':!wordResult.word.valid }">
+  <div class="alert" role="alert" ng-class="{'alert-success': wordResult.total > 0, 'alert-danger': wordResult.total == 0 }">
     <span>Mots posés</span>
     <ul class="results">
       <li>
-        <span class="playedWord">{{wordResult.word.word}} {{wordResult.word.points}}</span>
+        <em>{{wordResult.word.reference}}</em>&nbsp;&nbsp;<span class="playedWord">{{wordResult.word.word}} {{wordResult.word.points}}</span>
         <i class="fa fa-check" ng-if="wordResult.word.valid"></i>
         <span ng-if="!wordResult.word.valid"><i class="fa fa-times"></i> Pas dans le dictionnaire</span>
       </li>

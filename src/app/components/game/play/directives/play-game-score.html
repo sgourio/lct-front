@@ -1,0 +1,20 @@
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Joueur</th>
+        <th>Score</th>
+        <th>% du top</th>
+        <th>Dernier mot validé</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-ng-repeat="playerScore in gameScore.playerGameScoreList">
+          <td>{{::playerScore.name}}</td>
+          <td>{{::playerScore.total}}</td>
+          <td>{{::playerScore.percentageFromTop/100 | number : 2}}%</td>
+          <td><span ng-if="playerScore.lastWord">{{::playerScore.lastWord.points}}pts</span><span ng-if="!playerScore.lastWord">0pt</span> <span ng-if="username === playerScore.name"><em>{{::playerScore.lastWord.reference}}</em> {{::playerScore.lastWord.word}}</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

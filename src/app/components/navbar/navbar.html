@@ -24,7 +24,7 @@
               <li><a ng-show="!isAuthenticated()" ui-sref="signin">Connexion</a></li>
               <li><a ng-show="isAuthenticated()" href="javascript:void(0)">{{::username}}</a></li>
               <li><a ng-show="isAuthenticated()" ng-click="logout()" href="javascript:void(0)"> Déconnexion</a></li>
-              <li><a ng-show="isAdmin()" href="javascript:void(0)" ui-sref="admin">Admin</a></li>
+              <li><a ng-show="isAdmin" href="javascript:void(0)" ui-sref="admin">Admin</a></li>
             </ul>
           </div>
       </div>

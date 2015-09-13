@@ -50,6 +50,7 @@ angular.module('lct')
       });
 
       stompService.subscribeGameMetaData(playGameMetaData.playGameId, function(metaData){
+        $log.info('pushed meta data');
         initialize(metaData);
         updateTimer(playGameMetaData.playGameId);
       });

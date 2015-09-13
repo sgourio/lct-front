@@ -22,7 +22,7 @@
         <div class="caption">
           <h3>{{awesomeThing.title}}</h3>
           <p>{{awesomeThing.description}}</p>
-          <p><a ng-href="{{awesomeThing.url}}">{{awesomeThing.url}}</a></p>
+          <p><a ng-href="{{awesomeThing.url}}" ng-if="awesomeThing.url">{{awesomeThing.url}}</a></p>
         </div>
       </div>
     </div>

@@ -63,6 +63,12 @@ angular.module('lct')
         });
       },
 
+      subscribeGameScores: function(playGameId, callback){
+        this.init().then(function () {
+          $stomp.subscribe('/topic/game/' + playGameId +'/scores', callback, {});
+        });
+      },
+
       subscribeTimer: function(playGameId, callback){
         this.init().then(function () {
           $stomp.subscribe('/topic/game/' + playGameId +'/timer', callback, {});

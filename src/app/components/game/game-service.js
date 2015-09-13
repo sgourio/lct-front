@@ -197,7 +197,10 @@ angular.module('lct')
 
       putWord : function(playGameId, wordReference, roundNumber){
         return $q(function(resolve, reject){
-          $http.get(apiRoot + '/play/game/'+playGameId+'/word?wordReference=' + encodeURIComponent(wordReference) +'&roundNumber='+roundNumber).
+          $http.post(apiRoot + '/play/game/'+playGameId+'/word',{
+            wordReference : wordReference,
+            roundNumber : roundNumber
+          }).
             success(function (data) {
               resolve(data);
             }).
@@ -206,7 +209,20 @@ angular.module('lct')
               reject();
             });
         });
-      }
+      },
+
+      gameScores: function(playGameId){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/play/game/'+playGameId+'/scores').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/play/game/'+ playGameId +'/scores respond ' + status);
+              reject();
+            });
+        });
+      },
     };
     return gameService;
   }]);
