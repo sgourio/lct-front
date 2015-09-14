@@ -11,7 +11,7 @@ angular.module('lct')
       controller: function($scope){
         $scope.isOwner=$auth.getPayload().sub === $scope.gameMetaData.owner;
         $scope.displayStartDate = function(){
-          return $scope.gameMetaData.startDate == null;
+          return $scope.gameMetaData.startDate === null;
         };
         var getTimer = function() {
           gameService.getTimer($scope.gameMetaData.playGameId).then(function (timer) {
@@ -49,7 +49,7 @@ angular.module('lct')
 
           $scope.start = function (startAt) {
             if (startAt === 'now') {
-              gameService.startGame($scope.gameMetaData.playGameId, new Date(new Date().getTime() + 20000)).then(started)
+              gameService.startGame($scope.gameMetaData.playGameId, new Date(new Date().getTime() + 20000)).then(started);
             } else if (startAt === 'nextQuarter') {
               gameService.startGame($scope.gameMetaData.playGameId, $scope.qDate).then(started);
             } else {
@@ -65,7 +65,7 @@ angular.module('lct')
           gameService.quitGame(playGameId).then(function(){
             $state.go('gameList');
           });
-        }
+        };
 
       }
     };

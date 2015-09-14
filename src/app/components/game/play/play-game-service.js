@@ -8,7 +8,7 @@
  * Service in the lctUiApp.
  */
 angular.module('lct')
-  .service('playGameService', [ '$http', 'apiRoot', '$log', '$q', function ($http, apiRoot, $log, $q) {
+  .service('playGameService', [ function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var playGameService = {
       isBoardValid: function(board){
@@ -23,14 +23,14 @@ angular.module('lct')
               countDropped++;
               attached = attached || this.isAttached(board, i, j) ;
               if( typeof horizontal === 'undefined'){
-                if( row == -1 ) {
+                if( row === -1 ) {
                   row = i;
                   column = j;
                 }else{
-                  horizontal = row == i;
+                  horizontal = row === i;
                 }
               }else {
-                if ((horizontal && i != row) || (horizontal === false && j != column)) {
+                if ((horizontal && i !== row) || (horizontal === false && j !== column)) {
                   return {
                     valid: false,
                     error: 'Les lettres ne sont pas sur la même ligne ou la même colonne'
@@ -40,7 +40,7 @@ angular.module('lct')
             }
           }
         }
-        if( row == -1 ){
+        if( row === -1 ){
           return {
             valid : false,
             error : 'Aucune lettre posée sur le plateau'
@@ -55,28 +55,28 @@ angular.module('lct')
         if( countDropped === 1 && typeof horizontal === 'undefined' ){
           var next = column + 1;
           var prev = column - 1;
-          horizontal = (next  < board.squares[row].length && board.squares[row][next].droppedTile != null) || (prev > 0 && board.squares[row][prev].droppedTile != null);
+          horizontal = (next  < board.squares[row].length && board.squares[row][next].droppedTile !== null) || (prev > 0 && board.squares[row][prev].droppedTile !== null);
         }
 
         return{
           valid : true,
           wordReference : this.findWordAt(board, row, column, horizontal)
-        }
+        };
       },
 
       isAttached : function(board, row, column){
         if( row === 7 && column === 7){
           return true;
         }
-        return ( row > 0 && board.squares[row-1][column].droppedTile !== null && !board.squares[row-1][column].justDropped )
-        ||( row < board.squares.length - 1 && board.squares[row+1][column].droppedTile !== null && !board.squares[row+1][column].justDropped )
-        ||( column > 0 && board.squares[row][column - 1].droppedTile !== null && !board.squares[row][column - 1].justDropped )
-          ||( column < board.squares[row].length - 1 && board.squares[row][column + 1].droppedTile !== null && !board.squares[row][column + 1].justDropped );
+        return ( row > 0 && board.squares[row-1][column].droppedTile !== null && !board.squares[row-1][column].justDropped ) ||
+          ( row < board.squares.length - 1 && board.squares[row+1][column].droppedTile !== null && !board.squares[row+1][column].justDropped ) ||
+          ( column > 0 && board.squares[row][column - 1].droppedTile !== null && !board.squares[row][column - 1].justDropped ) ||
+          ( column < board.squares[row].length - 1 && board.squares[row][column + 1].droppedTile !== null && !board.squares[row][column + 1].justDropped );
 
       },
 
       findWordAt : function(board, row, column, horizontal){
-        var word = "";
+        var word = '';
         var square = board.squares[row][column];
         if( horizontal ){
           while( column > 0 && board.squares[row][column - 1].droppedTile !== null){
@@ -90,8 +90,8 @@ angular.module('lct')
             }
             j++;
           }
-          var reference = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(row) + "" + (column +1);
-          return word + "\t" + reference;
+          var reference = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(row) + '' + (column +1);
+          return word + '\t' + reference;
         }else{
           while( row > 0 && board.squares[row-1][column].droppedTile !== null){
             row--;
@@ -108,8 +108,8 @@ angular.module('lct')
             }
             i++;
           }
-          var reference = (column +1) + "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(row);
-          return word + "\t" + reference;
+          var ref = (column +1) + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(row);
+          return word + '\t' + ref;
         }
       }
     };

@@ -27,9 +27,7 @@ angular.module('lct')
 
     var stompService = {
       init: function(){
-        var deferred = $q.defer();
-
-        return $q(function(resolve, reject) {
+        return $q(function(resolve) {
           if( initialized ){
             resolve();
           }else if(intialization){

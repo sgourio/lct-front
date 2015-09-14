@@ -6,7 +6,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('playGameOpen', ['$log', 'gameService', '$state', '$auth', function($log, gameService, $state, $auth) {
+  .directive('playGameOpen', ['$log', 'gameService', '$timeout', 'stompService', function($log, gameService, $timeout, stompService) {
     return {
       restrict: 'E',
       scope: {
@@ -23,6 +23,30 @@ angular.module('lct')
         $scope.duration = function(seconds){
           return gameService.formatDuration(seconds);
         };
+
+
+        var countDown = function(playGameId){
+          if( $scope.timer > 0 ){
+            $scope.timer = $scope.timer - 1;
+          }
+          $timeout(function(){countDown(playGameId);}, 1000);
+        };
+
+        var init = false;
+        var updateTimer = function(playGameId){
+          gameService.getTimer(playGameId).then(function(timer){
+            $scope.timer=timer;
+            if( !init ){
+              init = true;
+              countDown(playGameId);
+            }
+          });
+        };
+        updateTimer($scope.gameMetaData.playGameId);
+        stompService.subscribeTimer($scope.gameMetaData.playGameId, function(timer){
+          $scope.timer=timer;
+          $scope.$apply();
+        });
       }
     };
   }]);

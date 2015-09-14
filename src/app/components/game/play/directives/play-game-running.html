@@ -12,19 +12,14 @@
     </div>
   </div>
   <div class="col-md-4 col-lg-6">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">Jeu</h3></div>
-      <div class="panel-body">
-        Partie "{{::gameMetaData.name}}" créée par {{::gameMetaData.owner}}<br />
-        <running-actions round="round"></running-actions>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">Scores</h3></div>
-      <div class="panel-body">
-        <play-game-score game-meta-data="gameMetaData"></play-game-score>
-      </div>
-    </div>
+    <p>
+      <span class="pull-right">Partie "{{::gameMetaData.name}}" créée par {{::gameMetaData.owner}}</span><br />
+      <timer play-game-id="gameMetaData.playGameId"></timer>
+      <running-actions round="round"></running-actions>
+    </p>
+    <p>
+      <play-game-score game-meta-data="gameMetaData"></play-game-score>
+    </p>
   </div>
 
 </div>

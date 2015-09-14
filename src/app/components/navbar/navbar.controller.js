@@ -8,18 +8,7 @@ angular.module('lct')
     $scope.isAuthenticated = function() {
       return $auth.isAuthenticated();
     };
-    //$scope.isAdmin = function(){
-    //  if( typeof $window.sessionStorage.admin === 'undefined'  ){
-    //    userService.isAdmin().then(function(isAdmin){
-    //      $window.sessionStorage.admin = isAdmin;
-    //      $auth.admin = isAdmin;
-    //      return isAdmin;
-    //    });
-    //  }else{
-    //    $auth.admin = $window.sessionStorage.admin;
-    //  }
-    //  return $auth.admin;
-    //};
+
     if( $auth.isAuthenticated() ) {
       $scope.username = $auth.getPayload().sub;
       userService.isAdmin().then(function(result){

@@ -1,4 +1,9 @@
 <div>
+  <p ng-if="gameScore.topWord">
+    Meilleur mot : {{gameScore.topWord.points}} pts avec
+    <em>{{gameScore.topWord.reference}}</em> {{gameScore.topWord.word}}</span><br />
+    Top score : {{gameScore.topTotal}} pts
+  </p>
   <table class="table">
     <thead>
       <tr>
@@ -11,9 +16,9 @@
     <tbody>
       <tr data-ng-repeat="playerScore in gameScore.playerGameScoreList">
           <td>{{::playerScore.name}}</td>
-          <td>{{::playerScore.total}}</td>
+          <td><span ng-if="playerScore.total > 0">{{::playerScore.total}} pts</span></td>
           <td>{{::playerScore.percentageFromTop/100 | number : 2}}%</td>
-          <td><span ng-if="playerScore.lastWord">{{::playerScore.lastWord.points}}pts</span><span ng-if="!playerScore.lastWord">0pt</span> <span ng-if="username === playerScore.name"><em>{{::playerScore.lastWord.reference}}</em> {{::playerScore.lastWord.word}}</span></td>
+          <td><span ng-if="playerScore.lastWord">{{::playerScore.lastWord.points}} pts</span><span ng-if="!playerScore.lastWord">0pt</span> <span ng-if="username === playerScore.name"><em>{{::playerScore.lastWord.reference}}</em> {{::playerScore.lastWord.word}}</span></td>
       </tr>
     </tbody>
   </table>

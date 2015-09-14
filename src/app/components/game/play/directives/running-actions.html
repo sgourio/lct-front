@@ -1,21 +1,26 @@
 <div>
-<button class="btn" data-ng-click="putWord(round.boardGame)">Valider</button>
-<div ng-if="wordResult != null">
-  <div class="alert" role="alert" ng-class="{'alert-success': wordResult.total > 0, 'alert-danger': wordResult.total == 0 }">
-    <span>Mots posés</span>
-    <ul class="results">
-      <li>
-        <em>{{wordResult.word.reference}}</em>&nbsp;&nbsp;<span class="playedWord">{{wordResult.word.word}} {{wordResult.word.points}}</span>
-        <i class="fa fa-check" ng-if="wordResult.word.valid"></i>
-        <span ng-if="!wordResult.word.valid"><i class="fa fa-times"></i> Pas dans le dictionnaire</span>
-      </li>
-      <li data-ng-repeat="word in wordResult.subWordList">
-        <span class="playedWord">{{word.word}} {{word.points}}</span>
-        <i class="fa fa-check" ng-if="word.valid"></i>
-        <span ng-if="!word.valid"><i class="fa fa-times"></i> Pas dans le dictionnaire</span>
-      </li>
-    </ul>
-    <strong>Total {{wordResult.total}}<span ng-if="wordResult.total > 1">pts</span><span ng-if="wordResult.total <= 1">pt</span></strong>
+  <button class="btn btn-default" data-ng-click="putWord(round.boardGame)" blur-me>Valider</button>
+  <div ng-if="wordResult !== null && currentRound === round.roundNumber" class="wordResult">
+    <div class="alert" role="alert" ng-class="{'alert-success': wordResult.total > 0, 'alert-danger': wordResult.total == 0 }">
+      <span>Mots posés</span>
+      <ul class="results">
+        <li>
+          <em>{{wordResult.word.reference}}</em>&nbsp;&nbsp;<span class="playedWord">{{wordResult.word.word}} {{wordResult.word.points}}pts</span>
+          <i class="fa fa-check" ng-if="wordResult.word.valid"></i>
+          <span ng-if="!wordResult.word.valid"><i class="fa fa-times"></i> Pas dans le dictionnaire</span>
+        </li>
+        <li data-ng-repeat="word in wordResult.subWordList">
+          <span class="playedWord">{{word.word}} {{word.points}}pts</span>
+          <i class="fa fa-check" ng-if="word.valid"></i>
+          <span ng-if="!word.valid"><i class="fa fa-times"></i> Pas dans le dictionnaire</span>
+        </li>
+      </ul>
+      <strong>Total {{wordResult.total}}<span ng-if="wordResult.total > 1">pts</span><span ng-if="wordResult.total <= 1">pt</span></strong>
+    </div>
   </div>
-</div>
+  <div ng-if="error !== null" class="wordResult">
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+  </div>
 </div>

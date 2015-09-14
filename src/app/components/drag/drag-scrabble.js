@@ -13,7 +13,7 @@
  * # drag
  */
 angular.module('gameDrag',[])
-  .directive('dragScrabble',['$document', 'gameBoardService', '$log', function ($document, gameBoardService, $log) {
+  .directive('dragScrabble',['$document', 'gameBoardService', function ($document, gameBoardService) {
     var squareWitdh = 37;
     var squareHeight = 37;
     var squareOffSetX = 16;

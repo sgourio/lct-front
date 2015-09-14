@@ -12,9 +12,14 @@
 
 body {
   padding: 0;
+  font-size: 12px;
 }
 button, input, optgroup, select, textarea{
   color: #333333;
+}
+
+.alert, .panel-heading, .panel-body{
+  padding: 7px;
 }
 
 .panel, .well, .jumbotron, .navbar, .modal-dialog{
@@ -136,7 +141,7 @@ ul{
     padding-bottom: 0px;
     height: 20px;
     span{
-      font-size: 0.8em;
+      font-size: 0.9em;
     }
   }
 }
@@ -148,6 +153,7 @@ ul{
 
 .board{
   clear: both;
+  background-color: #FFFFFF;
   background-image: url('/assets/images/plateau.png');
   width: 580px;
   height: 580px;
@@ -255,4 +261,11 @@ td.reference{
 .results li{
   list-style: disc;
   margin-left: 20px;
+}
+.wordResult{
+  margin-top: 6px;
+}
+
+.timer{
+  font-size: 1.4em;
 }
