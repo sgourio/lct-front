@@ -29,6 +29,7 @@ angular.module('lct')
         };
         updateTimer($scope.playGameId);
         stompService.subscribeTimer($scope.playGameId, function(timer){
+          $log.info('update time ' + timer);
           $scope.timer=timer;
           $scope.$apply();
         });

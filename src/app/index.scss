@@ -33,6 +33,10 @@ button, input, optgroup, select, textarea{
 .container{
 }
 
+.bottomNav{
+  margin-top: 80px;
+}
+
 ul{
   list-style: none;
   padding: 0;
@@ -175,9 +179,10 @@ ul{
 }
 
 .draw{
-  border: 1px solid #5f9ea0;
+  //border: 1px solid #5f9ea0;
   height: 54px;
   margin-bottom: 2px;
+  padding-top: 10px;
   position: relative;
   .tile {
     display: inline-block;

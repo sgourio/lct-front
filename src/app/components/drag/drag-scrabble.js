@@ -154,8 +154,10 @@ angular.module('gameDrag',[])
         };
 
         element.on('mousedown', function (event) {
-          event.preventDefault();
-          dragStart(element, event.pageX, event.pageY);
+          if(event.button === 0) {
+            event.preventDefault();
+            dragStart(element, event.pageX, event.pageY);
+          }
         });
 
         element.on('touchstart', function (event) {

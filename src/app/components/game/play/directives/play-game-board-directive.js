@@ -25,6 +25,12 @@ angular.module('lct')
           return gameBoardService.squarePosition(row, column, squareHeight, squareWidth, squareOffSetY, squareOffSetX);
         };
 
+        $scope.back = function($event, tile, row, column){
+          if($event.button === 2) {
+            gameBoardService.moveBoardToDraw($scope.board, $scope.draw, tile, $scope.draw.length, row, column);
+          }
+        };
+
         $scope.tileImageUrl = function(tile, jokerValue){
           if (tile.tileType !== 'wildcard') {
             return 'assets/images/lettres36/fr/normal/' + tile.value + '.gif';
