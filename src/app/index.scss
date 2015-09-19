@@ -274,3 +274,17 @@ td.reference{
 .timer{
   font-size: 1.4em;
 }
+
+.unselectable{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select:none;
+  user-select:none;
+  -o-user-select:none;
+}
+.action-icon{
+  cursor: pointer;
+}
+.action-back-all{
+  margin-top: 20px;
+}

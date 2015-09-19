@@ -1,7 +1,10 @@
 <div ng-if="running && round != null" class="row">
-  <div class="col-md-8 col-lg-6">
+  <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-1">
+        <get-back-all round="round"></get-back-all>
+      </div>
+      <div class="col-md-11">
         <play-game-draw round="round"></play-game-draw>
       </div>
     </div>

@@ -10,8 +10,6 @@ angular.module('lct')
       replace: true,
       templateUrl: 'app/components/game/play/directives/play-game-board.html',
       controller: function($scope){
-        $scope.board = $scope.round.boardGame;
-        $scope.draw = $scope.round.draw; // used for drag'n'drop
         var squareWidth = 37;
         var squareHeight = 37;
         var squareOffSetX = 16;
@@ -27,7 +25,7 @@ angular.module('lct')
 
         $scope.back = function($event, tile, row, column){
           if($event.button === 2) {
-            gameBoardService.moveBoardToDraw($scope.board, $scope.draw, tile, $scope.draw.length, row, column);
+            gameBoardService.moveBoardToDraw($scope.round.boardGame, $scope.round.draw, tile, $scope.round.draw.length, row, column);
           }
         };
 
