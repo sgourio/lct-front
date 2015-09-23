@@ -136,6 +136,21 @@ angular.module('lct')
         originSquare.justDropped = false;
       },
 
+      moveLetterToBoard : function (board, draw, letter, row, column){
+        var tile;
+        var drawIndex = -1;
+        for(var i = 0 ; i < draw.length; i++){
+          if( draw[i].value === letter){
+            tile = draw[i];
+            drawIndex = i;
+            break;
+          }
+        }
+        if( drawIndex >= 0 ) {
+          this.moveDrawToBoard(draw, board, tile, drawIndex, row, column);
+        }
+      },
+
       sortTiles : function(tab){
         if( tab.constructor === Array ) {
           tab.sort(function(a,b){
@@ -311,7 +326,10 @@ angular.module('lct')
 
       validRound : function(board, draw, droppedWord){
         var currentDraw = [];
-        Array.prototype.push.apply(currentDraw, draw);
+        for( var i = 0 ; i < draw.length; i++){
+          currentDraw.push(draw[i].tile);
+        }
+
         for( var i = 0 ; i < board.squares.length; i++){
           for( var j = 0; j < board.squares[i].length; j++){
             if(board.squares[i][j].justDropped){
@@ -375,11 +393,23 @@ angular.module('lct')
         return true;
       },
 
+      isYOrWildcardInTiles : function( tileList){
+        for( var i = 0 ; i < tileList.length; i++){
+          var tile = tileList[i];
+          if( tile.tileType === 'y' || tile.tileType === 'wildcard'){
+            return true;
+          }
+        }
+        return false;
+      },
+
       isFinish : function(deck, draw){
         var allTiles = [];
-        Array.prototype.push.apply(allTiles, draw);
+        for( var i = 0 ;  i < draw.length ; i++){
+          allTiles.push(draw[i].tile);
+        }
         Array.prototype.push.apply(allTiles, deck);
-        return allTiles.length <= 1 || this.isOnlyVowel(allTiles) || this.isOnlyConsonnant(allTiles);
+        return (allTiles.length <= 1 || this.isOnlyVowel(allTiles) || this.isOnlyConsonnant(allTiles)) && !this.isYOrWildcardInTiles(allTiles);
       },
 
       /**

@@ -1,0 +1,25 @@
+<div>
+  <div ng-if="msg.wordResultMessage.wordResult && msg.wordResultMessage.roundNumber === round.roundNumber" class="wordResult">
+    <div class="alert" role="alert" ng-class="{'alert-success': msg.wordResultMessage.wordResult.total > 0, 'alert-danger': msg.wordResultMessage.wordResult.total == 0 }">
+      <span>Résultat</span>
+      <ul class="results">
+        <li class="mainWord">
+          <em>{{msg.wordResultMessage.wordResult.word.reference}}</em>&nbsp;&nbsp;<span class="playedWord">{{msg.wordResultMessage.wordResult.word.word}} {{msg.wordResultMessage.wordResult.word.points}}pts</span>
+          <i class="fa fa-check" ng-if="msg.wordResultMessage.wordResult.word.valid"></i>
+          <span ng-if="!msg.wordResultMessage.wordResult.word.valid"><i class="fa fa-times"></i> Pas dans le dictionnaire</span>
+        </li>
+        <li data-ng-repeat="word in msg.wordResultMessage.wordResult.subWordList">
+          <span class="playedWord">{{word.word}} {{word.points}}pts</span>
+          <i class="fa fa-check" ng-if="word.valid"></i>
+          <span ng-if="!word.valid"><i class="fa fa-times"></i> Pas dans le dictionnaire</span>
+        </li>
+      </ul>
+      <strong>Total {{msg.wordResultMessage.wordResult.total}}<span ng-if="msg.wordResultMessage.wordResult.total > 1">pts</span><span ng-if="msg.wordResultMessage.wordResult.total <= 1">pt</span></strong>
+    </div>
+  </div>
+  <div ng-if="msg.errorMessage.error" class="wordResult">
+    <div class="alert alert-danger" role="alert">
+      {{msg.errorMessage.error}}
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@ angular.module('lct')
         round:'='
       },
       replace: true,
-      template: '<i class="fa fa-external-link-square fa-2x action-icon action-back-all" data-ng-click="backAll()" title="Ramener toutes les lettres sur le support"></i>',
+      template: '<i class="fa fa-arrow-up fa-2x action-icon action-back-all" data-ng-click="backAll()" title="Ramener toutes les lettres sur le support"></i>',
       controller: function($scope){
         $scope.backAll = function(){
             gameBoardService.clearBoard($scope.round.boardGame, $scope.round.draw);

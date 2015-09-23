@@ -3,6 +3,10 @@
 // injector
 // endinjector
 
+* {
+  border-radius: 0 !important;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -157,8 +161,7 @@ ul{
 
 .board{
   clear: both;
-  background-color: #FFFFFF;
-  background-image: url('/assets/images/plateau.png');
+  background: #FFFFFF url('/assets/images/plateau.png');
   width: 580px;
   height: 580px;
   position: relative;
@@ -166,11 +169,16 @@ ul{
     position: absolute;
     width: 37px;
     height: 37px;
+    padding: 1px;
 
     a{
       margin-top: -15px;
       display: block;
     }
+  }
+
+  .selected-square{
+    background-color: rgba(20, 193, 175, 0.5);
   }
 
   img{
@@ -201,9 +209,10 @@ ul{
     padding-left:37px;
     width: 74px;
   }
-
 }
-
+.actionButton{
+  padding-top: 10px;
+}
 .deck{
   padding-top: 10px;
   img{
@@ -266,11 +275,13 @@ td.reference{
 .results li{
   list-style: disc;
   margin-left: 20px;
-}
-.wordResult{
-  margin-top: 6px;
-}
 
+  &.mainWord{
+    font-weight: bold;
+    list-style: none;
+    margin-left: 2px;
+  }
+}
 .timer{
   font-size: 1.4em;
 }
@@ -287,4 +298,16 @@ td.reference{
 }
 .action-back-all{
   margin-top: 20px;
+}
+
+.btn-lct{
+  background: transparent;
+  color: white;
+  border: 1px solid #f5f5f5;
+  font-weight: bold;
+  letter-spacing: 2px;
+  &:hover{
+    color: #2c3e50;
+    background: #f5f5f5;
+  }
 }

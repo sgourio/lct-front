@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('runningActions', ['$log', 'gameService', '$state', '$auth', 'playGameService', function($log, gameService, $state, $auth, playGameService) {
+  .directive('runningActions', ['$log', 'gameService', '$state', '$auth', 'playGameService', 'messageService' , function($log, gameService, $state, $auth, playGameService, messageService) {
     return {
       restrict: 'E',
       scope: {
@@ -10,19 +10,17 @@ angular.module('lct')
       replace: true,
       templateUrl: 'app/components/game/play/directives/running-actions.html',
       controller: function($scope){
-        $scope.error = null;
         $scope.putWord = function(board){
-          $scope.error = null;
-          $scope.wordResult = null;
+          var roundNumber = $scope.round.roundNumber;
           var check = playGameService.isBoardValid(board);
           if( check.valid ){
-           $log.info(check.wordReference);
-            gameService.putWord($scope.round.playGameId, check.wordReference, $scope.round.roundNumber).then(function(result){
-              $scope.wordResult = result;
-              $scope.currentRound = $scope.round.roundNumber;
+            $log.info(check.wordReference);
+            gameService.putWord($scope.round.playGameId, check.wordReference, roundNumber).then(function(result){
+              messageService.addWordResult(result, roundNumber);
             });
           }else{
             $log.info(check);
+            messageService.addErrorMessage(check.error, roundNumber);
             $scope.error = check.error;
           }
         };

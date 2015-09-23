@@ -1,28 +1,38 @@
-<div ng-if="running && round != null" class="row">
-  <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
-    <div class="row">
-      <div class="col-md-1">
-        <get-back-all round="round"></get-back-all>
-      </div>
-      <div class="col-md-11">
-        <play-game-draw round="round"></play-game-draw>
+<div ng-if="running && round != null">
+  <div class="row">
+    <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
+      <div class="row">
+        <div class="col-md-1">
+          <get-back-all round="round"></get-back-all>
+        </div>
+        <div class="col-md-8">
+          <play-game-draw round="round"></play-game-draw>
+        </div>
+        <div class="col-md-3">
+          <running-actions round="round"></running-actions>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <play-game-board round="round"></play-game-board>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 col-lg-6">
-    <p>
+    <div class="col-md-4 col-lg-6">
       <span class="pull-right">Partie "{{::gameMetaData.name}}" créée par {{::gameMetaData.owner}}</span><br />
       <timer play-game-id="gameMetaData.playGameId"></timer>
-      <running-actions round="round"></running-actions>
-    </p>
-    <p>
-      <play-game-score game-meta-data="gameMetaData"></play-game-score>
-    </p>
+    </div>
   </div>
-
+  <div class="row">
+    <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
+      <play-game-board round="round"></play-game-board>
+    </div>
+    <div class="col-md-4 col-lg-6">
+      <display-messages round="round" class=""></display-messages>
+      <play-game-score game-meta-data="gameMetaData"></play-game-score>
+    </div>
+  </div>
+  <script type="text/ng-template" id="jokerPopover">
+    <div class="triangle"></div>
+    <ul class="jokerPopover">
+      <li ng-repeat="n in ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']">
+        <img  ng-src="{{'/assets/images/lettres36/fr/joker/'+n+'.gif'}}" ng-click="changeJokerValue(n,$event); hidePopover()" />
+      </li>
+    </ul>
+  </script>
 </div>
