@@ -1,7 +1,17 @@
+<div>
+  <ul class="draw"> <!-- DRAW -->
+    <li ng-repeat="droppedTile in round.draw track by $index" class="tile">
+      <img  ng-src="{{tileImageUrl(droppedTile.tile, droppedTile.value)}}" drag-scrabble="true" data-board="round.boardGame" data-draw="round.draw" data-value="{{droppedTile}}" data-from="draw" data-index="{{$index}}"/>
+      <a ng-if="droppedTile.tile.tileType == 'wildcard'" ns-popover ns-popover-template="drawJokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(droppedTile)"><i class="fa fa-question"></i></a>
+    </li>
+  </ul>
 
-<ul class="draw"> <!-- DRAW -->
-  <li ng-repeat="droppedTile in round.draw track by $index" class="tile">
-    <img  ng-src="{{tileImageUrl(droppedTile.tile, droppedTile.value)}}" drag-scrabble="true" data-board="round.boardGame" data-draw="round.draw" data-value="{{droppedTile}}" data-from="draw" data-index="{{$index}}"/>
-    <a ng-if="droppedTile.tile.tileType == 'wildcard'" ns-popover ns-popover-template="jokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(droppedTile)"><i class="fa fa-question"></i></a>
-  </li>
-</ul>
+  <script type="text/ng-template" id="drawJokerPopover">
+    <div class="triangle"></div>
+    <ul class="jokerPopover">
+      <li ng-repeat="n in ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']">
+        <img  ng-src="{{'/assets/images/lettres36/fr/joker/'+n+'.gif'}}" ng-click="changeJokerValue(n,$event); hidePopover()" />
+      </li>
+    </ul>
+  </script>
+</div>

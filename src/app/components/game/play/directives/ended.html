@@ -1,15 +1,18 @@
-<div ng-if="running && round != null">
+<div ng-if="round != null">
   <div class="row">
     <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
       <div class="row">
-        <div class="col-md-1">
-          <get-back-all round="round"></get-back-all>
-        </div>
+        Partie terminée<br />
+        La partie est remportée par <strong>{{::winners}}</strong>
+        <span ng-if="percentageFromTop >= 9000">avec le score incroyable de {{::bestScore}} ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+        <span ng-if="percentageFromTop > 0 && percentageFromTop < 9000">en marquant {{::bestScore}} ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+        <span ng-if="percentageFromTop === 0">en marquant rien du tout</span>
+        <br />
+        Le TOP score était de {{gameScore.topTotal}} pts
+      </div>
+      <div class="row">
         <div class="col-md-8">
           <play-game-draw round="round"></play-game-draw>
-        </div>
-        <div class="col-md-3">
-          <running-actions round="round"></running-actions>
         </div>
       </div>
     </div>

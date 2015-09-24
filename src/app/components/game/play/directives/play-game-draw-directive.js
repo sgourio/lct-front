@@ -24,6 +24,14 @@ angular.module('lct')
             }
           }
         };
+
+        $scope.startChangeJokerValue = function(droppedTile){
+          $scope.currentJoker = droppedTile;
+        };
+
+        $scope.changeJokerValue = function(letter){
+          $scope.currentJoker.value = letter;
+        };
       }
     };
   }]);

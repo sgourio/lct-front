@@ -5,8 +5,7 @@
 
   <play-game-running game-meta-data="metaData" ng-if="running"></play-game-running>
 
-  <div ng-if="ended">
-  ended
-  </div>
+  <play-game-ended game-meta-data="metaData" ng-if="ended"></play-game-ended>
+
   <div ng-include="'app/components/navbar/navbar.html'" class="bottomNav"></div>
 </div>

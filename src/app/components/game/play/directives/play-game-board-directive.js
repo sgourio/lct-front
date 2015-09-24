@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('playGameBoard', ['$log', 'gameService', '$state', '$auth', 'gameBoardService', function($log, gameService, $state, $auth, gameBoardService) {
+  .directive('playGameBoard', ['$log', 'gameService', '$state', '$auth', 'gameBoardService', 'playGameService', 'messageService', function($log, gameService, $state, $auth, gameBoardService, playGameService, messageService) {
     return {
       restrict: 'E',
       scope: {
@@ -79,7 +79,22 @@ angular.module('lct')
           }else if( code == 27){ // escape
             gameBoardService.clearBoard($scope.round.boardGame, $scope.round.draw);
           }else if( code == 13){ // enter
-            poserDuplicate();
+            $scope.putWord($scope.board);
+          }
+        };
+
+        $scope.putWord = function(board){
+          var roundNumber = $scope.round.roundNumber;
+          var check = playGameService.isBoardValid(board);
+          if( check.valid ){
+            $log.info(check.wordReference);
+            gameService.putWord($scope.round.playGameId, check.wordReference, roundNumber).then(function(result){
+              messageService.addWordResult(result, roundNumber);
+            });
+          }else{
+            $log.info(check);
+            messageService.addErrorMessage(check.error, roundNumber);
+            $scope.error = check.error;
           }
         };
 
