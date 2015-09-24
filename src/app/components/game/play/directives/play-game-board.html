@@ -1,4 +1,4 @@
-<div class="board" drop data-ng-keydown="keyDown($event)" tabindex="0"><!-- BOARD -->
+<div class="board" drop data-ng-keydown="keyDown($event)" tabindex="0" prevent-right-click><!-- BOARD -->
   <ul class="rows">
     <li ng-repeat="row in round.boardGame.squares" ng-init="lineIndex = $index">
       <ul class="columns">

@@ -79,7 +79,7 @@ angular.module('lct')
           }else if( code == 27){ // escape
             gameBoardService.clearBoard($scope.round.boardGame, $scope.round.draw);
           }else if( code == 13){ // enter
-            $scope.putWord($scope.board);
+            $scope.putWord($scope.round.boardGame);
           }
         };
 
