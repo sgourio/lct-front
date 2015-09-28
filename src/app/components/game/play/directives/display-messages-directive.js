@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('displayMessages', ['$log', 'messageService', function($log) {
+  .directive('displayMessages', ['messageService', function() {
     return {
       restrict: 'E',
       scope: {

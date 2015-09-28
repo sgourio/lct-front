@@ -326,8 +326,8 @@ angular.module('lct')
 
       validRound : function(board, draw, droppedWord){
         var currentDraw = [];
-        for( var i = 0 ; i < draw.length; i++){
-          currentDraw.push(draw[i].tile);
+        for( var drawIndex = 0 ; drawIndex < draw.length; drawIndex++){
+          currentDraw.push(draw[drawIndex].tile);
         }
 
         for( var i = 0 ; i < board.squares.length; i++){

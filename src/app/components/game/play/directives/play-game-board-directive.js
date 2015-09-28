@@ -16,7 +16,7 @@ angular.module('lct')
         var squareOffSetY = 13;
         var boardOffset = 0;
 
-        $scope.selectedSquare={row:0, column:0};
+        $scope.selectedSquare={row:-1, column:-1};
 
         $scope.$on('$viewContentLoaded', function() {
           boardOffset = angular.element('.board').offset();
@@ -45,7 +45,7 @@ angular.module('lct')
         };
 
         $scope.isSelected = function(row, column){
-          return $scope.selectedSquare.row == row && $scope.selectedSquare.column == column;
+          return $scope.selectedSquare.row === row && $scope.selectedSquare.column === column;
         };
 
         $scope.tileImageUrl = function(tile, jokerValue){
@@ -64,21 +64,19 @@ angular.module('lct')
           var code = (event.keyCode ? event.keyCode : event.which);
           if( code >= 65 && code <= 90){
             if( $scope.selectedSquare ) {
-              gameBoardService.moveLetterToBoard($scope.round.boardGame, $scope.round.draw, String.fromCharCode(code), $scope.selectedSquare.row, $scope.selectedSquare.column)
+              gameBoardService.moveLetterToBoard($scope.round.boardGame, $scope.round.draw, String.fromCharCode(code), $scope.selectedSquare.row, $scope.selectedSquare.column);
             }
-          }else if( code == 188){ //joker
-            entrerLettre("JOKER");
           }else if( (code >=37 && code <= 40) || (code >=98 && code <= 104)){
             event.preventDefault();
             moveSelection(code);
-          } else if( code == 46 || code == 32 || code === 8){ // delete
+          } else if( code === 46 || code === 32 || code === 8){ // delete
             if( $scope.selectedSquare ) {
               var tile = $scope.round.boardGame.squares[$scope.selectedSquare.row][$scope.selectedSquare.column].droppedTile;
-              gameBoardService.moveBoardToDraw($scope.round.boardGame, $scope.round.draw, tile, $scope.round.draw.length, $scope.selectedSquare.row, $scope.selectedSquare.column )
+              gameBoardService.moveBoardToDraw($scope.round.boardGame, $scope.round.draw, tile, $scope.round.draw.length, $scope.selectedSquare.row, $scope.selectedSquare.column );
             }
-          }else if( code == 27){ // escape
+          }else if( code === 27){ // escape
             gameBoardService.clearBoard($scope.round.boardGame, $scope.round.draw);
-          }else if( code == 13){ // enter
+          }else if( code === 13){ // enter
             $scope.putWord($scope.round.boardGame);
           }
         };
@@ -104,23 +102,23 @@ angular.module('lct')
          * @return
          */
         function moveSelection(fleche){
-          if( fleche == 37 || fleche == 100){ // left
+          if( fleche === 37 || fleche === 100){ // left
                   if( $scope.selectedSquare.column > 0 ){
                       $scope.selectedSquare.column = $scope.selectedSquare.column - 1;
                   }
           }
-          else if( fleche == 38 || fleche == 104){ // up
+          else if( fleche === 38 || fleche === 104){ // up
             if( $scope.selectedSquare.row > 0 ){
               $scope.selectedSquare.row = $scope.selectedSquare.row - 1;
             }
 
           }
-          else if( fleche == 39 || fleche == 102){ // right
+          else if( fleche === 39 || fleche === 102){ // right
             if( $scope.selectedSquare.column < 14 ){
               $scope.selectedSquare.column = $scope.selectedSquare.column + 1;
             }
           }
-          else if( fleche == 40 || fleche == 98){ // down
+          else if( fleche === 40 || fleche === 98){ // down
             if( $scope.selectedSquare.row < 14 ){
               $scope.selectedSquare.row = $scope.selectedSquare.row + 1;
             }

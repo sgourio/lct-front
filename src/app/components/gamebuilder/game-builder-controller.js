@@ -12,8 +12,8 @@ angular.module('lct')
 
     var squareWitdh = 37;
     var squareHeight = 37;
-    var squareOffSetX = 16;
-    var squareOffSetY = 14;
+    var squareOffSetX = 15;
+    var squareOffSetY = 13;
     var boardOffset = 0;
 
 

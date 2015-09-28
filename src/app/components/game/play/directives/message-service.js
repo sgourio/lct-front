@@ -7,7 +7,7 @@
  * Service to display message to user
  */
 angular.module('lct')
-  .service('messageService', [ '$log', function ($log) {
+  .service('messageService', [ function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var messageService = {
       wordResultMessage: {},
