@@ -85,6 +85,12 @@ angular.module('lct')
         this.init().then(function () {
           $stomp.subscribe('/topic/game/' + gameId +'/players', callback, {});
         });
+      },
+
+      subscribeChat: function(chatId, callback){
+        this.init().then(function () {
+          $stomp.subscribe('/topic/chat/' + chatId, callback, {});
+        });
       }
 
     };
