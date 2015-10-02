@@ -1,2 +1,5 @@
-Utilisateur
-{{users}}
+<ul>
+  <li ng-repeat="player in users">
+    {{::player.name}}
+  </li>
+</ul>

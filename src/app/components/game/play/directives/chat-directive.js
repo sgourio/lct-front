@@ -5,14 +5,14 @@ angular.module('lct')
     return {
       restrict: 'E',
       scope: {
-        gameMetaData:'='
+        id:'@'
       },
       replace: true,
       templateUrl: 'app/components/game/play/directives/chat.html',
       controller: function($scope) {
         $scope.chatInput = '';
 
-        chatService.getChat($scope.gameMetaData.playGameId).then(function (chat){
+        chatService.getChat($scope.id).then(function (chat){
           $scope.chat = chat;
           $location.hash('mess_' + ($scope.chat.chatMessageList.length - 1));
           $timeout(function() {
@@ -22,19 +22,21 @@ angular.module('lct')
 
         $scope.sendChat = function(){
           if( $scope.chatInput ){
-            chatService.sendChat($scope.gameMetaData.playGameId, $scope.chatInput).then(function (){
+            chatService.sendChat($scope.id, $scope.chatInput).then(function (){
               $scope.chatInput = '';
             });
           }
         };
 
-        stompService.subscribeChat($scope.gameMetaData.playGameId, function(chat){
+        stompService.subscribeChat($scope.id, function(chat){
           $scope.chat = chat;
-          $location.hash('mess_' + ($scope.chat.chatMessageList.length - 1));
-          $timeout(function () {
-            $anchorScroll();
-          });
-          $scope.$apply();
+          if( $scope.chat.chatMessageList ) {
+            $location.hash('mess_' + ($scope.chat.chatMessageList.length - 1));
+            $timeout(function () {
+              $anchorScroll();
+            });
+            $scope.$apply();
+          }
         });
       }
     };

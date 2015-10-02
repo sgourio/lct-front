@@ -7,6 +7,7 @@ angular.module('lct')
       scope: {
         gameMetaData:'='
       },
+      replace:true,
       templateUrl: 'app/components/game/play/directives/opened-actions.html',
       controller: function($scope){
         $scope.isOwner=$auth.getPayload().sub === $scope.gameMetaData.owner;
