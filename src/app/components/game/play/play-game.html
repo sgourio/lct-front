@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<div class="container" ng-if="metaData != null">
+<div ng-if="metaData != null">
 
   <play-game-open game-meta-data="metaData" timer="timer"></play-game-open>
 
@@ -7,5 +6,4 @@
 
   <play-game-ended game-meta-data="metaData" ng-if="ended"></play-game-ended>
 
-  <div ng-include="'app/components/navbar/navbar.html'" class="bottomNav"></div>
 </div>

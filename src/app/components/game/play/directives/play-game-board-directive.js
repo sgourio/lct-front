@@ -72,7 +72,9 @@ angular.module('lct')
           } else if( code === 46 || code === 32 || code === 8){ // delete
             if( $scope.selectedSquare ) {
               var tile = $scope.round.boardGame.squares[$scope.selectedSquare.row][$scope.selectedSquare.column].droppedTile;
-              gameBoardService.moveBoardToDraw($scope.round.boardGame, $scope.round.draw, tile, $scope.round.draw.length, $scope.selectedSquare.row, $scope.selectedSquare.column );
+              if(tile) {
+                gameBoardService.moveBoardToDraw($scope.round.boardGame, $scope.round.draw, tile, $scope.round.draw.length, $scope.selectedSquare.row, $scope.selectedSquare.column);
+              }
             }
           }else if( code === 27){ // escape
             gameBoardService.clearBoard($scope.round.boardGame, $scope.round.draw);

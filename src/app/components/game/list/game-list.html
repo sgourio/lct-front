@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<!--
-  ~ Scrabble Helper Module 2015.
-  ~ Written by Sylvain Gourio
-  ~ sylvain.gourio@gmail.com
-  -->
-
-<div class="container">
-  <div ng-include="'app/components/navbar/navbar.html'"></div>
-  <div data-ng-init="init()">
-    <div class="row">
-      <div class="col-md-9">
-        <chat id="1"></chat>
-        <div class="gameList">
-          <h3>Parties en cours</h3>
-          <play-game-list></play-game-list>
-        </div>
+<div data-ng-init="init()">
+  <div class="row">
+    <div class="col-md-9">
+      <chat id="1"></chat>
+      <div class="gameList">
+        <h3>Parties en cours</h3>
+        <play-game-list></play-game-list>
       </div>
-      <div class="col-md-3">
-        <div class="newGame">
-          <h3 class="panel-title">Nouvelle partie</h3>
-          <p>
-            Lancer une nouvelle partie pour jouer avec vos amis.<br /><br />
-            <a class="btn btn-lct" ng-href="#/game/create">Créer une nouvelle partie</a>
-          </p>
-        </div>
-        <div class="connectedPeople">
-          <h3>Joueurs connectés</h3>
-          <connected-users></connected-users>
-        </div>
+    </div>
+    <div class="col-md-3">
+      <div class="newGame">
+        <h3 class="panel-title">Nouvelle partie</h3>
+        <p>
+          Lancer une nouvelle partie pour jouer avec vos amis.<br /><br />
+          <a class="btn btn-lct" ng-href="#/game/create">Créer une nouvelle partie</a>
+        </p>
+      </div>
+      <div class="connectedPeople">
+        <h3>Joueurs connectés</h3>
+        <connected-users></connected-users>
       </div>
     </div>
   </div>

@@ -151,6 +151,12 @@ angular.module('gameDrag',[])
             var touch = e.targetTouches[0];
             drawmousemove(touch.pageX, touch.pageY, clone);
           });
+
+          scope.$on('stop-drag', function(event) {
+            $document.off('mousemove mouseup');
+            $document.off('touchmove touchend');
+            endmousemove(event.pageX, event.pageY, clone);
+          });
         };
 
         element.on('mousedown', function (event) {
@@ -170,6 +176,8 @@ angular.module('gameDrag',[])
         //element.on('touchstart', function(event) {
         //  dragStart(element, event);
         //});
+
+
       }
     };
   }]);

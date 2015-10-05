@@ -57,6 +57,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         authenticate: true
       });
 
+    $stateProvider
+      .state('ranking', {
+        url: '/ranking',
+        template: '<ranking></ranking>',
+        authenticate: false
+      });
+
 
     $urlRouterProvider.otherwise('/');
 
