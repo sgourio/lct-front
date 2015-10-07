@@ -42,6 +42,13 @@ ul{
   padding: 0;
   margin: 0;
 }
+
+.ng-table th.sortable .sort-indicator:after, .ng-table th.sortable .sort-indicator:before{
+  border-color: white transparent;
+}
+.ng-table th.sortable.sort-desc .sort-indicator:after{
+  border-top: 4px solid white;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

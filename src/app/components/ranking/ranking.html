@@ -1,21 +1,12 @@
 <div>
-  <table class="table table-condensed" ng-if="ranking.monthScoreLineBeanList.length > 0">
-    <thead>
-    <tr>
-      <th>Position</th>
-      <th>Joueur</th>
-      <th>Nb de parties jouées</th>
-      <th>Score Lettre Compte Triple</th>
-      <th>% du top</th>
-    </tr>
-    </thead>
+  <table class="table table-condensed" ng-table="configTableParams" show-filter="true">
     <tbody>
-    <tr ng-repeat="userScore in ranking.monthScoreLineBeanList track by $index">
-      <td>{{::($index+1)}}</td>
-      <td class="author">{{::userScore.name}}</td>
-      <td>{{::userScore.nbGames}}</td>
-      <td>{{::userScore.score}}</td>
-      <td>{{::userScore.percentFromTop/100 | number : 2}}%</td>
+    <tr ng-repeat="userScore in $data track by $index">
+      <td data-title="'Rang'" >{{userScore.rank}}</td>
+      <td data-title="'Joueurs'" filter="{name: 'text'}" sortable="'name'" class="author">{{userScore.name}}</td>
+      <td data-title="'Nb de parties jouées'" filter="{nbGames: 'number'}" sortable="'nbGames'">{{userScore.nbGames}}</td>
+      <td data-title="'Score Lettre Compte Triple'" sortable="'score'">{{userScore.score}}</td>
+      <td data-title="'% du top'" sortable="'percentFromTop'">{{userScore.percentFromTop/100 | number : 2}}%</td>
     </tr>
     </tbody>
   </table>
