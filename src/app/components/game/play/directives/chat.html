@@ -1,0 +1,20 @@
+<div class="chat">
+  <ul>
+    <li data-ng-repeat="message in chat.chatMessageList track by $index" id="mess_{{::$index}}"><span class="dateMessage">{{::message.instant | date:'HH:mm'}}</span>&nbsp;&nbsp;<span class="author">{{::message.author}} &gt; </span>{{::message.message}}</li>
+  </ul>
+  <form>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+              <input type="text" class="form-control" data-ng-model="chatInput">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-lct" data-ng-click="sendChat()">Envoyer</button>
+        </div>
+      </div>
+  </form>
+</div>

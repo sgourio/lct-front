@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('playGameRunning', ['$log', 'gameService', '$state', '$auth', 'stompService', function($log, gameService, $state, $auth, stompService) {
+  .directive('playGameRunning', ['$log', '$rootScope', 'gameService', '$state', '$auth', 'stompService', function($log, $rootScope, gameService, $state, $auth, stompService) {
     return {
       restrict: 'E',
       scope: {
@@ -17,6 +17,7 @@ angular.module('lct')
 
         stompService.subscribeGame($scope.gameMetaData.playGameId, function(round){
           $log.info('change round ' + round.roundNumber);
+          $rootScope.$broadcast('stop-drag');
           $scope.round = round;
           $scope.$apply();
         });

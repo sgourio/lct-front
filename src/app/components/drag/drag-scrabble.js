@@ -151,11 +151,19 @@ angular.module('gameDrag',[])
             var touch = e.targetTouches[0];
             drawmousemove(touch.pageX, touch.pageY, clone);
           });
+
+          scope.$on('stop-drag', function(event) {
+            $document.off('mousemove mouseup');
+            $document.off('touchmove touchend');
+            endmousemove(event.pageX, event.pageY, clone);
+          });
         };
 
         element.on('mousedown', function (event) {
-          event.preventDefault();
-          dragStart(element, event.pageX, event.pageY);
+          if(event.button === 0) {
+            event.preventDefault();
+            dragStart(element, event.pageX, event.pageY);
+          }
         });
 
         element.on('touchstart', function (event) {
@@ -168,6 +176,8 @@ angular.module('gameDrag',[])
         //element.on('touchstart', function(event) {
         //  dragStart(element, event);
         //});
+
+
       }
     };
   }]);

@@ -4,6 +4,9 @@ $body-bg: #2c3e50;
 $text-color: #eee !default;
 $link-color: $text-color;
 $btn-default-color:              #333 !default;
+$border-radius-base:0;
+$border-radius-large:0;
+$border-radius-small:0;
 /* Do not remove this comments bellow. It's the markers used by wiredep to inject
    sass dependencies when defined in the bower.json of your dependencies */
 // bower:scss

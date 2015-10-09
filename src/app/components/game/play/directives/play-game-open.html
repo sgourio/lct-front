@@ -1,8 +1,8 @@
 <div ng-show="opened(gameMetaData)" class="row">
   <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{{::gameMetaData.name}}</h3></div>
-      <div class="panel-body">
+    <div class="openedGame">
+      <h3>Bienvenue sur la partie "{{::gameMetaData.name}}"</h3>
+      <div>
         <em ng-if="gameMetaData.startDate == null">Partie en préparation</em>
         <em ng-if="gameMetaData.startDate != null">Partie pas encore démarrée</em>
         <br />
@@ -12,14 +12,15 @@
         <div ng-if="timer && timer > 60 && timer < 600"><i class="fa fa-clock-o fa-2x"></i> La partie démarre dans {{duration(timer)}}</div>
         <div ng-if="timer && timer > 0 && timer < 60"><i class="fa fa-clock-o fa-2x"></i> La partie démarre dans {{timer}}sec</div>
       </div>
-      <div class="panel-footer">
+      <div class="actions">
         <opened-actions game-meta-data="gameMetaData"></opened-actions>
       </div>
     </div>
   </div>
   <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">Joueurs inscrits</h3></div>
+    <chat id="{{gameMetaData.playGameId}}"></chat>
+    <div class="gamePlayers">
+      <h3 class="panel-title">Participants</h3>
       <players game-id="gameMetaData.playGameId"></players>
     </div>
   </div>

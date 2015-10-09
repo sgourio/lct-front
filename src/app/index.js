@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover','ngStomp'])
+angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover','ngStomp', 'ngTable'])
   .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider, $authProvider, $windowProvider) {
     $stateProvider
       .state('home', {
@@ -55,6 +55,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         templateUrl: 'app/components/game/play/play-game.html',
         controller: 'PlayGameCtrl',
         authenticate: true
+      });
+
+    $stateProvider
+      .state('ranking', {
+        url: '/ranking',
+        template: '<ranking></ranking>',
+        authenticate: false
       });
 
 

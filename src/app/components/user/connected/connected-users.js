@@ -6,6 +6,7 @@ angular.module('lct')
       restrict: 'E',
       scope: {
       },
+      replace: true,
       templateUrl: 'app/components/user/connected/connected-users.html',
       controller: function($scope){
         userService.userList().then(function(data){
