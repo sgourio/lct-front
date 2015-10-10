@@ -189,8 +189,10 @@ angular.module('lct')
         if( hours > 0) {
           if (minutes < 10) {minutes = '0'+minutes;}
           time = hours + 'h' +minutes;
-        }else{
+        }else if( minutes >= 2 ){
           time = minutes + 'min';
+        }else{
+          time = secNum + 's';
         }
         return time;
       },

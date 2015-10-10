@@ -86,7 +86,7 @@ module.exports = function(options) {
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
 
-  gulp.task('zip', ['clean','build'], function () {
+  gulp.task('zip', ['build'], function () {
     return gulp.src('dist/**')
       .pipe(zip('lct-front.zip'))
       .pipe(gulp.dest('dist'));
