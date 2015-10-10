@@ -317,7 +317,7 @@ td.reference{
 }
 
 .btn-lct{
-  background: transparent;
+  background: rgba(0, 0, 0, 0.24);
   color: white;
   border: 1px solid #fbcb09;
   letter-spacing: 2px;
@@ -424,3 +424,11 @@ td.reference{
   }
 }
 
+.play-text{
+  input {
+    text-transform: uppercase;
+  }
+  span{
+    font-style: italic;
+  }
+}
