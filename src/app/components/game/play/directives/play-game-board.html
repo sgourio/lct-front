@@ -3,8 +3,14 @@
     <li ng-repeat="row in round.boardGame.squares" ng-init="lineIndex = $index">
       <ul class="columns">
         <li ng-repeat="square in row" ng-style="{{ ::{top:squarePosition(lineIndex, $index).top, left:squarePosition(lineIndex, $index).left} }}" class="square" data-ng-class="{'selected-square': isSelected(lineIndex, $index)}" data-ng-click="selectSquare(lineIndex, $index)">
-          <img  ng-src="{{tileImageUrl(square.droppedTile.tile, square.droppedTile.value)}}" ng-if="square.droppedTile && square.justDropped" drag-scrabble="true" data-board="round.boardGame" data-draw="round.draw" drag-from="round.boardGame" data-value="{{square.droppedTile}}" data-row="{{lineIndex}}" data-column="{{$index}}" ng-mousedown="back($event, square.droppedTile, lineIndex, $index)"/>
-          <img  ng-src="{{tileImageUrl(square.droppedTile.tile, square.droppedTile.value)}}" ng-if="square.droppedTile && !square.justDropped"/>
+          <div class="playTile" data-ng-class="{'joker': square.droppedTile.tile.tileType == 'wildcard'}" ng-if="square.droppedTile && square.justDropped" drag-scrabble="true" data-board="round.boardGame" data-draw="round.draw" drag-from="round.boardGame" data-value="{{square.droppedTile}}" data-row="{{lineIndex}}" data-column="{{$index}}" ng-mousedown="back($event, square.droppedTile, lineIndex, $index)">
+            <span class="letter">{{square.droppedTile.value}}</span>
+            <span class="pull-right points">{{square.droppedTile.tile.point}}</span>
+          </div>
+          <div class="playTile" data-ng-class="{'joker': square.droppedTile.tile.tileType === 'wildcard', 'lastRound':square.droppedRound === (round.roundNumber - 1)}" ng-if="square.droppedTile && !square.justDropped">
+            <span class="letter">{{square.droppedTile.value}}</span>
+            <span class="pull-right points">{{square.droppedTile.tile.point}}</span>
+          </div>
           <a ng-if="square.droppedTile.tile.tileType == 'wildcard' && square.justDropped" ns-popover ns-popover-template="boardJokerPopover" ns-popover-trigger="click" ns-popover-placement="bottom" ng-click="startChangeJokerValue(square.droppedTile)"><i class="fa fa-question"></i></a>
         </li>
       </ul>
@@ -14,7 +20,10 @@
     <div class="triangle"></div>
     <ul class="jokerPopover">
       <li ng-repeat="n in ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']">
-        <img  ng-src="{{'/assets/images/lettres36/fr/joker/'+n+'.gif'}}" ng-click="changeJokerValue(n,$event); hidePopover()" />
+        <div class="playTile joker" ng-click="changeJokerValue(n,$event); hidePopover()">
+          <span class="letter">{{::n}}</span>
+          <span class="pull-right points">0</span>
+        </div>
       </li>
     </ul>
   </script>

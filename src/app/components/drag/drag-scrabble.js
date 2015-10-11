@@ -135,12 +135,14 @@ angular.module('gameDrag',[])
           });
           $document.on('mouseup', function (event) {
             event.preventDefault();
+            $document.off('touchmove touchend');
             $document.off('mousemove mouseup');
             endmousemove(event.pageX, event.pageY, clone);
           });
           $document.on('touchend', function (event) {
             event.preventDefault();
             $document.off('touchmove touchend');
+            $document.off('mousemove mouseup');
             var e = event.originalEvent;
             var touch = e.changedTouches[0];
             endmousemove(touch.pageX, touch.pageY, clone);
@@ -172,11 +174,6 @@ angular.module('gameDrag',[])
           var touch = e.targetTouches[0];
           dragStart(element, touch.pageX, touch.pageY);
         });
-
-        //element.on('touchstart', function(event) {
-        //  dragStart(element, event);
-        //});
-
 
       }
     };

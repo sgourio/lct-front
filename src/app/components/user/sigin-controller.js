@@ -27,4 +27,13 @@ angular.module('lct')
       return $auth.isAuthenticated();
     };
 
+    if( $scope.isAuthenticated ){
+      userService.isAdmin().then(function(isAdmin){
+        $auth.admin=isAdmin;
+        $window.sessionStorage.admin = isAdmin;
+        var toState = $window.sessionStorage.toState || 'home';
+        $state.transitionTo(toState);
+      });
+    }
+
   }]);

@@ -86,7 +86,11 @@ angular.module('lct')
           while( square.droppedTile !== null && j < board.squares[row].length){
             square = board.squares[row][j];
             if( square.droppedTile !== null ) {
-              word += square.droppedTile.value;
+              if( square.droppedTile.tile.tileType === 'wildcard' ){
+                word += '(' + square.droppedTile.value + ')';
+              }else {
+                word += square.droppedTile.value;
+              }
             }
             j++;
           }

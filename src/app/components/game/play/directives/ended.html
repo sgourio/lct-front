@@ -2,13 +2,18 @@
   <div class="row">
     <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
       <div class="row">
-        Partie terminée<br />
-        La partie est remportée par <strong>{{::winners}}</strong>
-        <span ng-if="percentageFromTop >= 9000">avec le score incroyable de {{::bestScore}} ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
-        <span ng-if="percentageFromTop > 0 && percentageFromTop < 9000">en marquant {{::bestScore}} ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
-        <span ng-if="percentageFromTop === 0">en marquant rien du tout</span>
-        <br />
-        Le TOP score était de {{gameScore.topTotal}} pts
+        <div class="col-md-12">
+          Partie terminée<br />
+          La partie est remportée par <strong>{{::winners}}</strong>
+          <span ng-if="percentageFromTop >= 9000">avec le score incroyable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+          <span ng-if="percentageFromTop >= 8000 && percentageFromTop < 9000">avec le score plus qu'honorable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+          <span ng-if="percentageFromTop >= 7000 && percentageFromTop < 8000">avec le score honorable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+          <span ng-if="percentageFromTop >= 6000 && percentageFromTop < 7000">avec le score assez satisfaisant de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+          <span ng-if="percentageFromTop > 0 && percentageFromTop < 6000">en marquant {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+          <span ng-if="percentageFromTop === 0">en marquant rien du tout</span>
+          <br />
+          Le TOP score était de {{gameScore.topTotal}} pts
+        </div>
       </div>
       <div class="row">
         <div class="col-md-8">
@@ -27,6 +32,7 @@
     </div>
     <div class="col-md-4 col-lg-6">
       <display-messages round="round" class=""></display-messages>
+      <chat id="{{gameMetaData.playGameId}}"></chat>
       <play-game-score game-meta-data="gameMetaData"></play-game-score>
     </div>
   </div>
