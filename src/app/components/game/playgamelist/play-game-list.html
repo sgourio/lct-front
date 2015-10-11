@@ -1,6 +1,7 @@
-<table class="table table-condensed" ng-if="games.length > 0">
+<table class="table table-condensed gameTable" ng-if="games.length > 0">
   <thead>
   <tr>
+    <th></th>
     <th>Nom</th>
     <th>Créateur</th>
     <th>Tour actuel</th>
@@ -12,13 +13,19 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="game in games" id="{{::game.playGameId}}">
-    <td class="text-uppercase text-info gameTitle" data-ng-click="joinGame(game.playGameId)">{{::game.name}}</td>
+  <tr ng-repeat="game in games" id="{{::game.playGameId}}" data-ng-class="{'running' : game.status === 'running', 'game-75' : game.timeByRound === 75, 'game-90' : game.timeByRound === 90, 'game-120' : game.timeByRound === 120, 'game-180' : game.timeByRound === 180}">
+    <td>
+      <span ng-show="game.status === 'opened'" class="metaInfo">Bient&ocirc;t</span>
+      <span ng-show="game.status === 'running'" class="metaInfo">En cours</span>
+    </td>
+    <td class="text-uppercase text-info gameTitle" data-ng-click="joinGame(game.playGameId)">
+      {{::game.name}}
+    </td>
     <td>{{::game.owner}}</td>
     <td>{{::game.actualRoundNumber}}/{{::game.numberOfRound}}</td>
     <td>{{::duration(game.timeByRound, 1)}}</td>
     <td ng-if="game.startDate !== null">{{::game.startDate | date:"HH'h'mm" }}</td>
-    <td ng-if="game.startDate === null">Pas encore démarré</td>
+    <td ng-if="game.startDate === null">Pas encore prévue</td>
     <td>{{::duration(game.timeByRound, game.numberOfRound - game.actualRoundNumber)}}</td>
     <td>{{::game.nbPlayers}}</td>
     <td><button class="btn btn-xs btn-lct" data-ng-click="joinGame(game.playGameId)"><i class="fa fa-play"></i> Rejoindre</button></td>

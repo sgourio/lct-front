@@ -23,7 +23,7 @@ angular.module('lct')
           });
         };
 
-        $scope.configTableParams = new NgTableParams({count: 5, filter: { name: "" }, show_filter: true },{data: [{"name":"Sylvain Gourio","nbGames":3,"score":6,"percentFromTop":592},{"name":"test Gourio","nbGames":2,"score":4,"percentFromTop":496},{"name":"io","nbGames":2,"score":4,"percentFromTop":602}]});
+        $scope.configTableParams = new NgTableParams({count: 5, 'show_filter': true },{});
         getRanking().then(function(data){
           var i;
           for( i = 0 ; i < data.monthScoreLineBeanList.length; i++){

@@ -171,10 +171,6 @@ ul{
   color: #D2AA07;
 }
 
-table td.gameTitle{
-  cursor: pointer;
-}
-
 .newGame{
   margin-top: 10px;
 }
@@ -321,7 +317,7 @@ td.reference{
 }
 
 .btn-lct{
-  background: transparent;
+  background: rgba(0, 0, 0, 0.24);
   color: white;
   border: 1px solid #fbcb09;
   letter-spacing: 2px;
@@ -391,5 +387,48 @@ td.reference{
   margin-top: 10px;
   h3{
     margin-top: 10px;
+  }
+}
+.gameTable {
+  tr.running {
+    td.gameTitle {
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+    }
+
+  }
+  .metaInfo {
+    font-style: italic;
+    text-transform: lowercase;
+  }
+  tr.game-75 {
+    td.gameTitle {
+      color: floralwhite;
+    }
+  }
+  tr.game-90 {
+    td.gameTitle {
+      color: #fca600;
+    }
+  }
+  tr.game-120 {
+    td.gameTitle {
+      color: limegreen;
+    }
+  }
+  tr.game-180 {
+    td.gameTitle {
+      color: lightcoral;
+    }
+  }
+}
+
+.play-text{
+  input {
+    text-transform: uppercase;
+  }
+  span{
+    font-style: italic;
   }
 }
