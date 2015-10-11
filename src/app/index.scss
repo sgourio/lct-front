@@ -53,8 +53,8 @@ ul{
 .header,
 .marketing,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Custom page header */
@@ -116,6 +116,9 @@ ul{
   .btn {
     font-size: 21px;
     padding: 14px 24px;
+  }
+  img{
+    width: 50%;
   }
 }
 
@@ -431,4 +434,44 @@ td.reference{
   span{
     font-style: italic;
   }
+}
+
+.playTile{
+  height: 34px;
+  width: 34px;
+  display: block;
+  padding: 2px auto;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: rgb(239, 212, 156);
+  cursor: move;
+  font-family: courier new, courier, monospace;
+  .letter{
+    line-height: 34px;
+    color: darkslategray;
+    font-size: 30px;
+    display: block;
+    &:after{
+      clear: both;
+    }
+  }
+  .points{
+    margin-top: -14px;
+    color: #000000;
+    font-family: arial, helvetica, sans-serif;
+    margin-right: 1px;
+  }
+}
+.joker{
+  background-color: rgb(183, 239, 221);
+}
+.lastRound{
+  background-color: rgb(135, 239, 122);
+}
+.lastRound.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+.lastRound.ng-enter.ng-enter-active {
+  opacity:1;
 }
