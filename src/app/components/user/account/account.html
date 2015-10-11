@@ -1,0 +1,30 @@
+<div>
+    <div class="row">
+      <div class="col-md-4">
+        <img data-ng-src="{{account.profilPictureURL}}?type=large"/>
+      </div>
+      <div class="col-md-8">
+        <h1>{{::account.name}}</h1>
+        <br />
+        Profil: <a href="{{::account.profilLink}}">{{::account.profilLink}}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Parties jouées</h3>
+        <table class="table table-condensed" ng-table="configTableParams">
+          <tbody>
+          <tr ng-repeat="row in $data">
+            <td data-title="'Nom'" sortable="'name'" class="author">{{::row.gameName}}</td>
+            <td data-title="'Rang'" >{{::row.position}}</td>
+            <td data-title="'date'" >{{::row.gameDate| date:'dd/MM/yyyy'}}</td>
+            <td data-title="'Score'">{{::row.score}}</td>
+            <td data-title="'% du top'">{{::row.percentFromTop/100 | number : 2}}%</td>
+            <td data-title="'top'">{{::row.topScore}}</td>
+            <td data-title="'Score Lettre Compte Triple'" sortable="'score'">{{::row.points}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

@@ -27,7 +27,7 @@ angular.module('lct')
       return $auth.isAuthenticated();
     };
 
-    if( $scope.isAuthenticated ){
+    if( $scope.isAuthenticated() ){
       userService.isAdmin().then(function(isAdmin){
         $auth.admin=isAdmin;
         $window.sessionStorage.admin = isAdmin;

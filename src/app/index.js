@@ -64,6 +64,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         authenticate: false
       });
 
+    $stateProvider
+      .state('account', {
+        url: '/account',
+        template: '<account></account>',
+        authenticate: true
+      });
+
 
     $urlRouterProvider.otherwise('/');
 

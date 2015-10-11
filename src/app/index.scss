@@ -483,3 +483,36 @@ td.reference{
 .lastRound.ng-enter.ng-enter-active {
   opacity:1;
 }
+.caption{
+  .response{
+    color: #fbcb09;
+    font-style: italic;
+  }
+}
+
+.thumbnail{
+  height: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  .pink{
+    color: deeppink;
+  }
+  .blue{
+    color: lightskyblue;
+  }
+  .green{
+    color: palegreen;
+  }
+  .yellow{
+    color: #fbcb09;
+  }
+  .black{
+    color: #000000;
+  }
+  .red{
+    color: #ff5766;
+  }
+  .brown{
+    color: brown;
+  }
+}

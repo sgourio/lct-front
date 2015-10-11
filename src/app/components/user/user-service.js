@@ -17,6 +17,35 @@ angular.module('lct')
   .service('userService', [ '$log',  '$q', '$http', 'apiRoot', function ($log, $q, $http, apiRoot) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var userService = {
+
+      myAccount: function(){
+        return $q(function(resolve, reject) {
+          // get the list immediately
+          $http.get(apiRoot + '/account/me').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/account/me' + ' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      myScore: function(){
+        return $q(function(resolve, reject) {
+          // get the list immediately
+          $http.get(apiRoot + '/account/me/scores').
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/account/me/scores' + ' respond ' + status);
+              reject();
+            });
+        });
+      },
+
       userList: function(){
         return $q(function(resolve, reject) {
           // get the list immediately

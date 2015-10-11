@@ -6,55 +6,64 @@ angular.module('lct')
       {
         'title': 'Jouer au scrabble duplicate',
         'description': 'Joue au scrabble en mode duplicate!',
-        'icon' : 'star'
+        'icon' : 'star',
+        'class' : 'blue'
       },
       {
         'title': 'Dictionnaire ODS 7',
-        'url': 'https://angularjs.org/',
         'description': 'Le dictionnaire officile du scrabble en vigueur dans les tournois depuis le 1er Janvier 2016',
-        'logo': 'ODS7.png'
-      },
-      {
-        'title': 'Tableaux des scores',
-        'url': '/ranking',
-        'description': 'Quel est votre place dans le classement?',
-        'logo': 'browsersync.png'
+        'icon' : 'balance-scale',
+        'class' : 'pink'
       },
       {
         'title': 'Règle officielle',
-        'url': 'http://gulpjs.com/',
         'description': 'LCT s\'appuie sur les règles du scrabble duplicate appliquées en concours',
-        'logo': 'gulp.png'
+        'icon': 'certificate',
+        'class': 'red'
       },
       {
         'title': 'Rejouer des parties',
-        'url': 'http://jasmine.github.io/',
-        'description': 'Sur Lettre Compte Triple, on peut rejouer des parties célèbres avec ses amis',
-        'logo': 'jasmine.png'
+        'description': 'Sur Lettre Compte Triple, on peut rejouer des parties célèbres avec ses amis.<br />Cela permet de vous confronter virtuellement avec les meilleurs dans les tournois.',
+        'icon': 'repeat',
+        'class': 'red'
       },
       {
         'title': 'Tablettes',
-        'url': 'http://karma-runner.github.io/',
-        'description': 'Jouez au scrabble partout, avec votre tablette, ou même votre smartphone!',
-        'logo': 'karma.png'
+        'description': 'Jouez au scrabble avec votre tablette, ou même avec votre smartphone!<br/> Pour les afficionados!',
+        'icon': 'tablet',
+        'class' : 'green'
       },
       {
         'title': 'Pour les arbitres',
-        'url': 'https://github.com/angular/protractor',
-        'description': 'LCT aide l\'arbitrage des parties.',
-        'logo': 'protractor.png'
+        'description': 'LCT aide l\'arbitrage des parties.<br />Avec LCT c\'est l\'assurance de toujours trouver le meilleur mot à chaque coup.<br />Les arbitres peuvent préparer les parties à l\'avance, et prévoir la durée des tournois.',
+        'icon': 'gavel',
+        'class' : 'black'
       },
       {
         'title': 'En club',
-        'url': 'http://getbootstrap.com/',
-        'description': 'LCT propose pour les clubs un mode de création de concours.',
-        'logo': 'bootstrap.png'
+        'description': 'LCT va proposer pour les clubs un mode de création de concours, et d\'arbitrage de partie.<br />Une c&ocirc;tisation est &agrave; pr&eacute;.',
+        'icon': 'users',
+        'class': 'brown'
       },
       {
-        'title': 'N.SELEUCIDE',
-        'description': 'J\'ai vu l\'annonce de Lettre Compte Triple Deluxe pour le 1/1/2016 sur tablette, bravo !<br />Est-ce qu\'on pourra l\'avoir aussi sur I Phone ?<br />Merci d\'avance et bravo pour votre site qui est GENIAL !<br />&gt; Oui ça marche sur iPhone même si c\'est un peu petit',
-        'icon': 'comment'
+        'title': 'Question / Réponse',
+        'description': 'J\'ai vu l\'annonce de Lettre Compte Triple Deluxe pour le 1/1/2016 sur tablette, bravo !<br />Est-ce qu\'on pourra l\'avoir aussi sur I Phone ?<br />Merci d\'avance et bravo pour votre site qui est GENIAL !<br /><span class="response">&gt; Oui ça marche sur iPhone même si un écran de portable est un peu petit pour jouer convenablement.</span>',
+        'icon': 'comments-o'
+      },
+      {
+        'title': 'Témoignage',
+        'description': 'Bonjour à la team,<br />Je tiens à vous faire savoir ma joie rien qu\'à l\'annonce de la prochaine arrivée de l\'appli tablette de LCT.<br />Je suis comme une enfant qui attend son cadeau de No&euml;l.<br />Youpi youp. Merci, Merci, Merci, Merci, Merci....<br /><span class="response">&gt; On adore vos messages.</span>',
+        'icon': 'comment',
+        'class': 'pink'
+      },
+      {
+        'title': 'Le classement mensuel',
+        'description': 'Chaque mois les compteurs sont remis à 0.<br />Serez vous plus performant que vos amis?',
+        'icon': 'trophy',
+        'class' : 'yellow',
+        'url': '#/ranking'
       }
+
     ];
     angular.forEach($scope.awesomeThings, function(awesomeThing) {
       awesomeThing.rank = Math.random();
