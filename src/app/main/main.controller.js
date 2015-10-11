@@ -9,58 +9,51 @@ angular.module('lct')
         'icon' : 'star'
       },
       {
-        'title': 'AngularJS',
+        'title': 'Dictionnaire ODS 7',
         'url': 'https://angularjs.org/',
-        'description': 'HTML enhanced for web apps!',
-        'logo': 'angular.png'
+        'description': 'Le dictionnaire officile du scrabble en vigueur dans les tournois depuis le 1er Janvier 2016',
+        'logo': 'ODS7.png'
       },
       {
-        'title': 'BrowserSync',
-        'url': 'http://browsersync.io/',
-        'description': 'Time-saving synchronised browser testing.',
+        'title': 'Tableaux des scores',
+        'url': '/ranking',
+        'description': 'Quel est votre place dans le classement?',
         'logo': 'browsersync.png'
       },
       {
-        'title': 'GulpJS',
+        'title': 'Règle officielle',
         'url': 'http://gulpjs.com/',
-        'description': 'The streaming build system.',
+        'description': 'LCT s\'appuie sur les règles du scrabble duplicate appliquées en concours',
         'logo': 'gulp.png'
       },
       {
-        'title': 'Jasmine',
+        'title': 'Rejouer des parties',
         'url': 'http://jasmine.github.io/',
-        'description': 'Behavior-Driven JavaScript.',
+        'description': 'Sur Lettre Compte Triple, on peut rejouer des parties célèbres avec ses amis',
         'logo': 'jasmine.png'
       },
       {
-        'title': 'Karma',
+        'title': 'Tablettes',
         'url': 'http://karma-runner.github.io/',
-        'description': 'Spectacular Test Runner for JavaScript.',
+        'description': 'Jouez au scrabble partout, avec votre tablette, ou même votre smartphone!',
         'logo': 'karma.png'
       },
       {
-        'title': 'Protractor',
+        'title': 'Pour les arbitres',
         'url': 'https://github.com/angular/protractor',
-        'description': 'End to end test framework for AngularJS applications built on top of WebDriverJS.',
+        'description': 'LCT aide l\'arbitrage des parties.',
         'logo': 'protractor.png'
       },
       {
-        'title': 'Bootstrap',
+        'title': 'En club',
         'url': 'http://getbootstrap.com/',
-        'description': 'Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.',
+        'description': 'LCT propose pour les clubs un mode de création de concours.',
         'logo': 'bootstrap.png'
       },
       {
-        'title': 'Angular UI Bootstrap',
-        'url': 'http://angular-ui.github.io/bootstrap/',
-        'description': 'Bootstrap components written in pure AngularJS by the AngularUI Team.',
-        'logo': 'ui-bootstrap.png'
-      },
-      {
-        'title': 'Sass (Node)',
-        'url': 'https://github.com/sass/node-sass',
-        'description': 'Node.js binding to libsass, the C version of the popular stylesheet preprocessor, Sass.',
-        'logo': 'node-sass.png'
+        'title': 'N.SELEUCIDE',
+        'description': 'J\'ai vu l\'annonce de Lettre Compte Triple Deluxe pour le 1/1/2016 sur tablette, bravo !<br />Est-ce qu\'on pourra l\'avoir aussi sur I Phone ?<br />Merci d\'avance et bravo pour votre site qui est GENIAL !<br />&gt; Oui ça marche sur iPhone même si c\'est un peu petit',
+        'icon': 'comment'
       }
     ];
     angular.forEach($scope.awesomeThings, function(awesomeThing) {

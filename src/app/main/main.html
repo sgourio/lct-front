@@ -14,7 +14,7 @@
         <div class="pull-right" ng-if="awesomeThing.icon"><i class="fa fa-{{awesomeThing.icon}} fa-5x"></i></div>
         <div class="caption">
           <h3>{{awesomeThing.title}}</h3>
-          <p>{{awesomeThing.description}}</p>
+          <p data-ng-bind-html="awesomeThing.description"></p>
           <p><a ng-href="{{awesomeThing.url}}" ng-if="awesomeThing.url">{{awesomeThing.url}}</a></p>
         </div>
       </div>
