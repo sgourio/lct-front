@@ -92,7 +92,24 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       url: apiRoot + '/auth/twitter'
     });
 
-  }).run(function ($rootScope, $state, $auth, $window) {
+  }).factory('authHttpResponseInterceptor',['$q','$location', '$log',function($q, $state, $log){
+    return {
+      response: function(response){
+        if (response.status === 401) {
+          $log.debug("Response 401");
+        }
+        return response || $q.when(response);
+      },
+      responseError: function(rejection) {
+        if (rejection.status === 401) {
+          $log.debug("Response Error 401",rejection);
+          $window.sessionStorage.toState = $state.current.name;
+          $state.transitionTo('signin');
+        }
+        return $q.reject(rejection);
+      }
+    }
+  }]).run(function ($rootScope, $state, $auth, $window) {
     $rootScope.$on('$stateChangeStart', function(event, toState){
       if (toState.authenticate && !$auth.isAuthenticated()){
         // User isn’t authenticated and must be
