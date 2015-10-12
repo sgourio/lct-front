@@ -14,9 +14,8 @@ angular.module('lct')
 
         chatService.getChat($scope.id).then(function (chat){
           $scope.chat = chat;
-          $location.hash('mess_' + ($scope.chat.chatMessageList.length - 1));
           $timeout(function() {
-            $anchorScroll();
+            angular.element('.chat ul')[0].scrollTop = angular.element('.chat ul')[0].scrollHeight;
           });
         });
 
@@ -29,11 +28,14 @@ angular.module('lct')
         };
 
         stompService.subscribeChat($scope.id, function(chat){
+          var element = angular.element('.chat ul')[0];
+          var toScroll = element.scrollHeight - element.scrollTop === element.clientHeight;
           $scope.chat = chat;
           if( $scope.chat.chatMessageList ) {
-            $location.hash('mess_' + ($scope.chat.chatMessageList.length - 1));
             $timeout(function () {
-              $anchorScroll();
+              if( toScroll ) {
+                element.scrollTop = element.scrollHeight;
+              }
             });
             $scope.$apply();
           }
