@@ -1,0 +1,18 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Ecrire un mot</h1>
+  </div>
+  <div class="col-md-12" data-ng-show="!sent">
+    <form>
+      <div class="form-group">
+        <label>Un problème? Un avis? Ou juste un message à Lettre Compte Triple</label>
+        <textarea class="form-control" rows="8" data-ng-model="message"></textarea>
+      </div>
+      <button type="submit" class="btn btn-lct" data-ng-click="send()">Envoyer</button>
+    </form>
+  </div>
+  <div class="col-md-12" data-ng-show="sent">
+    Merci d'avoir écrit &agrave; Lettre Compte Triple.
+  </div>
+</div>

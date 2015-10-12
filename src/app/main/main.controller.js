@@ -62,6 +62,12 @@ angular.module('lct')
         'icon': 'trophy',
         'class' : 'yellow',
         'url': '#/ranking'
+      },
+      {
+        'title': 'Aider LCT',
+        'description': 'Nous avons plein d\'id&eacute;es pour am&eacute;liorer le site, mais pas que. Nous avons une vision sur le devenir du Scrabble de comp&eacute;tition, et l\'envie de proposer des projets novateurs comme par exemple un plateau connect&eacute; &agrave; LCT. Nous recherchons un m&eacute;c&egrave;ne pour nous soutenir dans nos ambitions.',
+        'icon': 'money',
+        'class' : 'yellow'
       }
 
     ];

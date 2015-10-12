@@ -71,6 +71,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         authenticate: true
       });
 
+    $stateProvider
+      .state('contact', {
+        url: '/contact',
+        template: '<contact></contact>',
+        authenticate: true
+      });
+
 
     $urlRouterProvider.otherwise('/');
 
@@ -92,17 +99,17 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       url: apiRoot + '/auth/twitter'
     });
 
-  }).factory('authHttpResponseInterceptor',['$q','$location', '$log',function($q, $state, $log){
+  }).factory('authHttpResponseInterceptor',['$q','$location', '$log', '$window',function($q, $state, $log, $window){
     return {
       response: function(response){
         if (response.status === 401) {
-          $log.debug("Response 401");
+          $log.debug('Response 401');
         }
         return response || $q.when(response);
       },
       responseError: function(rejection) {
         if (rejection.status === 401) {
-          $log.debug("Response Error 401",rejection);
+          $log.debug('Response Error 401',rejection);
           $window.sessionStorage.toState = $state.current.name;
           $state.transitionTo('signin');
         }
