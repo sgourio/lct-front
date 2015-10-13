@@ -8,6 +8,7 @@ angular.module('lct')
       },
       templateUrl: 'app/components/user/account/account.html',
       controller: function($scope){
+        $scope.showForm = false;
         userService.myAccount().then(function(userBean){
           $scope.account = userBean;
         });
@@ -16,6 +17,18 @@ angular.module('lct')
           $scope.scores = scores;
           $scope.configTableParams.settings({data: scores.monthlyScoreGameList});
         });
+
+        $scope.changeNickname = function(){
+          $scope.alreadyUsed = false;
+          if( $scope.account.nickname ){
+            userService.updateNickname($scope.account.nickname).then(function(){
+              $scope.nicknameUpdated = true;
+              $scope.showForm = false;
+            }).catch(function(){
+              $scope.alreadyUsed = true;
+            });
+          }
+        }
       }
     };
   }]);

@@ -116,6 +116,9 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         return $q.reject(rejection);
       }
     }
+  }]).config(['$httpProvider',function($httpProvider) {
+    //Http Intercpetor to check auth failures for xhr requests
+    $httpProvider.interceptors.push('authHttpResponseInterceptor');
   }]).run(function ($rootScope, $state, $auth, $window) {
     $rootScope.$on('$stateChangeStart', function(event, toState){
       if (toState.authenticate && !$auth.isAuthenticated()){
@@ -128,6 +131,9 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         $window.sessionStorage.toState = toState.name;
         $state.transitionTo('signin');
         event.preventDefault();
+      }
+      if( toState.name === 'signin'){
+        $window.sessionStorage.toState = 'account';
       }
     });
   });

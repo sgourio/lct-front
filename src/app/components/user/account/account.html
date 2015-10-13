@@ -1,12 +1,31 @@
-<div>
+<div class="account">
     <div class="row">
       <div class="col-md-4">
-        <img data-ng-src="{{account.profilPictureURL}}?type=large"/>
+        <img data-ng-src="{{account.profilPictureURL}}?type=large" class="profilePicture"/>
       </div>
       <div class="col-md-8">
-        <h1>{{::account.name}}</h1>
+        <h1>{{::account.name}} <span data-ng-show="account.nickname">&lt;&nbsp;{{ account.nickname }}&nbsp;&gt;</span></h1>
         <br />
         Profil: <a href="{{::account.profilLink}}">{{::account.profilLink}}</a>
+        <div data-ng-show="!account.nickname && !showForm" class="chooseNickname">
+          Pour terminer votre inscription, merci de choisir un pseudo.<br />
+          <button class="btn btn-lct" data-ng-click="showForm = true">Choisir un pseudo</button>
+        </div>
+        <div data-ng-show="account.nickname && !showForm" class="chooseNickname">
+          <label class="control-label">Votre pseudo: </label>
+          <span class="deluxe">{{account.nickname}}</span>&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-lct" data-ng-click="showForm = true">Changer de pseudo</button>
+        </div>
+        <div data-ng-show="showForm" class="chooseNickname">
+          <form class="form-inline">
+            <div class="form-group">
+              <label class="control-label">Votre pseudo: </label>
+              <input type="text" class="form-control" data-ng-model="account.nickname"></textarea>
+            </div>
+            <button type="submit" class="btn btn-lct" data-ng-click="changeNickname()">Valider</button>
+            <div class="alert alert-danger" role="alert" data-ng-if="alreadyUsed">Ce pseudo est déjà utilisé par un autre joueur.</div>
+          </form>
+        </div>
       </div>
     </div>
     <div class="row">

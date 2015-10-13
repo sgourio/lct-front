@@ -32,6 +32,20 @@ angular.module('lct')
         });
       },
 
+      updateNickname: function(nickname){
+        return $q(function(resolve, reject) {
+          // get the list immediately
+          $http.post(apiRoot + '/account/me/nickname', nickname ).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/account/me/nickname' + ' respond ' + status);
+              reject();
+            });
+        });
+      },
+
       myScore: function(){
         return $q(function(resolve, reject) {
           // get the list immediately

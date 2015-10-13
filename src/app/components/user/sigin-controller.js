@@ -16,6 +16,9 @@ angular.module('lct')
           $window.sessionStorage.admin = isAdmin;
         });
         var toState = $window.sessionStorage.toState || 'home';
+        if( toState === 'signin'){
+          toState = 'account';
+        }
         $state.transitionTo(toState);
       });
     };

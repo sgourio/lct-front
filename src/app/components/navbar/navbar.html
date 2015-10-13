@@ -1,4 +1,4 @@
-<nav ng-controller="NavbarCtrl">
+<nav>
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
@@ -23,10 +23,10 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li><a ng-show="!isAuthenticated()" ui-sref="signin">Connexion</a></li>
-              <li><a ng-show="isAuthenticated()" href="javascript:void(0)" ui-sref="account">{{::username}}</a></li>
-              <li><a ng-show="isAuthenticated()" ng-click="logout()" href="javascript:void(0)"> Déconnexion</a></li>
-              <li><a ng-show="isAdmin" href="javascript:void(0)" ui-sref="admin">Admin</a></li>
+              <li><a ng-if="!isAuthenticated()" ui-sref="signin">Connexion</a></li>
+              <li><a ng-if="isAuthenticated()" ui-sref="account">{{auth.getPayload().sub}}</a></li>
+              <li><a ng-if="isAuthenticated()" ng-click="logout()" href="javascript:void(0)"> Déconnexion</a></li>
+              <li><a ng-if="auth.admin" href="javascript:void(0)" ui-sref="admin">Admin</a></li>
             </ul>
           </div>
       </div>
