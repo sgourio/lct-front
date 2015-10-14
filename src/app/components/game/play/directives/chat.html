@@ -1,6 +1,6 @@
 <div class="chat">
   <ul>
-    <li data-ng-repeat="message in chat.chatMessageList track by $index"><span class="dateMessage">{{::message.instant | date:'HH:mm'}}</span>&nbsp;&nbsp;<span class="author">{{::message.author}} &gt; </span>{{::message.message}}</li>
+    <li data-ng-repeat="message in chat.chatMessageList track by $index" data-ng-class="{'aude': message.author === 'Aude' || message.author === 'Sylvain'}"><span class="dateMessage">{{::message.instant | date:'HH:mm'}}</span>&nbsp;&nbsp;<span class="author" >{{::message.author}} &gt; </span>{{::message.message}}</li>
   </ul>
   <form>
       <div class="row">

@@ -370,9 +370,21 @@ td.reference{
     background-color: transparent;
     color: white;
   }
-}
-.chat ul li .author{
-  color: #fbcb09;
+
+
+  .aude{
+    color: lightcoral;
+    .author{
+      color: lightcoral;
+    }
+  }
+
+  .dateMessage{
+    color: #f5f5f5;
+  }
+  ul li .author{
+    color: #fbcb09;
+  }
 }
 
 .gamePlayers{
@@ -443,6 +455,7 @@ td.reference{
 .play-text{
   input {
     text-transform: uppercase;
+    background-color: transparent;
   }
   span{
     font-style: italic;

@@ -27,7 +27,7 @@ angular.module('lct')
             gameService.autoList($scope.max).then(function (data) {
               $scope.games=data;
               if( $scope.games.length > 0 ) {
-                $scope.title = 'Parties automatiques';
+                $scope.title = 'Parties créées par LCT';
               }
             });
           }else{

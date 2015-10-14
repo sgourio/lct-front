@@ -1,4 +1,17 @@
 <div class="form-group play-text" data-ng-class="fieldClass" data-ng-keydown="keyDown($event)">
   <span>Mettre la référence de la première case, puis un espace, puis le mot et taper sur "entrée" pour valider</span>
-  <input type="text" ng-change="playing()" data-ng-model="proposal" class="form-control" placeholder="H7 SCRABBLE"/>
+  <form>
+    <div class="row">
+      <div class="col-xs-8">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-terminal"></i></div>
+              <input type="text" ng-change="playing()" data-ng-model="proposal" class="form-control" placeholder="H7 SCRABBLE">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

@@ -99,7 +99,7 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       url: apiRoot + '/auth/twitter'
     });
 
-  }).factory('authHttpResponseInterceptor',['$q','$location', '$log', '$window',function($q, $state, $log, $window){
+  }).factory('authHttpResponseInterceptor',['$q','$location', '$log', '$window',function($q, $location, $log, $window){
     return {
       response: function(response){
         if (response.status === 401) {
@@ -110,8 +110,8 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       responseError: function(rejection) {
         if (rejection.status === 401) {
           $log.debug('Response Error 401',rejection);
-          $window.sessionStorage.toState = $state.current.name;
-          $state.transitionTo('signin');
+          $window.sessionStorage.admin = false;
+          $location.path('/signin')
         }
         return $q.reject(rejection);
       }

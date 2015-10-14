@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('openedActions', ['$log', 'gameService', '$state', '$auth', function($log, gameService, $state, $auth) {
+  .directive('openedActions', ['$log', 'gameService', 'userService', '$state', '$auth', function($log, gameService, userService, $state, $auth) {
     return {
       restrict: 'E',
       scope: {
@@ -10,7 +10,10 @@ angular.module('lct')
       replace:true,
       templateUrl: 'app/components/game/play/directives/opened-actions.html',
       controller: function($scope){
-        $scope.isOwner=$auth.getPayload().sub === $scope.gameMetaData.owner;
+        userService.myAccount().then(function(userBean){
+          $scope.isOwner = userBean.nickname === $scope.gameMetaData.owner;
+        });
+
         $scope.displayStartDate = function(){
           return $scope.gameMetaData.startDate === null;
         };

@@ -1,6 +1,6 @@
 <div ng-if="metaData != null">
 
-  <play-game-open game-meta-data="metaData" timer="timer"></play-game-open>
+  <play-game-open ng-if="metaData.status === 'opened'" game-meta-data="metaData" timer="timer"></play-game-open>
 
   <play-game-running game-meta-data="metaData" ng-if="running"></play-game-running>
 
