@@ -456,6 +456,7 @@ td.reference{
   input {
     text-transform: uppercase;
     background-color: transparent;
+    color: #fca600;
   }
   span{
     font-style: italic;
@@ -549,4 +550,6 @@ td.reference{
   }
 }
 
-
+.bonus{
+  color: lightcoral;
+}
