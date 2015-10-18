@@ -349,7 +349,7 @@ td.reference{
     height: 300px;
     overflow-y: scroll;
     list-style-type: none;
-    margin: 10px 0 10px 0;
+    margin: 0px 0 10px 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -369,6 +369,12 @@ td.reference{
   input{
     background-color: transparent;
     color: white;
+  }
+  a{
+    text-decoration: underline;
+    &:hover{
+      cursor: pointer;
+    }
   }
 
 
@@ -552,4 +558,31 @@ td.reference{
 
 .bonus{
   color: lightcoral;
+}
+
+.edito{
+  text-align: justify;
+  h2{
+    color: #D2AA07;
+  }
+  a{
+    color: #D2AA07;
+  }
+  p, dt{
+    padding-left: 20px;
+  }
+  dd{
+    padding-left: 40px;
+  }
+}
+.trophy{
+  color: #FBC900;
+  .names{
+    font-size: 3em;
+  }
+}
+
+textarea.form-control{
+  background: transparent;
+  color: white;
 }

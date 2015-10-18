@@ -1,39 +1,62 @@
 <div ng-if="round != null">
   <div class="row">
-    <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
+    <div class="col-md-8 col-lg-6">
+      <div class="row">
+        <div class="col-md-12 unselectable" unselectable="on" onselectstart="return false;">
+          <div class="row trophy">
+            <div class="col-md-2">
+              <i class="fa fa-trophy fa-5x"></i>
+            </div>
+            <div class="col-md-10 names">
+              <strong>1er. {{::winners}}</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+              Partie terminée<br />
+              <div data-ng-if="winners">
+                La partie est remportée par <strong>{{::winners}}</strong>
+                <span ng-if="percentageFromTop >= 9000">avec le score incroyable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+                <span ng-if="percentageFromTop >= 8000 && percentageFromTop < 9000">avec le score plus qu'honorable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+                <span ng-if="percentageFromTop >= 7000 && percentageFromTop < 8000">avec le score honorable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+                <span ng-if="percentageFromTop >= 6000 && percentageFromTop < 7000">avec le score assez satisfaisant de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+                <span ng-if="percentageFromTop > 0 && percentageFromTop < 6000">en marquant {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
+                <span ng-if="percentageFromTop === 0">en ne marquant rien du tout...</span>
+                <br />
+              </div>
+              Le TOP score était de {{gameScore.topTotal}} pts<br /><br /><br />
+              <a class="btn btn-lct">Retour au salon</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <play-game-draw round="round"></play-game-draw>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
+          <play-game-board round="round"></play-game-board>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-6">
       <div class="row">
         <div class="col-md-12">
-          Partie terminée<br />
-          La partie est remportée par <strong>{{::winners}}</strong>
-          <span ng-if="percentageFromTop >= 9000">avec le score incroyable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
-          <span ng-if="percentageFromTop >= 8000 && percentageFromTop < 9000">avec le score plus qu'honorable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
-          <span ng-if="percentageFromTop >= 7000 && percentageFromTop < 8000">avec le score honorable de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
-          <span ng-if="percentageFromTop >= 6000 && percentageFromTop < 7000">avec le score assez satisfaisant de {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
-          <span ng-if="percentageFromTop > 0 && percentageFromTop < 6000">en marquant {{::bestScore}}pts ({{::percentageFromTop/100 | number : 2}}% du TOP)</span>
-          <span ng-if="percentageFromTop === 0">en marquant rien du tout</span>
-          <br />
-          Le TOP score était de {{gameScore.topTotal}} pts
+            <span class="pull-right">Partie "{{::gameMetaData.name}}" lancée
+              <span data-ng-if="gameMetaData.owner === 'auto'">automatiquement</span>
+              <span data-ng-if="gameMetaData.owner !== 'auto'">par {{::gameMetaData.owner}}</span>
+              <span data-ng-if="gameMetaData.creatorId === 'auto'">(et créée par l'ordinateur)</span>
+              <span data-ng-if="gameMetaData.creatorId !== 'auto'">(et créée par {{::gameMetaData.creator}})</span>
+            </span><br />
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-8">
-          <play-game-draw round="round"></play-game-draw>
+        <div class="col-md-12">
+          <chat id="{{gameMetaData.playGameId}}"></chat>
+          <play-game-score game-meta-data="gameMetaData"></play-game-score>
         </div>
       </div>
     </div>
-    <div class="col-md-4 col-lg-6">
-      <span class="pull-right">Partie "{{::gameMetaData.name}}" créée par {{::gameMetaData.owner}}</span><br />
-      <timer play-game-id="gameMetaData.playGameId"></timer>
-    </div>
   </div>
-  <div class="row">
-    <div class="col-md-8 col-lg-6 unselectable" unselectable="on" onselectstart="return false;">
-      <play-game-board round="round"></play-game-board>
-    </div>
-    <div class="col-md-4 col-lg-6">
-      <display-messages round="round" class=""></display-messages>
-      <chat id="{{gameMetaData.playGameId}}"></chat>
-      <play-game-score game-meta-data="gameMetaData"></play-game-score>
-    </div>
-  </div>
+
 </div>

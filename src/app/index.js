@@ -65,6 +65,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       });
 
     $stateProvider
+      .state('rules', {
+        url: '/rules',
+        template: '<rules></rules>',
+        authenticate: false
+      });
+
+    $stateProvider
       .state('account', {
         url: '/account',
         template: '<account></account>',
@@ -110,14 +117,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       responseError: function(rejection) {
         if (rejection.status === 401) {
           $log.debug('Response Error 401',rejection);
-          $window.sessionStorage.admin = false;
           $location.path('/signin')
         }
         return $q.reject(rejection);
       }
     }
   }]).config(['$httpProvider',function($httpProvider) {
-    //Http Intercpetor to check auth failures for xhr requests
+    //Http Interceptor to check auth failures for xhr requests
     $httpProvider.interceptors.push('authHttpResponseInterceptor');
   }]).run(function ($rootScope, $state, $auth, $window) {
     $rootScope.$on('$stateChangeStart', function(event, toState){
@@ -127,12 +133,12 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         $state.transitionTo('signin');
         event.preventDefault();
       }
-      if( toState.admin && !$auth.admin){
+      if( toState.admin && !$auth.getPayload().isAdmin){
         $window.sessionStorage.toState = toState.name;
         $state.transitionTo('signin');
         event.preventDefault();
       }
-      if( toState.name === 'signin'){
+      if( toState.name === 'signin' && !$window.sessionStorage.toState){
         $window.sessionStorage.toState = 'account';
       }
     });

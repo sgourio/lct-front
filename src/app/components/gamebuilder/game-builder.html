@@ -9,7 +9,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
         <button class="btn btn-lct btn-sm" type="button" ng-click="clearDraw()" ng-show="!finished">Vider</button>
         <button class="btn btn-lct btn-sm" type="button" ng-click="randomDraw()" ng-show="!finished">Nouveau tirage aléatoire</button>
         <button class="btn btn-lct btn-sm" type="button" ng-click="displayDeck = !displayDeck" ng-show="!finished">Choisir</button>
@@ -61,7 +61,7 @@
         </div>
         <div class="row">
           <div class="col-md-12" ng-if="selectedSuggestIndex >= 0">
-            <button class="btn btn-default" type="button" ng-click="validRound()">Valider</button>
+            <button class="btn btn-lct" type="button" ng-click="validRound()">Valider</button>
           </div>
         </div>
         <div class="row" ng-if="finished">
@@ -72,7 +72,7 @@
             Temps de la partie estimée (avec des tours de 3 min et des pauses de 30 secondes entre les tours):
             <span ng-show="{{(game.roundList.length * 210) > 3600}}">{{Math.floor((game.roundList.length * 210)/3600)}}h</span>
             {{Math.floor(((game.roundList.length * 210)/60)%60)}}m {{(game.roundList.length * 210)%60}}s
-            <button class="btn btn-primary" type="button" ng-click="openSaveGameModal()">Enregistrer la partie</button>
+            <button class="btn btn-lct" type="button" ng-click="openSaveGameModal()">Enregistrer la partie</button>
           </div>
         </div>
         <div class="row">

@@ -7,12 +7,16 @@
     <form>
       <div class="form-group">
         <label>Un problème? Un avis? Ou juste un message à Lettre Compte Triple</label>
-        <textarea class="form-control" rows="8" data-ng-model="message"></textarea>
+        <textarea class="form-control" rows="8" data-ng-model="message" placeholder="Ecrire ici"></textarea>
       </div>
       <button type="submit" class="btn btn-lct" data-ng-click="send()">Envoyer</button>
     </form>
   </div>
   <div class="col-md-12" data-ng-show="sent">
     Merci d'avoir écrit &agrave; Lettre Compte Triple.
+  </div>
+  <div class="col-md-12">
+  <br />
+    <img src="/assets/images/waiting-man.jpg" width="100%"/>
   </div>
 </div>

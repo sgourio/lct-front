@@ -11,12 +11,9 @@ angular.module('lct')
     $scope.authenticate = function(provider) {
       $auth.link(provider).then(function (response){
         $auth.setToken(response);
-        userService.isAdmin().then(function(isAdmin){
-          $auth.admin=isAdmin;
-          $window.sessionStorage.admin = isAdmin;
-        });
-        var toState = $window.sessionStorage.toState || 'home';
-        if( toState === 'signin'){
+        var toState = $window.sessionStorage.toState || 'account';
+        $window.sessionStorage.toState = null;
+        if( !toState || toState === 'signin'){
           toState = 'account';
         }
         $state.transitionTo(toState);
@@ -31,12 +28,8 @@ angular.module('lct')
     };
 
     if( $scope.isAuthenticated() ){
-      userService.isAdmin().then(function(isAdmin){
-        $auth.admin=isAdmin;
-        $window.sessionStorage.admin = isAdmin;
-        var toState = $window.sessionStorage.toState || 'home';
-        $state.transitionTo(toState);
-      });
+      var to = $window.sessionStorage.toState || 'home';
+      $state.transitionTo(to);
     }
 
   }]);

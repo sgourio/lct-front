@@ -11,6 +11,7 @@ angular.module('lct')
       templateUrl: 'app/components/game/play/directives/chat.html',
       controller: function($scope) {
         $scope.chatInput = '';
+        $scope.visible = true;
 
         chatService.getChat($scope.id).then(function (chat){
           $scope.chat = chat;

@@ -12,8 +12,6 @@ angular.module('lct')
 
         $scope.logout = function(){
           $auth.logout();
-          $auth.admin=false;
-          $window.sessionStorage.admin = false;
         };
         $scope.isAuthenticated = function() {
           return $auth.isAuthenticated();
@@ -23,11 +21,6 @@ angular.module('lct')
         $scope.isActive = function (viewLocation) {
           return ($location.path() === '/' && viewLocation === '/') || (viewLocation !== '/' && $location.path().startsWith(viewLocation));
         };
-        if( $auth.isAuthenticated() ) {
-          userService.isAdmin().then(function(result){
-              $auth.admin = result;
-          });
-        }
 
       }
     };

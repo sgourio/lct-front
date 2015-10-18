@@ -12,8 +12,8 @@ angular.module('lct')
       {
         'title': 'Dictionnaire ODS 7',
         'description': 'Le dictionnaire officile du scrabble en vigueur dans les tournois depuis le 1er Janvier 2016',
-        'icon' : 'balance-scale',
-        'class' : 'pink'
+        'icon' : 'book',
+        'class' : 'yellow'
       },
       {
         'title': 'Règle officielle',

@@ -8,13 +8,21 @@
         <div class="col-md-8">
           <play-game-draw round="round"></play-game-draw>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" ng-if="!creator">
           <running-actions round="round"></running-actions>
+        </div>
+        <div class="col-md-3" ng-if="creator">
+          En tant que créateur de la partie, vous ne pouvez pas jouer.
         </div>
       </div>
     </div>
     <div class="col-md-4 col-lg-6">
-      <span class="pull-right">Partie "{{::gameMetaData.name}}" créée par {{::gameMetaData.owner}}</span><br />
+      <span class="pull-right">Partie "{{::gameMetaData.name}}" lancée
+        <span data-ng-if="gameMetaData.owner === 'auto'">automatiquement</span>
+        <span data-ng-if="gameMetaData.owner !== 'auto'">par {{::gameMetaData.owner}}</span>
+        <span data-ng-if="gameMetaData.creatorId === 'auto'">(et créée par l'ordinateur)</span>
+        <span data-ng-if="gameMetaData.creatorId !== 'auto'">(et créée par {{::gameMetaData.creator}})</span>
+      </span><br />
       Tour #{{round.roundNumber}}
       <timer play-game-id="gameMetaData.playGameId"></timer>
     </div>

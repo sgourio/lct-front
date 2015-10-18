@@ -11,6 +11,10 @@ angular.module('lct')
       controller: function($scope){
         $scope.running = $scope.gameMetaData.status === 'running';
 
+        if( $auth.getPayload().userId === $scope.gameMetaData.creatorId){
+          $scope.creator = true;
+        }
+
         gameService.currentRound($scope.gameMetaData.playGameId).then(function(round){
           $scope.round = round;
         });
