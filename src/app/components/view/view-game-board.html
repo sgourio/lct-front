@@ -1,0 +1,14 @@
+<div class="board"><!-- BOARD -->
+  <ul class="rows">
+    <li ng-repeat="row in round.boardGame.squares" ng-init="lineIndex = $index">
+      <ul class="columns">
+        <li ng-repeat="square in row" ng-style="{{ ::{top:squarePosition(lineIndex, $index).top, left:squarePosition(lineIndex, $index).left} }}" class="square" data-ng-class="{'selected-square': isSelected(lineIndex, $index)}">
+          <div class="playTile" data-ng-class="{'joker': square.droppedTile.tile.tileType === 'wildcard', 'lastRound':square.droppedRound === (round.roundNumber - 1)}" ng-if="square.droppedTile && !square.justDropped">
+            <span class="letter">{{square.droppedTile.value}}</span>
+            <span class="pull-right points">{{square.droppedTile.tile.point}}</span>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

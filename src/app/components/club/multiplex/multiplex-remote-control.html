@@ -1,0 +1,52 @@
+<div>
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Partie multiplexe: "{{::multiplex.name}}"</h1>
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right"><a ui-sref="multiplexDisplay({multiplexGameId : multiplex.multiplexGameId})" target="_blank" class="btn btn-lct">Afficher la partie <i class="fa fa-television"></i></a></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      Adresse de la partie pour les joueurs: {{$state.href('multiplexDisplay' , {multiplexGameId : multiplex.multiplexGameId}, {'absolute' : true})}}
+    </div>
+  </div>
+  <div class="row" data-ng-show="roundNumber > 0">
+    <div class="col-md-2">
+      <p class="drawNumber">Tirage n° : {{roundNumber}}</p>
+    </div>
+    <div class="col-md-8">
+      <view-draw round="round"></view-draw>
+    </div>
+    <div class="col-md-2 big">
+      <p >
+        <span class="timer pull-right">{{timer}} <i class="fa fa-clock-o"></i></span>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" data-ng-if="round.lastDroppedWord">
+      <span class="lastWord">Dernier mot : <em>{{round.lastDroppedWord.reference}}</em> {{round.lastDroppedWord.value}}, {{round.lastDroppedWord.points}}pts</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-lct btn-xs" data-ng-click="previousRound()" data-ng-show="roundNumber > 0"><i class="fa fa-chevron-left"></i> Tour précédent ({{ roundNumber - 1 }})</button>
+      <button class="btn btn-lct" data-ng-click="nextRound()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound">Prochain tour ({{ roundNumber + 1 }}) <i class="fa fa-chevron-right"></i></button>
+      <button class="btn btn-lct" data-ng-click="nextRound()" data-ng-show="roundNumber == 0">D&eacute;marrer le multiplexe <i class="fa fa-chevron-right"></i></button>
+      <br />
+      <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-lg-6">
+      <view-game-board round="round"></view-game-board>
+    </div>
+    <div class="col-md-4 col-lg-6">
+    </div>
+  </div>
+
+
+</div>

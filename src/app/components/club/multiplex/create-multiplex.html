@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="">
+      <h1>Créer un nouveau multiplex</h1>
+      <div class="row">
+        <div class="col-md-8">
+          <h3>1. Combien de temps entre chaque tour?</h3>
+          <form class="form">
+            <div class="radio-inline">
+              <label>
+                <input type="radio" data-ng-model="multiplex.roundTime" value="90" name="roundTime"/> 90 sec
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" data-ng-model="multiplex.roundTime" value="120" name="roundTime"/> 2 min
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" data-ng-model="multiplex.roundTime" value="180" name="roundTime"/> 3 min
+              </label>
+            </div>
+          </form>
+          <h3>2. Sélection d'une partie</h3>
+          <div class="row">
+            <div class="col-md-12">
+              <game-list round-time="multiplex.roundTime" owner="me" refreshable="false" selected-game="multiplex.selectedGame"></game-list>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <game-list max="10" round-time="multiplex.roundTime" owner="auto" refreshable="true" selected-game="multiplex.selectedGame"></game-list>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h3>3. Nommer la partie</h3>
+              <input type="text" data-ng-model="multiplex.gameName"/>
+            </div>
+          </div>
+          <div class="row" ng-if="hasError">
+            <div class="col-md-12">
+              <br />
+              <div class="alert alert-danger">{{error}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+              <br />
+              <button class="btn btn-lct btn-lg btn-block" data-ng-click="startGame()">Démarrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

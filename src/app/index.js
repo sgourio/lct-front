@@ -85,6 +85,43 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         authenticate: true
       });
 
+    $stateProvider
+      .state('club', {
+        url: '/club',
+        template: '<club-home></club-home>',
+        authenticate: true
+      });
+
+    $stateProvider
+      .state('multiplex', {
+        url: '/club/multiplex',
+        template: '<multiplex></multiplex>',
+        authenticate: true
+      });
+
+    $stateProvider
+      .state('multiplexControl', {
+        url: '/club/multiplex/remote/control/:multiplexGameId',
+        template: '<multiplex-remote-control data-game-id="{{multiplexGameId}}"></multiplex-remote-control>',
+        authenticate: true,
+        controller: function($scope, $stateParams) {
+          $scope.multiplexGameId = $stateParams.multiplexGameId;
+        }
+      });
+
+    $stateProvider
+      .state('multiplexDisplay', {
+        url: '/club/multiplex/display/:multiplexGameId',
+        views: {
+          'global': {
+            template: '<display-multiplex data-game-id="{{multiplexGameId}}"></display-multiplex>',
+            controller: function ($scope, $stateParams) {
+              $scope.multiplexGameId = $stateParams.multiplexGameId;
+            }
+          }
+        }
+      });
+
 
     $urlRouterProvider.otherwise('/');
 

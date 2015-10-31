@@ -91,6 +91,18 @@ angular.module('lct')
         this.init().then(function () {
           $stomp.subscribe('/topic/chat/' + chatId, callback, {});
         });
+      },
+
+      subscribeMultiplexGameMetaData: function(multiplexGameId, callback){
+        this.init().then(function () {
+          $stomp.subscribe('/topic/multiplex/' + multiplexGameId +'/metadata', callback, {});
+        });
+      },
+
+      subscribeMultiplex: function(multiplexGameId, callback){
+        this.init().then(function () {
+          $stomp.subscribe('/topic/multiplex/' + multiplexGameId +'/round', callback, {});
+        });
       }
 
     };

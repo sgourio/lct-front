@@ -1,0 +1,17 @@
+<div>
+  <ul class="draw"> <!-- DRAW -->
+    <li ng-repeat="droppedTile in round.oldTiles" class="tile">
+      <div class="playTile" data-ng-class="{'joker': droppedTile.tile.tileType == 'wildcard'}">
+        <span class="letter">{{droppedTile.value}}</span>
+        <span class="pull-right points">{{droppedTile.tile.point}}</span>
+      </div>
+    </li>
+    <li class="tile" ng-if="round.draw.length > 0"><div class="plus"><i class="fa fa-plus"></i></div></li>
+    <li ng-repeat="droppedTile in round.newTiles" class="tile">
+      <div class="playTile" data-ng-class="{'joker': droppedTile.tile.tileType == 'wildcard'}">
+        <span class="letter">{{droppedTile.value}}</span>
+        <span class="pull-right points">{{droppedTile.tile.point}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

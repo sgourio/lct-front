@@ -230,6 +230,10 @@ ul{
       width: 34px;
       height: 34px;
     }
+    .plus{
+      text-align: center;
+      padding-top: 10px;
+    }
   }
 
   .over{
@@ -312,7 +316,9 @@ td.reference{
 .timer{
   font-size: 1.4em;
 }
-
+.big .timer{
+  font-size: 2em;
+}
 .unselectable{
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -585,4 +591,12 @@ td.reference{
 textarea.form-control{
   background: transparent;
   color: white;
+}
+
+.drawNumber{
+  font-size: 1.4em;
+  padding-top: 14px;
+}
+.lastWord{
+  font-size: 1.4em;
 }
