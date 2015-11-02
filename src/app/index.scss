@@ -317,7 +317,7 @@ td.reference{
   font-size: 1.4em;
 }
 .big .timer{
-  font-size: 2em;
+  font-size: 4em;
 }
 .unselectable{
   -moz-user-select: none;
@@ -599,4 +599,49 @@ textarea.form-control{
 }
 .lastWord{
   font-size: 1.4em;
+}
+
+.previewMultiplex{
+  border-top : 1px solid #FFFFFF;
+  margin-top: 10px;
+  padding-top: 6px;
+}
+.positioned{
+  position: relative;
+}
+.bigDraw{
+  padding: 50px 10px;
+  margin: auto;
+  width: 100%;
+
+  .draw .tile {
+    width: 62px
+  }
+
+  .playTile {
+    height: 58px;
+    width: 58px;
+
+    .letter {
+      line-height: 58px;
+      color: darkslategray;
+      font-size: 42px;
+      display: block;
+    }
+    .points{
+      margin-top: -28px;
+      font-size: 2em;
+    }
+  }
+
+  .plus {
+    font-size: 3em;
+  }
+}
+
+.bigResult{
+  padding: 20px 10px;
+  margin: auto;
+  width: 100%;
+  font-size: 2.8em;
 }

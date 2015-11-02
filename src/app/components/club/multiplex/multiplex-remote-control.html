@@ -20,9 +20,6 @@
       <view-draw round="round"></view-draw>
     </div>
     <div class="col-md-2 big">
-      <p >
-        <span class="timer pull-right">{{timer}} <i class="fa fa-clock-o"></i></span>
-      </p>
     </div>
   </div>
   <div class="row">
@@ -34,19 +31,19 @@
   <div class="row">
     <div class="col-md-12">
       <button class="btn btn-lct btn-xs" data-ng-click="previousRound()" data-ng-show="roundNumber > 0"><i class="fa fa-chevron-left"></i> Tour précédent ({{ roundNumber - 1 }})</button>
-      <button class="btn btn-lct" data-ng-click="nextRound()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound">Prochain tour ({{ roundNumber + 1 }}) <i class="fa fa-chevron-right"></i></button>
-      <button class="btn btn-lct" data-ng-click="nextRound()" data-ng-show="roundNumber == 0">D&eacute;marrer le multiplexe <i class="fa fa-chevron-right"></i></button>
+      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'displayResult'">Afficher le tirage <i class="fa fa-chevron-right"></i></button>
+      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'running'">Afficher la solution <i class="fa fa-chevron-right"></i></button>
+      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'displayDraw'">Lancer le chrono <i class="fa fa-chevron-right"></i></button>
+      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber === 0">D&eacute;marrer le multiplexe <i class="fa fa-chevron-right"></i></button>
       <br />
       <br />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 col-lg-6">
-      <view-game-board round="round"></view-game-board>
-    </div>
-    <div class="col-md-4 col-lg-6">
+      <button class="btn btn-lct" data-ng-click="sendMessage('ok')" >Envoyer un message</button>
     </div>
   </div>
 
+  <div class="previewMultiplex">
+    <p>Ce que voient les joueurs:</p>
+    <display-multiplex data-game-id="{{gameId}}"></display-multiplex>
+  </div>
 
 </div>

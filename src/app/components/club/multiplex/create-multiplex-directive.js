@@ -11,15 +11,15 @@ angular.module('lct')
     return {
       restrict: 'E',
       scope: {
-        'multiplex' : '='
       },
       replace: true,
       templateUrl: 'app/components/club/multiplex/create-multiplex.html',
       controller: function($scope) {
-        $scope.multiplex.roundTime = 120;
-        $scope.multiplex.selectedGame = null;
-
-        $scope.multiplex.gameName='';
+        $scope.multiplex = {
+          roundTime : 120,
+          selectedGame : null,
+          gameName : ''
+        };
         $scope.hasError = false;
 
         $scope.startGame = function(){

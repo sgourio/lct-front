@@ -95,7 +95,7 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
     $stateProvider
       .state('multiplex', {
         url: '/club/multiplex',
-        template: '<multiplex></multiplex>',
+        template: '<create-multiplex></create-multiplex>',
         authenticate: true
       });
 

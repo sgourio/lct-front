@@ -1,18 +1,31 @@
 <div>
   <div class="row">
-    <div class="col-md-8 col-lg-6">
-      <view-draw round="round"></view-draw>
-    </div>
-    <div class="col-md-4 col-lg-6">
-      Partie multiplexe proposée par LCT <span class="deluxe">Deluxe</span>
+    <div class="col-md-12 clearfix">
+      <div class="pull-right">
+        Partie multiplexe proposée par LCT <span class="deluxe">Deluxe</span>
+      </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row positioned">
     <div class="col-md-8 col-lg-6">
       <view-game-board round="round"></view-game-board>
     </div>
     <div class="col-md-4 col-lg-6">
-      Tour numéro : {{round.roundNumber}}
+      <p data-ng-show="round.roundNumber > 0">
+        Tour numéro : {{round.roundNumber}}
+      </p>
+      <p class="big clearfix">
+        <span class="timer pull-right"><span data-ng-show="message !== 'running'">PAUSE</span><span data-ng-show="message === 'running'">{{timer}}</span> <i class="fa fa-clock-o"></i></span>
+
+      </p>
+
+      <div class="bigDraw" data-ng-show="message !== 'displayResult'">
+        <view-draw round="round"></view-draw>
+      </div>
+      <div class="bigResult" data-ng-show="message === 'displayResult'">
+        Meilleur mot: <em>{{round.lastDroppedWord.reference}}</em> <span class="playedWord">{{round.lastDroppedWord.value}}</span>, {{round.lastDroppedWord.points}}pts
+      </div>
     </div>
+
   </div>
 </div>

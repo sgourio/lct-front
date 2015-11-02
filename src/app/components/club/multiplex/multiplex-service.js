@@ -60,6 +60,19 @@ angular.module('lct')
               reject();
             });
         });
+      },
+
+      sendMessage: function(multiplexGameId, message){
+        return $q(function(resolve, reject){
+          $http.post(apiRoot + '/multiplex/game/'+multiplexGameId +'/message', message).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service POST ' + apiRoot + '/multiplex/game/'+multiplexGameId +'/message  respond ' + status);
+              reject();
+            });
+        });
       }
     };
     return multiplexService;

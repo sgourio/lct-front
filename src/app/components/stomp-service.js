@@ -103,6 +103,12 @@ angular.module('lct')
         this.init().then(function () {
           $stomp.subscribe('/topic/multiplex/' + multiplexGameId +'/round', callback, {});
         });
+      },
+
+      subscribeMultiplexMessage: function(multiplexGameId, callback){
+        this.init().then(function () {
+          $stomp.subscribe('/topic/multiplex/' + multiplexGameId +'/message', callback, {});
+        });
       }
 
     };

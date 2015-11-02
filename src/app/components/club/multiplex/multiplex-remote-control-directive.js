@@ -17,33 +17,52 @@ angular.module('lct')
       controller: function($scope) {
         $scope.$state = $state;
         $scope.roundNumber = 0;
-        $scope.timer = 0;
+        $scope.workflow = ''; // displayDraw, running, displayResult
         if( $scope.gameId ) {
-          var countDown = function() {
-            if ($scope.timer > 0) {
-              $scope.timer = $scope.timer - 1;
-            }
-            $timeout(countDown, 1000);
-          };
-          countDown();
 
           multiplexService.metaData($scope.gameId).then(function(data){
             $scope.multiplex = data;
 
             $scope.nextRound = function(){
               multiplexService.changeRound($scope.multiplex.multiplexGameId , ++$scope.roundNumber);
+              if( $scope.roundNumber === 1 ) {
+                $scope.workflow = 'displayDraw';
+              }else{
+                $scope.workflow = 'displayResult';
+              }
             };
             $scope.previousRound = function(){
               multiplexService.changeRound($scope.multiplex.multiplexGameId , --$scope.roundNumber);
             };
 
+            $scope.sendMessage = function(message){
+              multiplexService.sendMessage($scope.multiplex.multiplexGameId , message);
+            };
+
+            $scope.next = function(){
+              if( $scope.roundNumber === 0 || ($scope.workflow === 'running' && $scope.roundNumber <= $scope.multiplex.numberOfRound)){
+                if( $scope.roundNumber === 0 ) {
+                  $scope.workflow = 'displayDraw';
+                }else{
+                  $scope.workflow = 'displayResult';
+                }
+                $scope.nextRound();
+              }else if($scope.workflow === 'displayDraw'){
+                $scope.workflow = 'running';
+                $scope.sendMessage('running');
+              }else if($scope.workflow === 'displayResult'){
+                $scope.workflow = 'displayDraw';
+                $scope.sendMessage('displayDraw');
+              }
+            };
+
             stompService.subscribeMultiplex($scope.gameId, function(round){
               $scope.round = round;
-              $scope.timer = $scope.multiplex.timeByRound;
               $scope.$apply();
             });
           });
         }
+
       }
     };
   }]);
