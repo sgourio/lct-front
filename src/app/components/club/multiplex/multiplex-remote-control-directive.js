@@ -17,6 +17,7 @@ angular.module('lct')
       controller: function($scope) {
         $scope.$state = $state;
         $scope.roundNumber = 0;
+        $scope.scoreRoundNumber = 0;
         $scope.workflow = ''; // displayDraw, running, displayResult
         if( $scope.gameId ) {
 

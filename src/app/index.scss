@@ -13,6 +13,7 @@
 body {
   padding: 0;
   font-size: 12px;
+  background:url('/assets/images/lys2.png') #2c3e50 repeat;
 }
 button, input, optgroup, select, textarea{
   color: #333333;
@@ -31,6 +32,7 @@ button, input, optgroup, select, textarea{
 }
 
 .container{
+  //background: #2c3e50;
 }
 
 .bottomNav{
@@ -594,7 +596,7 @@ textarea.form-control{
 }
 
 .drawNumber{
-  font-size: 1.4em;
+  font-size: 1em;
   padding-top: 14px;
 }
 .lastWord{
@@ -644,4 +646,26 @@ textarea.form-control{
   margin: auto;
   width: 100%;
   font-size: 2.8em;
+}
+
+.scoreMultiplex{
+  .form-control{
+    padding-left: 3px;
+    padding-right: 1px;
+  }
+  input {
+    background-color: transparent;
+    color: #fca600;
+  }
+  .has-error{
+    input{
+      color: #a94442;
+    }
+  }
+  span{
+    font-style: italic;
+  }
+  .reference{
+    text-transform: uppercase;
+  }
 }

@@ -1,43 +1,37 @@
 <div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <h1>Partie multiplexe: "{{::multiplex.name}}"</h1>
     </div>
-    <div class="col-md-4">
-      <div class="pull-right"><a ui-sref="multiplexDisplay({multiplexGameId : multiplex.multiplexGameId})" target="_blank" class="btn btn-lct">Afficher la partie <i class="fa fa-television"></i></a></div>
-    </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
-      Adresse de la partie pour les joueurs: {{$state.href('multiplexDisplay' , {multiplexGameId : multiplex.multiplexGameId}, {'absolute' : true})}}
+    <div class="col-md-6">
+      <p>
+        Adresse de la partie pour les joueurs: {{$state.href('multiplexDisplay' , {multiplexGameId : multiplex.multiplexGameId}, {'absolute' : true})}}
+        <a ui-sref="multiplexDisplay({multiplexGameId : multiplex.multiplexGameId})" target="_blank" class="btn btn-lct">Afficher la partie <i class="fa fa-television"></i></a>
+      </p>
+      <p>
+      <p class="drawNumber" data-ng-show="roundNumber > 0">
+        Tirage n° : {{roundNumber}}
+        <view-draw round="round"></view-draw>
+      </p>
+      <p data-ng-if="round.lastDroppedWord">
+        <span class="lastWord">Dernier mot : <em>{{round.lastDroppedWord.reference}}</em> {{round.lastDroppedWord.value}}, {{round.lastDroppedWord.points}}pts</span>
+      </p>
+      <p>
+        <button class="btn btn-lct btn-xs" data-ng-click="previousRound()" data-ng-show="roundNumber > 0"><i class="fa fa-chevron-left"></i> Tour précédent ({{ roundNumber - 1 }})</button>
+        <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'displayResult'">Afficher le tirage <i class="fa fa-chevron-right"></i></button>
+        <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'running'">Afficher la solution <i class="fa fa-chevron-right"></i></button>
+        <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'displayDraw'">Lancer le chrono <i class="fa fa-chevron-right"></i></button>
+        <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber === 0">D&eacute;marrer le multiplexe <i class="fa fa-chevron-right"></i></button>
+      </p>
     </div>
-  </div>
-  <div class="row" data-ng-show="roundNumber > 0">
-    <div class="col-md-2">
-      <p class="drawNumber">Tirage n° : {{roundNumber}}</p>
-    </div>
-    <div class="col-md-8">
-      <view-draw round="round"></view-draw>
-    </div>
-    <div class="col-md-2 big">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12" data-ng-if="round.lastDroppedWord">
-      <span class="lastWord">Dernier mot : <em>{{round.lastDroppedWord.reference}}</em> {{round.lastDroppedWord.value}}, {{round.lastDroppedWord.points}}pts</span>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <button class="btn btn-lct btn-xs" data-ng-click="previousRound()" data-ng-show="roundNumber > 0"><i class="fa fa-chevron-left"></i> Tour précédent ({{ roundNumber - 1 }})</button>
-      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'displayResult'">Afficher le tirage <i class="fa fa-chevron-right"></i></button>
-      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'running'">Afficher la solution <i class="fa fa-chevron-right"></i></button>
-      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'displayDraw'">Lancer le chrono <i class="fa fa-chevron-right"></i></button>
-      <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber === 0">D&eacute;marrer le multiplexe <i class="fa fa-chevron-right"></i></button>
-      <br />
-      <br />
-      <button class="btn btn-lct" data-ng-click="sendMessage('ok')" >Envoyer un message</button>
+    <div class="col-md-6">
+      <div>
+        <button class="btn btn-lct btn-xs" data-ng-click="scoreRoundNumber = scoreRoundNumber - 1" data-ng-show="scoreRoundNumber > 0">Précédent</button>
+        <button class="btn btn-lct btn-xs" data-ng-click="scoreRoundNumber = scoreRoundNumber + 1" data-ng-show="scoreRoundNumber <= multiplex.numberOfRound">Suivant</button>
+      </div>
+      <multiplex-score data-game-id="gameId" round="scoreRoundNumber" data-ng-if="scoreRoundNumber > 0 && scoreRoundNumber <= multiplex.numberOfRound" ></multiplex-score>
     </div>
   </div>
 

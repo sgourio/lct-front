@@ -95,7 +95,7 @@ angular.module('lct')
             j++;
           }
           var reference = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(row) + '' + (column +1);
-          return word + '\t' + reference;
+          return reference + '\t' + word;
         }else{
           while( row > 0 && board.squares[row-1][column].droppedTile !== null){
             row--;
@@ -113,7 +113,7 @@ angular.module('lct')
             i++;
           }
           var ref = (column +1) + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(row);
-          return word + '\t' + ref;
+          return ref + '\t' + word;
         }
       }
     };

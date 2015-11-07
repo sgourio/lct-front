@@ -1,0 +1,23 @@
+<div>
+  Scores du tour #{{round}} :<br />
+  <table class="table scoreMultiplex">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Mot</th>
+        <th>Bonus</th>
+        <th>Score du tour</th>
+        <th>total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-ng-repeat="score in scoreList">
+        <td class="col-sm-3"><input type="text" class="form-control input-sm" data-ng-model="score.name" data-ng-blur="putWord(score)"/></td>
+        <td data-ng-class="{'has-error':score.error}"><input type="text" class="form-control input-sm reference" data-ng-model="score.reference" data-ng-blur="putWord(score)" placeholder="S(U)PER"/></td>
+        <td class="col-sm-1"><input type="text" class="form-control input-sm" data-ng-model="score.bonus" data-ng-blur="putWord(score)"/></td>
+        <td>{{score.score}}<span data-ng-if="score.bonus > 0"> (+{{score.bonus}})</span></td>
+        <td>{{score.total}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

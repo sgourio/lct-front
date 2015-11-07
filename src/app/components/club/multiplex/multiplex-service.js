@@ -73,6 +73,56 @@ angular.module('lct')
               reject();
             });
         });
+      },
+
+      roundScore: function(multiplexGameId, roundNumber){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/multiplex/game/'+multiplexGameId + '/score/' + roundNumber).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/multiplex/game/'+multiplexGameId + '/score/' + roundNumber +' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      totalScoreAtRound: function(multiplexGameId, roundNumber){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/multiplex/game/'+multiplexGameId + '/total/' + roundNumber).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/multiplex/game/'+multiplexGameId + '/total/' + roundNumber +' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      totalScore: function(multiplexGameId){
+       return this.totalScoreAtRound(multiplexGameId, 100);
+      },
+
+
+      putWord: function(multiplexGameId, roundNumber, name, wordReference, bonus, id){
+        return $q(function(resolve, reject){
+          $http.post(apiRoot + '/multiplex/game/'+multiplexGameId +'/word', {
+            roundNumber: roundNumber,
+            name: name,
+            wordReference: wordReference.replace(/\s/g,'\t'),
+            bonus: bonus,
+            id: id
+          }).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service POST ' + apiRoot + '/multiplex/game/'+multiplexGameId +'/word  respond ' + status);
+              reject();
+            });
+        });
       }
     };
     return multiplexService;
