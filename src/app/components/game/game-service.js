@@ -224,7 +224,7 @@ angular.module('lct')
               reject();
             });
         });
-      },
+      }
     };
     return gameService;
   }]);

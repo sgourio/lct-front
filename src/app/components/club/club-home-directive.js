@@ -11,6 +11,7 @@ angular.module('lct')
     return {
       restrict: 'E',
       scope: {
+
       },
       replace: true,
       templateUrl: 'app/components/club/club-home.html',

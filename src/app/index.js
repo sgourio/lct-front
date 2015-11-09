@@ -43,8 +43,7 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
     $stateProvider
       .state('admin', {
         url: '/admin',
-        templateUrl: 'app/components/admin/admin.html',
-        controller: 'AdminCtrl',
+        template: '<admin></admin>',
         authenticate: true,
         admin: true
       });
@@ -90,6 +89,12 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
         url: '/club',
         template: '<club-home></club-home>',
         authenticate: true
+      });
+
+    $stateProvider
+      .state('clubs', {
+        url: '/clubs',
+        template: '<club-description></club-description>'
       });
 
     $stateProvider

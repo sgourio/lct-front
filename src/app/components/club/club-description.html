@@ -1,0 +1,51 @@
+<div>
+  <div class="row clubs edito">
+    <div class="col-md-6">
+      <h1><i class="fa fa-university"></i> Clubs</h1>
+      <p>
+        Cette partie du site est d&eacute;di&eacute;e aux <span class="deluxe">clubs de Scrabble</span>.<br />
+        Les membres d'un club ont accès à des fonctionnalités supplémentaires:
+      </p>
+      <p>
+        <ul>
+          <li>Restreindre aux membres de leur club l'accès &agrave; une partie</li>
+          <li>Pr&eacute;parer des parties et les proposer aux autres joueurs</li>
+          <li>Utiliser Lettre Compte Triple pour faire l'arbitre</li>
+          <li class="deluxe">Jouer une partie multiplexe en salle</li>
+        </ul>
+      </p>
+      <p>
+        Ces fonctionnalit&eacute;s d&eacute;di&eacute;es aux clubs sont soumises &agrave; la souscription d'un abonnement mensuel ou annuel de la part du club. Pour plus de renseignements ou pour une d&eacute;monstration, merci de nous <a ui-sref="contact">contacter</a>.
+      </p>
+      <a ui-sref="club">Rejoindre mon club</a>
+
+
+      <div ng-if="!auth.isAuthenticated()">
+        se connecter
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div data-ng-if="auth.isAuthenticated()">
+        <h2>Cr&eacute;er un club</h2>
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" id="name" data-ng-model="clubName" placeholder="Nom du club">
+          </div>
+          <button type="submit" class="btn btn-lct" data-ng-click="createClub(clubName)">Cr&eacute;er</button>
+        </form>
+        <h2>Mes clubs</h2>
+        <ul>
+          <li data-ng-repeat="club in clubList">
+            <span>{{::club.name}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row" data-ng-if="!auth.isAuthenticated()">
+    <div class="col-md-9">
+      <p>Pour cr&eacute;er ou rejoindre votre club, connectez vous:</p>
+      <signin></signin>
+    </div>
+  </div>
+</div>
