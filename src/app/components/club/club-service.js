@@ -65,7 +65,7 @@ angular.module('lct')
 
       inviteUser: function(clubId, email){
         return $q(function(resolve, reject){
-          $http.post(apiRoot + '/club/'+clubId+'/user', {email: email}).
+          $http.post(apiRoot + '/club/'+clubId+'/user', email).
             success(function (data) {
               $log.info('Adding user to club end with success, id: ' + data);
               resolve(data);

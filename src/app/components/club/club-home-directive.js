@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('clubHome', [ '$log', 'clubService', function($log, clubService) {
+  .directive('clubHome', [ '$log', 'clubService', '$auth', function($log, clubService, $auth) {
     return {
       restrict: 'E',
       scope: {
@@ -17,9 +17,11 @@ angular.module('lct')
       templateUrl: 'app/components/club/club-home.html',
       controller: function($scope) {
         $log.info('club: ' + $scope.clubId);
+        $scope.auth = $auth;
         $scope.init = function() {
           clubService.getClub($scope.clubId).then(function (club) {
             $scope.club = club;
+            $scope.isAdmin = club.admins.indexOf($auth.getPayload().userId) >= 0;
           });
         };
 

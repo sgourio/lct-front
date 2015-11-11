@@ -7,12 +7,12 @@
         Votre club n'est pas encore validé par l'équipe Lettre Compte Triple. Vous n'avez pas accès à toute les fonctionnalités.
       </div>
       <h2>Membres du clubs ({{::club.userList.length}})</h2>
-      <form class="form-inline">
+      <form class="form-inline" data-ng-if="isAdmin">
         <div class="form-group">
           <label for="email">Inviter un joueur : </label>
           <input type="text" class="form-control input-sm" id="email" data-ng-model="email" placeholder="email">
         </div>
-        <button type="submit" class="btn btn-lct" data-ng-click="inviteUser(email)">Inviter</button>
+        <button type="submit" class="btn btn-lct" data-ng-click="inviteUser(email)">Inviter <i class="fa fa-user-plus"></i></button>
       </form>
       <ul class="users">
         <li data-ng-repeat="u in club.userList">
@@ -21,7 +21,6 @@
       </ul>
       <div class="gameList">
         <h3>Jouer une partie multiplexe</h3>
-        {{club}}
         <p>
           Ce mode de jeu vous permet de jouer une partie en mode multiplexe.<br />
           Dans l'idéal, la partie est projeté dans une ou plusieurs salles.<br />
