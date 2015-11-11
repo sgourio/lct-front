@@ -26,6 +26,14 @@
     </div>
     <div class="col-md-6">
       <div data-ng-if="auth.isAuthenticated()">
+        <div data-ng-if="clubList.length > 0">
+          <h2>Mes clubs</h2>
+          <ul>
+            <li data-ng-repeat="club in clubList">
+              <a ui-sref="club({clubId : club.id})">{{::club.name}}</a>
+            </li>
+          </ul>
+        </div>
         <h2>Cr&eacute;er un club</h2>
         <form class="form-inline">
           <div class="form-group">
@@ -33,12 +41,6 @@
           </div>
           <button type="submit" class="btn btn-lct" data-ng-click="createClub(clubName)">Cr&eacute;er</button>
         </form>
-        <h2>Mes clubs</h2>
-        <ul>
-          <li data-ng-repeat="club in clubList">
-            <span>{{::club.name}}</span>
-          </li>
-        </ul>
       </div>
     </div>
   </div>

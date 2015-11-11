@@ -13,7 +13,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="game in games" id="{{::game.playGameId}}" data-ng-class="{'running' : game.status === 'running', 'game-75' : game.timeByRound === 75, 'game-90' : game.timeByRound === 90, 'game-120' : game.timeByRound === 120, 'game-180' : game.timeByRound === 180}">
+  <tr ng-repeat="game in games" id="{{::game.playGameId}}" data-ng-class="{'running' : game.status === 'running', 'opened': game.status === 'opened', 'game-75' : game.timeByRound === 75, 'game-90' : game.timeByRound === 90, 'game-120' : game.timeByRound === 120, 'game-180' : game.timeByRound === 180}">
     <td>
       <span ng-show="game.status === 'opened'" class="metaInfo">Bient&ocirc;t</span>
       <span ng-show="game.status === 'running'" class="metaInfo">En cours</span>

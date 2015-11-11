@@ -1,17 +1,50 @@
 <div>
   <div class="row admin">
     <div class="col-md-12">
-      <h2>Validation des clubs</h2>
-      <ul class="clubs">
-        <li data-ng-repeat="club in createdClubList">
-          {{::club.name}} <button class="btn btn-lct btn-xs" data-ng-click="activateClub(club.id)">Activer</button>
-          <ul class="users">
-            <li data-ng-repeat="u in club.userList">
-              <user user="u"></user>
+      <h2>Les clubs</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <h3>Nouveaux clubs</h3>
+          <ul class="clubs">
+            <li data-ng-repeat="club in createdClubList">
+              <span class="club-name deluxe">{{::club.name}}</span> <button class="btn btn-lct btn-xs" data-ng-click="activateClub(club.id)">Valider</button>
+              <ul class="users">
+                <li data-ng-repeat="u in club.userList">
+                  <user user="u"></user>
+                </li>
+              </ul>
             </li>
           </ul>
-        </li>
-      </ul>
+        </div>
+        <div class="col-md-4">
+          <h3>Clubs actifs</h3>
+          <ul class="clubs">
+            <li data-ng-repeat="club in activatedClubList">
+              <span class="club-name deluxe">{{::club.name}}</span> <button class="btn btn-lct btn-xs" data-ng-click="suspendClub(club.id)">Suspendre</button>
+              <ul class="users">
+                <li data-ng-repeat="u in club.userList">
+                  <user user="u"></user>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h3>Clubs suspendus</h3>
+          <ul class="clubs">
+            <li data-ng-repeat="club in suspendedClubList">
+              <span class="club-name deluxe">{{::club.name}}</span>
+              <button class="btn btn-lct btn-xs" data-ng-click="activateClub(club.id)">Activer</button>
+              <button class="btn btn-lct btn-xs" data-ng-click="deleteClub(club.id)">Supprimer</button>
+              <ul class="users">
+                <li data-ng-repeat="u in club.userList">
+                  <user user="u"></user>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row hide">

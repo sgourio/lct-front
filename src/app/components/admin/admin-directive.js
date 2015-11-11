@@ -29,16 +29,36 @@ angular.module('lct')
 
         $scope.activateClub = function(clubId){
           adminService.activateClub(clubId).then(function(){
-            $scope.getCreatedClubs();
+            $scope.getClubs();
+          });
+        };
+        $scope.suspendClub = function(clubId){
+          adminService.suspendClub(clubId).then(function(){
+            $scope.getClubs();
+          });
+        };
+        $scope.deleteClub = function(clubId){
+          if( confirm('Supprimer le club?'  ) ) {
+            adminService.deleteClub(clubId).then(function () {
+              $scope.getClubs();
+            });
+          }
+        };
+
+
+        $scope.getClubs = function() {
+          adminService.getClubs('created').then(function (clubList) {
+            $scope.createdClubList = clubList;
+          });
+          adminService.getClubs('activated').then(function (clubList) {
+            $scope.activatedClubList = clubList;
+          });
+          adminService.getClubs('suspended').then(function (clubList) {
+            $scope.suspendedClubList = clubList;
           });
         };
 
-        $scope.getCreatedClubs = function() {
-          adminService.createdClubs().then(function (clubList) {
-            $scope.createdClubList = clubList;
-          });
-        };
-        $scope.getCreatedClubs();
+        $scope.getClubs();
 
       }
     }

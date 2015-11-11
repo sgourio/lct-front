@@ -1,8 +1,27 @@
 <div>
   <div class="row">
     <div class="col-md-9">
+      <h1>{{::club.name}}</h1>
+      <span>Bienvenue sur la page du club.</span>
+      <div data-ng-if="club.status === 'created'" class="alert alert-warning" role="alert">
+        Votre club n'est pas encore validé par l'équipe Lettre Compte Triple. Vous n'avez pas accès à toute les fonctionnalités.
+      </div>
+      <h2>Membres du clubs ({{::club.userList.length}})</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="email">Inviter un joueur : </label>
+          <input type="text" class="form-control input-sm" id="email" data-ng-model="email" placeholder="email">
+        </div>
+        <button type="submit" class="btn btn-lct" data-ng-click="inviteUser(email)">Inviter</button>
+      </form>
+      <ul class="users">
+        <li data-ng-repeat="u in club.userList">
+          <user user="u"></user>
+        </li>
+      </ul>
       <div class="gameList">
         <h3>Jouer une partie multiplexe</h3>
+        {{club}}
         <p>
           Ce mode de jeu vous permet de jouer une partie en mode multiplexe.<br />
           Dans l'idéal, la partie est projeté dans une ou plusieurs salles.<br />

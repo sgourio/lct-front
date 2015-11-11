@@ -86,9 +86,12 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
 
     $stateProvider
       .state('club', {
-        url: '/club',
-        template: '<club-home></club-home>',
-        authenticate: true
+        url: '/club/:clubId',
+        template: '<club-home data-club-id="{{clubId}}"></club-home>',
+        authenticate: true,
+        controller: function($scope, $stateParams) {
+          $scope.clubId = $stateParams.clubId;
+        }
       });
 
     $stateProvider

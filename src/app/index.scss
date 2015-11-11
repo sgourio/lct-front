@@ -338,11 +338,11 @@ td.reference{
 .btn-lct{
   background: rgba(0, 0, 0, 0.24);
   color: white;
-  border: 1px solid #fbcb09;
+  border: 1px solid #9C8F57;
   letter-spacing: 2px;
   &:hover{
     color: #2c3e50;
-    background: #f5f5f5;
+    background: #FFE883;
   }
   &:focus{
     color: white;
@@ -433,12 +433,14 @@ td.reference{
 }
 .gameTable {
   tr.running {
-    td.gameTitle {
-      cursor: pointer;
-      color: white;
-      font-weight: bold;
-    }
-
+    background-color: rgba(0, 0, 0, 0.10);
+  }
+  tr.opened{
+    background-color: rgba(0, 0, 0, 0.28);
+  }
+  .gameTitle{
+    color: white;
+    cursor: pointer;
   }
   .metaInfo {
     font-style: italic;
@@ -674,5 +676,31 @@ textarea.form-control{
   ul{
     list-style: disc;
     padding-left: 60px;
+  }
+}
+
+.admin{
+  .clubs{
+    button{
+      float: right;
+      margin-right: 20px;
+    }
+    > li{
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: 1px solid #FFE883;
+
+      .club-name{
+        font-size: 1.2em;
+      }
+    }
+    ul {
+      list-style: disc;
+      padding-left: 60px;
+
+      li{
+        margin-top: 4px;
+      }
+    }
   }
 }

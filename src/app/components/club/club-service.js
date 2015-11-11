@@ -48,7 +48,36 @@ angular.module('lct')
               reject();
             });
         });
+      },
+
+      getClub: function(clubId){
+        return $q(function(resolve, reject){
+          $http.get(apiRoot + '/club/'+clubId).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + apiRoot + '/club/' + clubId +' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      inviteUser: function(clubId, email){
+        return $q(function(resolve, reject){
+          $http.post(apiRoot + '/club/'+clubId+'/user', {email: email}).
+            success(function (data) {
+              $log.info('Adding user to club end with success, id: ' + data);
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service ' + apiRoot + '/club/user' +' respond ' + status);
+              reject();
+            });
+        });
       }
+
+
     };
     return clubService;
   }]);

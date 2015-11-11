@@ -17,9 +17,9 @@ angular.module('lct')
         });
       },
 
-      createdClubs: function(){
+      getClubs: function(status){
         return $q(function(resolve, reject) {
-          $http.get(apiRoot + '/admin/club?status=created').
+          $http.get(apiRoot + '/admin/club?status=' + status).
             success(function (data) {
               $log.info('game generated');
               resolve(data);
@@ -35,11 +35,39 @@ angular.module('lct')
         return $q(function(resolve, reject) {
           $http.post(apiRoot + '/admin/club/' + clubId + '/active').
             success(function (data) {
-              $log.info('game generated');
+              $log.info('club activated');
               resolve(data);
             }).
             error(function (data, status) {
               $log.error('Service POST ' + apiRoot + '/admin/club/' + clubId + '/active respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      suspendClub: function(clubId){
+        return $q(function(resolve, reject) {
+          $http.post(apiRoot + '/admin/club/' + clubId + '/suspend').
+            success(function (data) {
+              $log.info('club suspended');
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service POST ' + apiRoot + '/admin/club/' + clubId + '/suspend respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      deleteClub: function(clubId){
+        return $q(function(resolve, reject) {
+          $http.delete(apiRoot + '/admin/club/' + clubId ).
+            success(function (data) {
+              $log.info('club deleted');
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service POST ' + apiRoot + '/admin/club/' + clubId + '/suspend respond ' + status);
               reject();
             });
         });
