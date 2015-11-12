@@ -1,7 +1,7 @@
 <div>
   <div class="row">
     <div class="col-md-9">
-      <h1>{{::club.name}}</h1>
+      <h1 class="deluxe">{{::club.name}}</h1>
       <span>Bienvenue sur la page du club.</span>
       <div data-ng-if="club.status === 'created'" class="alert alert-warning" role="alert">
         Votre club n'est pas encore validé par l'équipe Lettre Compte Triple. Vous n'avez pas accès à toute les fonctionnalités.
@@ -19,12 +19,22 @@
           <user user="u"></user>
         </li>
       </ul>
+      <div>
+        <h2>Cr&eacute;er une partie personnalis&eacute;e</h2>
+        <p>
+          Les parties personnalis&eacute;es permettent de pr&eacute;parer &agrave; l'avance des parties pour les proposer ensuite aux joueurs de votre club.<br />
+          Ces parties peuvent &ecirc;tre jou&eacute;es aussi bien en mode multiplexe ou en ligne sur Lettre Compte Triple.<br />
+          Elles peuvent &ecirc;tre ouvertes &agrave; tous les joueurs de Lettre Compte Triple, ou restreinte &agrave; votre club.<br />
+          La cr&eacute;ation de partie personnalis&eacute;e vous permet aussi de reprendre des parties c&eacute;l&egrave;bres.
+        </p>
+        <a ui-sref="builder" class="btn btn-lct">Préparer un jeu <i class="fa fa-cogs"></i></a>
+      </div>
       <div class="gameList">
         <h3>Jouer une partie multiplexe</h3>
         <p>
-          Ce mode de jeu vous permet de jouer une partie en mode multiplexe.<br />
-          Dans l'idéal, la partie est projeté dans une ou plusieurs salles.<br />
-          L'arbitre contrôle le déroulé de la partie et inscrit les scores des joueurs.
+          Ce mode de jeu vous permet de jouer une partie en mode multiplexe. <br />
+          Dans l'id&eacute;al, la partie est projet&eacute; dans une ou plusieurs salles. <br />
+          L'arbitre contr&ocirc;le le d&eacute;roul&eacute; de la partie et inscrit les scores des joueurs.
         </p>
       </div>
     </div>
@@ -33,7 +43,7 @@
         <h3 class="panel-title">Nouvelle partie</h3>
         <p>
           Lancer une nouvelle partie partie multiplexe.<br /><br />
-          <a class="btn btn-lct" ng-href="#/club/multiplex">Créer une nouvelle partie</a>
+          <a class="btn btn-lct" ui-sref="multiplexCreate">Créer une nouvelle partie</a>
         </p>
       </div>
     </div>

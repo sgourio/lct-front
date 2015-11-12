@@ -28,7 +28,7 @@ angular.module('lct')
               $scope.alreadyUsed = true;
             });
           }
-        }
+        };
       }
     };
   }]);

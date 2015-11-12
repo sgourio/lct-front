@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('navbar', [ '$location', '$state', '$auth', '$window', 'userService', function ($location, $state, $auth, $window, userService) {
+  .directive('navbar', [ '$location', '$state', '$auth', function ($location, $state, $auth) {
     return {
       restrict: 'E',
       scope: {

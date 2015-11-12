@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('lct')
-  .controller('SignInCtrl', ['$scope', '$location', '$state', '$log', '$auth', '$window', 'userService', function ($scope,$location, $state, $log, $auth, $window, userService) {
+  .controller('SignInCtrl', ['$scope', '$location', '$state', '$log', '$auth', '$window', function ($scope,$location, $state, $log, $auth, $window) {
     $scope.authenticate = function(provider) {
       $auth.link(provider).then(function (response){
         $auth.setToken(response);

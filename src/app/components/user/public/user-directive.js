@@ -7,15 +7,13 @@
 'use strict';
 
 angular.module('lct')
-  .directive('user', ['$log', function($log) {
+  .directive('user', [function() {
     return {
       restrict: 'E',
       replace: true,
       scope: {
         user: '=' // userBean
       },
-      templateUrl: 'app/components/user/public/user.html',
-      controller: function($scope){
-      }
+      templateUrl: 'app/components/user/public/user.html'
     };
   }]);

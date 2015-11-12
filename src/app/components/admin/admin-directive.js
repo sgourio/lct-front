@@ -13,7 +13,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('admin', [ '$log', 'adminService', function ($log, adminService) {
+  .directive('admin', [ '$log', 'adminService', function ($log, adminService, $window) {
     return {
       restrict: 'E',
       scope: {},
@@ -38,7 +38,7 @@ angular.module('lct')
           });
         };
         $scope.deleteClub = function(clubId){
-          if( confirm('Supprimer le club?'  ) ) {
+          if( $window.confirm('Supprimer le club?'  ) ) {
             adminService.deleteClub(clubId).then(function () {
               $scope.getClubs();
             });
@@ -61,5 +61,5 @@ angular.module('lct')
         $scope.getClubs();
 
       }
-    }
+    };
   }]);

@@ -14,8 +14,6 @@ angular.module('lct')
         round:'='
       },
       replace: true,
-      templateUrl: 'app/components/view/view-draw.html',
-      controller: function($scope){
-      }
+      templateUrl: 'app/components/view/view-draw.html'
     };
   }]);

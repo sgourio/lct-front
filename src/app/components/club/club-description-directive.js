@@ -18,8 +18,8 @@ angular.module('lct')
         $window.sessionStorage.toState = 'club';
 
         $scope.createClub = function(clubName){
-          clubService.create(clubName).then(function(clubId){
-            $scope.clubName = "";
+          clubService.create(clubName).then(function(){
+            $scope.clubName = '';
             $scope.myClubs();
           });
         };

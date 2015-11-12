@@ -1,12 +1,10 @@
 'use strict';
 angular.module('lct')
-  .directive('rules', ['$log', function($log) {
+  .directive('rules', ['$log', function() {
     return {
       restrict: 'E',
       scope: {
       },
-      templateUrl: 'app/components/rules/rules.html',
-      controller: function($scope){
-      }
+      templateUrl: 'app/components/rules/rules.html'
     };
   }]);

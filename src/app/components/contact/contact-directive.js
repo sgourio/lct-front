@@ -18,14 +18,14 @@ angular.module('lct')
         $scope.send = function(){
           if( $scope.message !== '' ) {
             $http.post(apiRoot + '/account/message', $scope.message).
-              success(function (data) {
+              success(function () {
                 $scope.sent = true;
               }).
               error(function (data, status) {
                 $log.error('Service ' + apiRoot + '/account/message' + ' respond ' + status);
               });
           }
-        }
+        };
       }
     };
   }]);

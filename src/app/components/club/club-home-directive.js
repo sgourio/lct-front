@@ -29,7 +29,7 @@ angular.module('lct')
         $scope.inviteUser = function(email){
           clubService.inviteUser($scope.clubId, email).then(function(){
             $scope.init();
-          })
+          });
         };
 
         $scope.init();

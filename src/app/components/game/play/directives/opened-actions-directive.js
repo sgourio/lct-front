@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('openedActions', ['$log', 'gameService', 'userService', '$state', '$auth', function($log, gameService, userService, $state, $auth) {
+  .directive('openedActions', ['$log', 'gameService', 'userService', '$state', function($log, gameService, userService, $state) {
     return {
       restrict: 'E',
       scope: {

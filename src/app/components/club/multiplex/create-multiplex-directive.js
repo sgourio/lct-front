@@ -11,6 +11,7 @@ angular.module('lct')
     return {
       restrict: 'E',
       scope: {
+        clubId : '='
       },
       replace: true,
       templateUrl: 'app/components/club/multiplex/create-multiplex.html',

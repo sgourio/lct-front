@@ -10,7 +10,8 @@ angular.module('lct')
     return {
       restrict: 'E',
       scope: {
-        'gameId' : '@'
+        'gameId' : '@',
+        'clubId' : '='
       },
       replace: true,
       templateUrl: 'app/components/club/multiplex/multiplex-remote-control.html',

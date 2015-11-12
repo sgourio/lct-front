@@ -101,29 +101,34 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       });
 
     $stateProvider
-      .state('multiplex', {
-        url: '/club/multiplex',
-        template: '<create-multiplex></create-multiplex>',
-        authenticate: true
+      .state('multiplexCreate', {
+        url: '/club/:clubId/multiplex',
+        template: '<create-multiplex data-club-id="clubId"></create-multiplex>',
+        authenticate: true,
+        controller: function($scope, $stateParams) {
+          $scope.clubId = $stateParams.clubId;
+        }
       });
 
     $stateProvider
       .state('multiplexControl', {
-        url: '/club/multiplex/remote/control/:multiplexGameId',
-        template: '<multiplex-remote-control data-game-id="{{multiplexGameId}}"></multiplex-remote-control>',
+        url: '/club/:clubId/multiplex/remote/control/:multiplexGameId',
+        template: '<multiplex-remote-control data-club-id="clubId" data-game-id="{{multiplexGameId}}"></multiplex-remote-control>',
         authenticate: true,
         controller: function($scope, $stateParams) {
+          $scope.clubId = $stateParams.clubId;
           $scope.multiplexGameId = $stateParams.multiplexGameId;
         }
       });
 
     $stateProvider
       .state('multiplexDisplay', {
-        url: '/club/multiplex/display/:multiplexGameId',
+        url: '/club/:clubId/multiplex/display/:multiplexGameId',
         views: {
           'global': {
             template: '<display-multiplex data-game-id="{{multiplexGameId}}"></display-multiplex>',
             controller: function ($scope, $stateParams) {
+              $scope.clubId = $stateParams.clubId;
               $scope.multiplexGameId = $stateParams.multiplexGameId;
             }
           }
@@ -151,7 +156,7 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       url: apiRoot + '/auth/twitter'
     });
 
-  }).factory('authHttpResponseInterceptor',['$q','$location', '$log', '$window',function($q, $location, $log, $window){
+  }).factory('authHttpResponseInterceptor',['$q','$location', '$log',function($q, $location, $log){
     return {
       response: function(response){
         if (response.status === 401) {
@@ -162,11 +167,11 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       responseError: function(rejection) {
         if (rejection.status === 401) {
           $log.debug('Response Error 401',rejection);
-          $location.path('/signin')
+          $location.path('/signin');
         }
         return $q.reject(rejection);
       }
-    }
+    };
   }]).config(['$httpProvider',function($httpProvider) {
     //Http Interceptor to check auth failures for xhr requests
     $httpProvider.interceptors.push('authHttpResponseInterceptor');
@@ -180,6 +185,7 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       }
       if( toState.admin && !$auth.getPayload().isAdmin){
         $window.sessionStorage.toState = toState.name;
+        $auth.logout();
         $state.transitionTo('signin');
         event.preventDefault();
       }

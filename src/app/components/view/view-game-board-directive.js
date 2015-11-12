@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('viewGameBoard', ['$log', 'gameService', '$state', '$auth', 'gameBoardService', 'playGameService', 'messageService', function($log, gameService, $state, $auth, gameBoardService, playGameService, messageService) {
+  .directive('viewGameBoard', ['$log', 'gameService', '$state', '$auth', 'gameBoardService', function($log, gameService, $state, $auth, gameBoardService) {
     return {
       restrict: 'E',
       scope: {
