@@ -37,7 +37,7 @@ angular.module('lct')
             $scope.multiplex.state = 'opened';
             multiplexService.openGame($scope.multiplex.selectedGame, $scope.multiplex.gameName, $scope.multiplex.roundTime)
               .then(function(multiplexGameId){
-                $state.go('multiplexControl', {multiplexGameId: multiplexGameId});
+                $state.go('multiplexControl', {clubId : $scope.clubId, multiplexGameId: multiplexGameId});
               });
           }
         };

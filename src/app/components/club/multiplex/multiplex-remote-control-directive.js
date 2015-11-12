@@ -18,7 +18,7 @@ angular.module('lct')
       controller: function($scope) {
         $scope.$state = $state;
         $scope.roundNumber = 0;
-        $scope.scoreRoundNumber = 0;
+        $scope.scoreRoundNumber = 1;
         $scope.workflow = ''; // displayDraw, running, displayResult
         if( $scope.gameId ) {
 
@@ -57,6 +57,20 @@ angular.module('lct')
                 $scope.sendMessage('displayDraw');
               }
             };
+
+            $scope.goDirectTo = function(roundNumber){
+              $scope.roundNumber = roundNumber;
+              multiplexService.changeRound($scope.multiplex.multiplexGameId , $scope.roundNumber);
+              $scope.workflow = 'displayDraw';
+            };
+
+            $scope.end = function(){
+              $scope.workflow = 'displayResult';
+              $scope.roundNumber = $scope.multiplex.numberOfRound + 1;
+              multiplexService.changeRound($scope.multiplex.multiplexGameId , $scope.multiplex.numberOfRound + 1);
+            };
+
+            $scope.numberArray = new Array($scope.multiplex.numberOfRound);
 
             stompService.subscribeMultiplex($scope.gameId, function(round){
               $scope.round = round;

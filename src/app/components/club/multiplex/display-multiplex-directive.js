@@ -50,7 +50,9 @@ angular.module('lct')
               $log.info('change round ' + round.roundNumber);
               $scope.round = round;
               $scope.timer = 0;
-              if( round.roundNumber > 1 ) {
+              if (round.roundNumber > $scope.multiplex.numberOfRound){
+                $scope.message = 'finalScores';
+              }else if( round.roundNumber > 1 ) {
                 $scope.message = 'displayResult';
               }else if (round.roundNumber > 0 ){
                 $scope.message = 'displayDraw';

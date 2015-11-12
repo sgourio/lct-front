@@ -7,11 +7,11 @@
   <div class="row">
     <div class="col-md-6">
       <p>
-        Adresse de la partie pour les joueurs: {{$state.href('multiplexDisplay' , {multiplexGameId : multiplex.multiplexGameId}, {'absolute' : true})}}
-        <a ui-sref="multiplexDisplay({multiplexGameId : multiplex.multiplexGameId})" target="_blank" class="btn btn-lct">Afficher la partie <i class="fa fa-television"></i></a>
+        Adresse de la partie pour les joueurs: {{$state.href('multiplexDisplay' , {clubId: clubId, multiplexGameId : multiplex.multiplexGameId}, {'absolute' : true})}}
+        <a ui-sref="multiplexDisplay({clubId: clubId, multiplexGameId : multiplex.multiplexGameId})" target="_blank" class="btn btn-lct">Afficher la partie <i class="fa fa-television"></i></a>
       </p>
       <p>
-      <p class="drawNumber" data-ng-show="roundNumber > 0">
+      <p class="drawNumber" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound">
         Tirage n° : {{roundNumber}}
         <view-draw round="round"></view-draw>
       </p>
@@ -25,13 +25,20 @@
         <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber > 0 && roundNumber <= multiplex.numberOfRound && workflow === 'displayDraw'">Lancer le chrono <i class="fa fa-chevron-right"></i></button>
         <button class="btn btn-lct" data-ng-click="next()" data-ng-show="roundNumber === 0">D&eacute;marrer le multiplexe <i class="fa fa-chevron-right"></i></button>
       </p>
+      <span data-ng-repeat="turn in numberArray track by $index">
+        &nbsp;<a href="javascript:void(0)" data-ng-click="goDirectTo($index + 1 )">{{$index + 1 }}</a>
+      </span>
+      <span><a href="javascript:void(0)" data-ng-click="end()">fin</a></span>
     </div>
     <div class="col-md-6">
+      <h3>Scores</h3>
       <div>
         <button class="btn btn-lct btn-xs" data-ng-click="scoreRoundNumber = scoreRoundNumber - 1" data-ng-show="scoreRoundNumber > 0">Précédent</button>
         <button class="btn btn-lct btn-xs" data-ng-click="scoreRoundNumber = scoreRoundNumber + 1" data-ng-show="scoreRoundNumber <= multiplex.numberOfRound">Suivant</button>
       </div>
+      <br />
       <multiplex-score data-game-id="gameId" round="scoreRoundNumber" data-ng-if="scoreRoundNumber > 0 && scoreRoundNumber <= multiplex.numberOfRound" ></multiplex-score>
+      <multiplex-score-final data-game-id="gameId" data-ng-if="scoreRoundNumber > multiplex.numberOfRound" ></multiplex-score-final>
     </div>
   </div>
 

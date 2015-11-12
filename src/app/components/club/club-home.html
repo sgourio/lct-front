@@ -30,12 +30,13 @@
         <a ui-sref="builder" class="btn btn-lct">Préparer un jeu <i class="fa fa-cogs"></i></a>
       </div>
       <div class="gameList">
-        <h3>Jouer une partie multiplexe</h3>
+        <h2>Jouer une partie multiplexe</h2>
         <p>
           Ce mode de jeu vous permet de jouer une partie en mode multiplexe. <br />
           Dans l'id&eacute;al, la partie est projet&eacute; dans une ou plusieurs salles. <br />
           L'arbitre contr&ocirc;le le d&eacute;roul&eacute; de la partie et inscrit les scores des joueurs.
         </p>
+        <a class="btn btn-lct" ui-sref="multiplexCreate({clubId : clubId})">Créer un multiplexe <i class="fa fa-television"></i></a>
       </div>
     </div>
     <div class="col-md-3">
@@ -43,7 +44,7 @@
         <h3 class="panel-title">Nouvelle partie</h3>
         <p>
           Lancer une nouvelle partie partie multiplexe.<br /><br />
-          <a class="btn btn-lct" ui-sref="multiplexCreate">Créer une nouvelle partie</a>
+          <a class="btn btn-lct" ui-sref="multiplexCreate({clubId : clubId})">Créer une nouvelle partie</a>
         </p>
       </div>
     </div>

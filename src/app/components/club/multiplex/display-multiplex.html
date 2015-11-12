@@ -11,19 +11,22 @@
       <view-game-board round="round"></view-game-board>
     </div>
     <div class="col-md-4 col-lg-6">
-      <p data-ng-show="round.roundNumber > 0">
+      <p data-ng-show="round.roundNumber > 0 && round.roundNumber <= multiplex.numberOfRound">
         Tour numéro : {{round.roundNumber}}
       </p>
-      <p class="big clearfix">
+      <p class="big clearfix" data-ng-if="round.roundNumber <= multiplex.numberOfRound">
         <span class="timer pull-right"><span data-ng-show="message !== 'running'">PAUSE</span><span data-ng-show="message === 'running'">{{timer}}</span> <i class="fa fa-clock-o"></i></span>
-
       </p>
 
-      <div class="bigDraw" data-ng-show="message !== 'displayResult'">
+      <div class="bigDraw" data-ng-show="message !== 'displayResult' && message !== 'finalScores'">
         <view-draw round="round"></view-draw>
       </div>
-      <div class="bigResult" data-ng-show="message === 'displayResult'">
+      <div class="bigResult" data-ng-show="message === 'displayResult' || message === 'finalScores'">
         Meilleur mot: <em>{{round.lastDroppedWord.reference}}</em> <span class="playedWord">{{round.lastDroppedWord.value}}</span>, {{round.lastDroppedWord.points}}pts
+      </div>
+      <div class="final-scores" data-ng-if="message === 'finalScores'">
+        <h2>Partie terminée, les scores!</h2>
+        <multiplex-score-final data-game-id="gameId"></multiplex-score-final>
       </div>
     </div>
 

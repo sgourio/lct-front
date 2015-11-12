@@ -1,0 +1,19 @@
+<div>
+  Scores de la partie:<br />
+  <table class="table scoreMultiplex">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Nom</th>
+      <th>total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="score in scoreList track by $index">
+      <td>{{$index + 1}}</td>
+      <td>{{score.name}}</td>
+      <td>{{score.total}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
