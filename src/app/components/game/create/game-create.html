@@ -1,47 +1,60 @@
-  <div class="row" data-ng-init="init()">
+  <div class="row game-creation" data-ng-init="init()">
     <div class="col-md-12">
       <div class="">
-        <h1>Création d'une nouvelle partie</h1>
+        <h1 class="deluxe">Création d'une nouvelle partie</h1>
         <div class="row">
           <div class="col-md-8">
-            <h3>1. Combien de temps entre chaque tour?</h3>
-            <form class="form">
-              <div class="radio-inline">
-                <label>
-                  <input type="radio" data-ng-model="roundTime" value="10" name="roundTime"/> 10 sec
-                </label>
-              </div>
-              <div class="radio-inline">
-                <label>
-                  <input type="radio" data-ng-model="roundTime" value="90" name="roundTime"/> 90 sec
-                </label>
-              </div>
-              <div class="radio-inline">
-                <label>
-                  <input type="radio" data-ng-model="roundTime" value="120" name="roundTime"/> 2 min
-                </label>
-              </div>
-              <div class="radio-inline">
-                <label>
-                  <input type="radio" data-ng-model="roundTime" value="180" name="roundTime"/> 3 min
-                </label>
-              </div>
-            </form>
-            <h3>2. Sélection d'une partie</h3>
             <div class="row">
               <div class="col-md-12">
-                <game-list round-time="roundTime" owner="me" refreshable="false" selected-game="selectedGame"></game-list>
+                <h2>1. Combien de temps entre chaque tour?</h2>
+                <form class="form col-md-11 col-md-offset-1">
+                  <div class="radio-inline" if-admin>
+                    <label>
+                      <input type="radio" data-ng-model="roundTime" value="10" name="roundTime"/> 10 sec
+                    </label>
+                  </div>
+                  <div class="radio-inline">
+                    <label>
+                      <input type="radio" data-ng-model="roundTime" value="90" name="roundTime"/> 90 sec
+                    </label>
+                  </div>
+                  <div class="radio-inline">
+                    <label>
+                      <input type="radio" data-ng-model="roundTime" value="120" name="roundTime"/> 2 min
+                    </label>
+                  </div>
+                  <div class="radio-inline">
+                    <label>
+                      <input type="radio" data-ng-model="roundTime" value="180" name="roundTime"/> 3 min
+                    </label>
+                  </div>
+                </form>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
-                <game-list max="10" round-time="roundTime" owner="auto" refreshable="true" selected-game="selectedGame"></game-list>
+                <h2>2. Sélection d'une partie</h2>
+                <div class="row">
+                  <div class="col-md-11 col-md-offset-1">
+                    <game-list round-time="roundTime" owner="me" refreshable="false" selected-game="selectedGame"></game-list>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-11 col-md-offset-1">
+                    <game-list max="10" round-time="roundTime" owner="auto" refreshable="true" selected-game="selectedGame"></game-list>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
-                <h3>3. Nommer la partie</h3>
-                <input type="text" data-ng-model="gameName"/>
+                <h2>3. Nommer la partie</h2>
+                <form class="form-inline col-md-11 col-md-offset-1">
+                  <div class="form-group">
+                    <label>Nom:&nbsp;</label>
+                    <input type="text" class="form-control" data-ng-model="gameName" placeholder="Pour les champions!">
+                  </div>
+                </form>
               </div>
             </div>
             <div class="row" ng-if="hasError">
@@ -59,6 +72,5 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>

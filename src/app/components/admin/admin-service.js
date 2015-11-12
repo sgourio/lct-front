@@ -71,6 +71,20 @@ angular.module('lct')
               reject();
             });
         });
+      },
+
+      cleanMainChat: function(){
+        return $q(function(resolve, reject) {
+          $http.delete(apiRoot + '/admin/chat').
+            success(function (data) {
+              $log.info('chat cleaned');
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service POST ' + apiRoot + '/admin/chat/clean' + clubId + '/suspend respond ' + status);
+              reject();
+            });
+        });
       }
     };
     return adminService;

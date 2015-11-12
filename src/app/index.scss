@@ -677,6 +677,8 @@ textarea.form-control{
 }
 
 .clubs{
+  font-size: 1.2em;
+  text-align: justify;
   ul{
     list-style: disc;
     padding-left: 60px;
@@ -706,5 +708,12 @@ textarea.form-control{
         margin-top: 4px;
       }
     }
+  }
+}
+
+.game-creation{
+  h2{
+    font-size: 1.4em;
+    padding-top: 20px;
   }
 }

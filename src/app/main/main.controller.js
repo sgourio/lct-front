@@ -19,7 +19,8 @@ angular.module('lct')
         'title': 'Règle officielle',
         'description': 'LCT s\'appuie sur les règles du scrabble duplicate appliquées en concours',
         'icon': 'certificate',
-        'class': 'red'
+        'class': 'red',
+        'url': '#/rules'
       },
       {
         'title': 'Rejouer des parties',
@@ -37,13 +38,15 @@ angular.module('lct')
         'title': 'Pour les arbitres',
         'description': 'LCT aide l\'arbitrage des parties.<br />Avec LCT c\'est l\'assurance de toujours trouver le meilleur mot à chaque coup.<br />Les arbitres peuvent préparer les parties à l\'avance, et prévoir la durée des tournois.',
         'icon': 'gavel',
-        'class' : 'black'
+        'class' : 'brown',
+        'url': '#/clubs'
       },
       {
         'title': 'En club',
-        'description': 'LCT va proposer pour les clubs un mode de création de concours, et d\'arbitrage de partie.<br />Une c&ocirc;tisation est &agrave; pr&eacute;.',
+        'description': 'LCT va proposer pour les clubs un mode de création de concours, et d\'arbitrage de partie.<br />Une c&ocirc;tisation est &agrave; pr&eacute;voir.',
         'icon': 'users',
-        'class': 'brown'
+        'class': 'blue',
+        'url': '#/clubs'
       },
       {
         'title': 'Question / Réponse',
@@ -67,8 +70,16 @@ angular.module('lct')
         'title': 'Aider LCT',
         'description': 'Nous avons plein d\'id&eacute;es pour am&eacute;liorer le site, mais pas que. Nous avons une vision sur le devenir du Scrabble de comp&eacute;tition, et l\'envie de proposer des projets novateurs comme par exemple un plateau connect&eacute; &agrave; LCT. Nous recherchons un m&eacute;c&egrave;ne pour nous soutenir dans nos ambitions.',
         'icon': 'money',
+        'class' : 'yellow',
+        'url': '#/contact'
+      },
+      {
+        'title': 'Amis du Plessis',
+        'description': 'Les bons sites sur le Scrabble ne sont pas légion, mais celui du <a href="http://www.scrabbleplesseen.fr/" class="deluxe">Scrabble Plesseen</a> se démarque par la qualité des d\'informations qu\'il propose.<br />Allez y faire un tour',
+        'icon': 'thumbs-o-up',
         'class' : 'yellow'
       }
+
 
     ];
     angular.forEach($scope.awesomeThings, function(awesomeThing) {

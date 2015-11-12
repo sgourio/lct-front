@@ -54,4 +54,28 @@
       {{game}}
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Le chat</h2>
+      Nettoyer le chat principal: <button class="btn btn-lct" data-ng-click="cleanMainChat()">Vider le chat <i class="fa fa-comment-o"></i></button>
+      <br />
+      {{game}}
+    </div>
+  </div>
+
+  <div>
+    <script type="text/ng-template" id="deleteClubModal">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirmation</h3>
+      </div>
+      <div class="modal-body">
+        <span>Supprimer le club?</span>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="ok()">Supprimer</button>
+        <button class="btn btn-lct" ng-click="cancel()">Annuler</button>
+      </div>
+    </script>
+  </div>
 </div>

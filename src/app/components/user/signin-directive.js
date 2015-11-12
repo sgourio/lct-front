@@ -6,7 +6,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('signin', [ '$location', '$state', '$auth', '$window', 'userService', function ($location, $state, $auth, $window) {
+  .directive('signin', [ '$location', '$state', '$auth', '$window', function ($location, $state, $auth, $window) {
     return {
       restrict: 'E',
       scope: {

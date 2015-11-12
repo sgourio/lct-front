@@ -213,7 +213,7 @@ angular.module('lct')
     };
 
     $scope.openSaveGameModal = function(){
-        var modalInstance = $modal.open({
+      var modalInstance = $modal.open({
           animation: $scope.animationsEnabled,
           templateUrl: 'saveModal',
           controller: 'ModalSaveGameCtrl',

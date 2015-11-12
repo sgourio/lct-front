@@ -27,7 +27,7 @@ angular.module('lct')
             gameService.autoList($scope.max).then(function (data) {
               $scope.games=data;
               if( $scope.games.length > 0 ) {
-                $scope.title = 'Parties créées par LCT';
+                $scope.title = 'Parties proposées par Lettre Compte Triple';
               }
             });
           }else{

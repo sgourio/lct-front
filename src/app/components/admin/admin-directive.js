@@ -13,7 +13,7 @@
 'use strict';
 
 angular.module('lct')
-  .directive('admin', [ '$log', 'adminService', function ($log, adminService, $window) {
+  .directive('admin', [ '$log', 'adminService', '$modal', function ($log, adminService, $modal) {
     return {
       restrict: 'E',
       scope: {},
@@ -38,11 +38,28 @@ angular.module('lct')
           });
         };
         $scope.deleteClub = function(clubId){
-          if( $window.confirm('Supprimer le club?'  ) ) {
+          var deleteClubModalInstance = $modal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'deleteClubModal',
+            controller: [ '$scope', '$modalInstance', 'clubId', function ($scope, $modalInstance, clubId) {
+              $scope.ok = function () {
+                $modalInstance.close(clubId);
+              };
+              $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+              };
+            }],
+            resolve: {
+              clubId: clubId
+            }
+          });
+          deleteClubModalInstance.result.then(function (clubID) {
             adminService.deleteClub(clubId).then(function () {
               $scope.getClubs();
             });
-          }
+          }, function () {
+          });
+
         };
 
 
@@ -59,6 +76,10 @@ angular.module('lct')
         };
 
         $scope.getClubs();
+
+        $scope.cleanMainChat = function(){
+          adminService.cleanMainChat();
+        }
 
       }
     };

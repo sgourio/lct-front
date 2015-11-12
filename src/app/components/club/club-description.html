@@ -1,6 +1,6 @@
 <div>
   <div class="row clubs edito">
-    <div class="col-md-6">
+    <div class="col-md-9">
       <h1><i class="fa fa-university"></i> Clubs</h1>
       <p>
         Cette partie du site est d&eacute;di&eacute;e aux <span class="deluxe">clubs de Scrabble</span>.<br />
@@ -15,13 +15,17 @@
         </ul>
       </p>
       <p>
-        Ces fonctionnalit&eacute;s d&eacute;di&eacute;es aux clubs sont soumises &agrave; la souscription d'un abonnement mensuel ou annuel de la part du club (10&euro; / mois ou 100 &euro; / an). Pour plus de renseignements ou pour une d&eacute;monstration, merci de nous <a ui-sref="contact">contacter</a>.
+        Ces fonctionnalit&eacute;s d&eacute;di&eacute;es aux clubs sont soumises &agrave; la souscription d'un abonnement mensuel ou annuel de la part du club (10&euro; / mois ou 100 &euro; / an).<br />
+        <span class="deluxe">Pour les clubs scolaires c'est gratuit!</span><br />
+        Pour plus de renseignements ou pour une d&eacute;monstration, merci de nous <a ui-sref="contact">contacter</a>.
       </p>
       <div ng-if="!auth.isAuthenticated()">
         se connecter
       </div>
+      <br /><br />
+      <img src="/assets/images/little-woman.jpeg" width="100%"/>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div data-ng-if="auth.isAuthenticated()">
         <div data-ng-if="clubList.length > 0">
           <h2>Mes clubs</h2>
