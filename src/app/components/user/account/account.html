@@ -30,6 +30,12 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+        Rechercher <input type="text" data-ng-model="searchName" data-ng-change="search()" />
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <h3>Parties jouées</h3>
         <table class="table table-condensed" ng-table="configTableParams">
           <tbody>

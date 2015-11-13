@@ -81,7 +81,7 @@ angular.module('lct')
               resolve(data);
             }).
             error(function (data, status) {
-              $log.error('Service POST ' + apiRoot + '/admin/chat/clean' + clubId + '/suspend respond ' + status);
+              $log.error('Service POST ' + apiRoot + '/admin/chat respond ' + status);
               reject();
             });
         });

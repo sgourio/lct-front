@@ -53,7 +53,7 @@ angular.module('lct')
               clubId: clubId
             }
           });
-          deleteClubModalInstance.result.then(function (clubID) {
+          deleteClubModalInstance.result.then(function () {
             adminService.deleteClub(clubId).then(function () {
               $scope.getClubs();
             });
@@ -79,7 +79,7 @@ angular.module('lct')
 
         $scope.cleanMainChat = function(){
           adminService.cleanMainChat();
-        }
+        };
 
       }
     };

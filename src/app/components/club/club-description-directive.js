@@ -15,7 +15,7 @@ angular.module('lct')
       templateUrl: 'app/components/club/club-description.html',
       controller: function($scope) {
         $scope.auth = $auth;
-        $window.sessionStorage.toState = 'club';
+        $window.sessionStorage.toState = 'clubs';
 
         $scope.createClub = function(clubName){
           clubService.create(clubName).then(function(){
@@ -31,7 +31,9 @@ angular.module('lct')
           });
         };
 
-        $scope.myClubs();
+        if( $auth.isAuthenticated()) {
+          $scope.myClubs();
+        }
       }
     };
   }]);

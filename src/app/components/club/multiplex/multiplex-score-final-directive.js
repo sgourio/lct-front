@@ -25,8 +25,8 @@ angular.module('lct')
                 name: result[i].name,
                 total: result[i].total
               });
-            };
-            $scope.scoreList.sort(function(a, b){return b.total- a.total});
+            }
+            $scope.scoreList.sort(function(a, b){return b.total- a.total;});
         });
       }
     };

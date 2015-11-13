@@ -11,7 +11,7 @@ angular.module('lct')
       restrict: 'A',
       scope: {
       },
-      link: function(scope, element, attrs){
+      link: function(scope, element){
         if( $auth.getPayload().isAdmin ){
           element.css('display', '');
         }else{

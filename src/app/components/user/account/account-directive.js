@@ -29,6 +29,14 @@ angular.module('lct')
             });
           }
         };
+
+        $scope.search = function(){
+          if( $scope.searchName ){
+            userService.search($scope.searchName).then(function(data){
+              $log.info(data)
+            });
+          }
+        }
       }
     };
   }]);

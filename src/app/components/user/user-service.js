@@ -100,8 +100,22 @@ angular.module('lct')
               reject();
             });
         });
-      }
+      },
 
+      search: function(name){
+        return $q(function(resolve, reject) {
+          // get the list immediately
+          var url = apiRoot + '/account/user';
+          $http.post(url, name).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + url + ' respond ' + status);
+              reject();
+            });
+        });
+      }
     };
     return userService;
   }]);

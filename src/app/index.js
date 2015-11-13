@@ -97,7 +97,8 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
     $stateProvider
       .state('clubs', {
         url: '/clubs',
-        template: '<club-description></club-description>'
+        template: '<club-description></club-description>',
+        authenticate: false
       });
 
     $stateProvider
