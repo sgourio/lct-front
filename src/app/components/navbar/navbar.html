@@ -24,7 +24,7 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li><a ng-if="!isAuthenticated()" ui-sref="signin">Connexion</a></li>
-              <li><a ng-if="isAuthenticated()" ui-sref="account">{{auth.getPayload().sub}}</a></li>
+              <li><a ng-if="isAuthenticated()" ui-sref="account">{{auth.getPayload().nickname}}</a></li>
               <li><a ng-if="isAuthenticated()" ng-click="logout()" href="javascript:void(0)"> Déconnexion</a></li>
               <li><a ng-if="auth.getPayload().isAdmin" href="javascript:void(0)" ui-sref="admin">Admin</a></li>
             </ul>

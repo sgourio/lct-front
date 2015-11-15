@@ -27,7 +27,6 @@ angular.module('lct')
         $scope.myClubs = function(){
           clubService.myClubs().then(function(data){
             $scope.clubList = data;
-            $log.info(data);
           });
         };
 

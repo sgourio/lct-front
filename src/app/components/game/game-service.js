@@ -82,12 +82,13 @@ angular.module('lct')
         });
       },
 
-      openGame: function(gameId, gameName, roundTime){
+      openGame: function(gameId, gameName, roundTime, authorizedUserIds){
         return $q(function(resolve, reject) {
           $http.put(apiRoot + '/play/openGame',{
             gameId : gameId,
             gameName : gameName,
-            roundTime : roundTime
+            roundTime : roundTime,
+            authorizedUserIds : authorizedUserIds
           }).
             success(function (data) {
               resolve(data);

@@ -57,6 +57,37 @@
                 </form>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h2>4. (optionnel) Limiter l'accès</h2>
+                <form class="col-md-11 col-md-offset-1">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" data-ng-model="authorization" data-ng-click="authorizationChange()" value="all" name="authorization"/>
+                      Tout le monde
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" data-ng-model="authorization" data-ng-click="authorizationChange()" value="friends" name="authorization"/>
+                      Mes amis
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" data-ng-model="authorization" data-ng-click="authorizationChange()" value="me" name="authorization"/>
+                      Moi seulement
+                    </label>
+                  </div>
+                  <div class="radio" data-ng-repeat="club in clubList">
+                    <label>
+                      <input type="radio" data-ng-model="$parent.authorization" data-ng-click="authorizationChange(club.id)" value="{{club.id}}" name="authorization"/>
+                      Club: "{{::club.name}}"
+                    </label>
+                  </div>
+                </form>
+              </div>
+            </div>
             <div class="row" ng-if="hasError">
               <div class="col-md-12">
                 <br />

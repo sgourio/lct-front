@@ -9,6 +9,7 @@ angular.module('lct')
       templateUrl: 'app/components/user/account/account.html',
       controller: function($scope){
         $scope.showForm = false;
+        $scope.searchName = '';
         userService.myAccount().then(function(userBean){
           $scope.account = userBean;
         });
@@ -30,13 +31,36 @@ angular.module('lct')
           }
         };
 
+        $scope.updateFriendList = function(){
+          userService.getFriends().then(function(data){
+            $scope.friends = data;
+          });
+        };
+        $scope.updateFriendList();
+
         $scope.search = function(){
           if( $scope.searchName ){
             userService.search($scope.searchName).then(function(data){
-              $log.info(data)
+              $scope.userProposals = data;
             });
           }
-        }
+        };
+
+        $scope.addFriend = function(friendId){
+          if( friendId ){
+            userService.addFriend(friendId).then(function(){
+              $scope.updateFriendList();
+            });
+          }
+        };
+
+        $scope.removeFriend = function(friendId){
+          if( friendId ){
+            userService.removeFriend(friendId).then(function(){
+              $scope.updateFriendList();
+            });
+          }
+        };
       }
     };
   }]);

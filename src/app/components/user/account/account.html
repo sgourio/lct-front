@@ -29,10 +29,46 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        Rechercher <input type="text" data-ng-model="searchName" data-ng-change="search()" />
-      </div>
+      <div class="col-md-6">
+        <h3>Mes amis</h3>
+        <div>
+          <span data-ng-if="!friends || friends.length === 0">L'homme n'est jamais moins seul que lorsqu'il est seul (Ciceron)</span>
 
+          <ul class="userList" data-ng-if="friends.length > 0">
+            <li data-ng-repeat="user in friends" class="row">
+              <div class="col-md-6">
+                <user user="user"></user>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-lct btn-xs" data-ng-click="removeFriend(user.id)">Supprimer</button>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3>Ajouter des amis</h3>
+        <p>Rechercher et enregistrer des amis pour pouvoir faire des parties privées avec eux.</p>
+        <form class="form-inline">
+          <div class="form-group">
+            <label class="control-label">Pseudo ou email: </label>
+            <input type="text" class="form-control" data-ng-model="searchName" data-ng-change="search()"></textarea>
+          </div>
+        </form>
+        <div data-ng-if="userProposals">
+          <ul class="userList">
+            <li data-ng-repeat="user in userProposals" class="row">
+              <div class="col-md-6">
+                <user user="user"></user>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-lct btn-xs" data-ng-click="addFriend(user.id)">Ajouter</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-12">

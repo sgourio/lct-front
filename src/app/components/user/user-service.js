@@ -115,6 +115,49 @@ angular.module('lct')
               reject();
             });
         });
+      },
+
+      getFriends: function(){
+        return $q(function(resolve, reject) {
+          var url = apiRoot + '/account/friend';
+          $http.get(url).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + url + ' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      addFriend: function(friendId){
+        return $q(function(resolve, reject) {
+          var url = apiRoot + '/account/friend';
+          $http.post(url, friendId).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + url + ' respond ' + status);
+              reject();
+            });
+        });
+      },
+
+      removeFriend: function(friendId){
+        return $q(function(resolve, reject) {
+          // get the list immediately
+          var url = apiRoot + '/account/friend/'+friendId;
+          $http.delete(url).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET ' + url + ' respond ' + status);
+              reject();
+            });
+        });
       }
     };
     return userService;
