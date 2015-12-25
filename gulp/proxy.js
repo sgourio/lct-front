@@ -44,7 +44,7 @@ proxy.on('error', function(error, req, res) {
  //
  proxy.on('upgrade', function (req, socket, head) {
    gutil.log('web-socket');
-   proxy.ws(req, socket, head);
+   proxy.ws(req, socket, head, { target: proxyTarget });
  });
 
 /*

@@ -1,5 +1,5 @@
-<ul>
+<ul class="connectedUser">
   <li ng-repeat="player in users">
-    {{::player.name}}
+    <img data-ng-src="{{::player.pictureURL}}" width="40px" /><span>{{::player.name}}</span>
   </li>
 </ul>
