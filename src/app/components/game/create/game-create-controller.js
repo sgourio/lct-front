@@ -4,12 +4,6 @@
  * sylvain.gourio@gmail.com
  */
 
-/*
- * Scrabble Helper Module 2015.
- * Written by Sylvain Gourio
- * sylvain.gourio@gmail.com
- */
-
 'use strict';
 
 /**
@@ -98,7 +92,7 @@ angular.module('lct')
         }else if( clubId ){
           $scope.authorizeToClub(clubId);
         }
-      }
+      };
     };
 
 
