@@ -12,6 +12,7 @@ angular.module('lct')
 
         $scope.logout = function(){
           $auth.logout();
+          $state.transitionTo('home');
         };
         $scope.isAuthenticated = function() {
           return $auth.isAuthenticated();

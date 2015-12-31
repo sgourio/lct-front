@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover','ngStomp', 'ngTable'])
+angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover','ngStomp', 'ngTable','ckeditor'])
   .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider, $authProvider, $windowProvider) {
     $stateProvider
       .state('home', {
@@ -168,7 +168,6 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       responseError: function(rejection) {
         if (rejection.status === 401) {
           $log.debug('Response Error 401',rejection);
-          $location.path('/signin');
         }
         return $q.reject(rejection);
       }

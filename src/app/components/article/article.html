@@ -1,0 +1,35 @@
+<div class="article">
+  <div class="thumbnail" data-ng-if="article != null">
+    <div class="caption">
+      <h1 data-ng-bind="article.title"></h1>
+      <span data-ng-bind-html="article.content"></span>
+    </div>
+    <div data-ng-show="admin && article != null" >
+      <button data-ng-click="$parent.edit = !$parent.edit" class="btn btn-lct"><i class="fa fa-pencil"></i> Editer</button>
+    </div>
+  </div>
+
+  <div data-ng-show="edit">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-11 edit">
+        <form>
+          <div class="form-group">
+            <label>Titre</label>
+            <input type="text" data-ng-model="article.title"/>
+          </div>
+          <div class="form-group">
+            <label>Contenu</label>
+            <div ckeditor="options" ng-model="article.content" ready="onReady()"></div>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" data-ng-model="article.published" /> Publier
+            </label>
+          </div>
+          <button class="btn btn-lct" data-ng-click="saveArticle()"><i class="fa fa-floppy-o"></i> Enregistrer</button>
+          <button class="btn btn-lct" data-ng-click="deleteArticle()" data-ng-show="article.id != null"><i class="fa fa-trash"></i> Supprimer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

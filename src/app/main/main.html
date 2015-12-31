@@ -1,4 +1,4 @@
-  <div class="jumbotron text-center">
+ <div class="jumbotron text-center">
     <img src="assets/images/logo_LCT.png" alt="Lettre Compte Triple">
     <p class="lead">
       <span class="version">
@@ -7,7 +7,13 @@
     </p>
     <p><a class="btn btn-lg btn-success" ui-sref="gameList">Génial! <i class="fa fa-gratipay"></i></a></p>
   </div>
-  <div class="row">
+  <div data-ng-show="admin">
+    <button class="btn btn-lct" data-ng-click="addArticle()">Ajouter un article</button>
+  </div>
+  <div ng-repeat="article in articles">
+    <article data-article="article" data-admin="admin"/>
+  </div>
+  <div class="row awesome">
     <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
       <div class="thumbnail">
         <img class="pull-right" ng-src="assets/images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}" ng-if="awesomeThing.logo">

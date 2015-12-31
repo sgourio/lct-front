@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lct')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl',['$scope', '$log', 'articleService', '$auth' , function ($scope, $log, articleService, $auth) {
     $scope.awesomeThings = [
       {
         'title': 'Jouer au scrabble duplicate',
@@ -68,16 +68,17 @@ angular.module('lct')
       },
       {
         'title': 'Aider LCT',
-        'description': 'Nous avons plein d\'id&eacute;es pour am&eacute;liorer le site, mais pas que. Nous avons une vision sur le devenir du Scrabble de comp&eacute;tition, et l\'envie de proposer des projets novateurs comme par exemple un plateau connect&eacute; &agrave; LCT. Nous recherchons un m&eacute;c&egrave;ne pour nous soutenir dans nos ambitions.',
+        'description': 'Nous avons plein d\'id&eacute;es pour am&eacute;liorer le site, mais pas que. Nous rêvons de proposer des projets novateurs comme par exemple un plateau connect&eacute; &agrave; LCT. Nous recherchons un m&eacute;c&egrave;ne pour nous soutenir dans nos ambitions.',
         'icon': 'money',
         'class' : 'yellow',
         'url': '#/contact'
       },
       {
         'title': 'Amis du Plessis',
-        'description': 'Les bons sites sur le Scrabble ne sont pas légion, mais celui du <a href="http://www.scrabbleplesseen.fr/" class="deluxe">Scrabble Plesseen</a> se démarque par la qualité des d\'informations qu\'il propose.<br />Allez y faire un tour',
+        'description': 'Les bons sites sur le Scrabble ne sont pas légion, mais celui du <a href="http://www.scrabbleplesseen.fr/" class="deluxe">Scrabble Plesseen</a> se démarque par la qualité des d\'informations qu\'il propose.<br />',
         'icon': 'thumbs-o-up',
-        'class' : 'yellow'
+        'class' : 'yellow',
+        'url': 'http://www.scrabbleplesseen.fr/'
       }
 
 
@@ -85,4 +86,34 @@ angular.module('lct')
     angular.forEach($scope.awesomeThings, function(awesomeThing) {
       awesomeThing.rank = Math.random();
     });
-  });
+
+    $scope.articles = [];
+    $scope.admin = $auth.isAuthenticated() && $auth.getPayload().isAdmin;
+
+    if( $scope.admin ) {
+      articleService.Article.all().$promise.then(function (data) {
+        $scope.articles = data;
+      }, function (error) {
+        $log.error(error);
+      });
+    }else{
+      articleService.Article.published().$promise.then(function (data) {
+        $scope.articles = data;
+      }, function (error) {
+        $log.error(error);
+      });
+    }
+
+    $scope.addArticle = function(){
+      $scope.articles.unshift(new articleService.Article({
+        id: null,
+        title: '',
+        content: '',
+        creationDate: null,
+        published: false
+      }));
+    };
+
+
+
+  }]);

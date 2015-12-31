@@ -525,32 +525,48 @@ td.reference{
   }
 }
 
-.thumbnail{
-  height: 200px;
-  max-height: 200px;
-  overflow-y: auto;
-  .pink{
-    color: deeppink;
-  }
-  .blue{
-    color: lightskyblue;
-  }
-  .green{
-    color: palegreen;
-  }
-  .yellow{
-    color: #fbcb09;
-  }
-  .black{
-    color: #000000;
-  }
-  .red{
-    color: #ff5766;
-  }
-  .brown{
-    color: brown;
+.awesome {
+  .thumbnail {
+    height: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    .pink {
+      color: deeppink;
+    }
+    .blue {
+      color: lightskyblue;
+    }
+    .green {
+      color: palegreen;
+    }
+    .yellow {
+      color: #fbcb09;
+    }
+    .black {
+      color: #000000;
+    }
+    .red {
+      color: #ff5766;
+    }
+    .brown {
+      color: brown;
+    }
   }
 }
+
+.article{
+  .thumbnail{
+    h1{
+      color: #fbcb09;
+      font-size: 2.2em;
+    }
+    font-size: 1.2em;
+  }
+  .edit{
+    margin-bottom: 60px;
+  }
+}
+
 .account {
   img.profilePicture {
     max-width: 100%;

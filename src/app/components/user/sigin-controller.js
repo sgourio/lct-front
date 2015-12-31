@@ -13,7 +13,7 @@ angular.module('lct')
         $auth.setToken(response);
         var toState = $window.sessionStorage.toState || 'account';
         $window.sessionStorage.toState = null;
-        if( !toState || toState === 'signin'){
+        if( !toState || toState === 'null' || toState === 'signin'){
           toState = 'account';
         }
         $state.transitionTo(toState);
