@@ -63,7 +63,8 @@ module.exports = function(options) {
       }))
       .pipe(htmlFilter.restore())
       .pipe(gulp.dest(options.dist + '/'))
-      .pipe($.size({ title: options.dist + '/', showFiles: true }));
+      .pipe($.size({ title: options.dist + '/', showFiles: true }))
+      ;
   });
 
   // Only applies for fonts from bower dependencies
@@ -88,7 +89,7 @@ module.exports = function(options) {
   });
 
   gulp.task('zip', ['build'], function () {
-    return gulp.src('dist/**')
+    return gulp.src(['dist/**','!lct-front.zip'])
       .pipe(zip('lct-front.zip'))
       .pipe(gulp.dest('dist'));
   });

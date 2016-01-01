@@ -6,7 +6,7 @@
 
 'use strict';
 angular.module('lct')
-  .directive('article', [ '$log', 'articleService', function($log, articleService) {
+  .directive('article', [ '$log', '$window', function($log, $window) {
     return {
       restrict: 'E',
       scope: {
@@ -32,15 +32,15 @@ angular.module('lct')
 
 
         $scope.saveArticle = function(){
-          $scope.article.$save().then(function(data) {
+          $scope.article.$save().then(function() {
             $log.info('saved');
             $scope.edit = false;
           });
         };
 
         $scope.deleteArticle = function(){
-          if( confirm('Supprimer l\'article?')) {
-            $scope.article.$delete().then(function (data) {
+          if( $window.confirm('Supprimer l\'article?')) {
+            $scope.article.$delete().then(function () {
               $log.info('deleted');
               $scope.edit = false;
               $scope.article = null;

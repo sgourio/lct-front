@@ -16,7 +16,7 @@ angular.module('lct')
       replace: true,
       templateUrl: 'app/components/game/play/directives/play-game-score.html',
       controller: function($scope){
-        $scope.username = $auth.getPayload().sub;
+        $scope.username = $auth.getPayload().nickname;
 
         gameService.gameScores($scope.gameMetaData.playGameId).then(function(gameScore){
           $log.info(gameScore);

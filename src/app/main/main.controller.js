@@ -5,13 +5,13 @@ angular.module('lct')
     $scope.awesomeThings = [
       {
         'title': 'Jouer au scrabble duplicate',
-        'description': 'Joue au scrabble en mode duplicate!',
+        'description': 'Joue au scrabble en mode duplicate, le meilleur moyen d\'apprendre &agrave; jouer et de s\'améliorer.',
         'icon' : 'star',
         'class' : 'blue'
       },
       {
         'title': 'Dictionnaire ODS 7',
-        'description': 'Le dictionnaire officile du scrabble en vigueur dans les tournois depuis le 1er Janvier 2016',
+        'description': 'Le dictionnaire officiel du scrabble en vigueur dans les tournois depuis le 1er Janvier 2016',
         'icon' : 'book',
         'class' : 'yellow'
       },
@@ -24,7 +24,7 @@ angular.module('lct')
       },
       {
         'title': 'Rejouer des parties',
-        'description': 'Sur Lettre Compte Triple, on peut rejouer des parties célèbres avec ses amis.<br />Cela permet de vous confronter virtuellement avec les meilleurs dans les tournois.',
+        'description': 'Sur Lettre Compte Triple, on pourra bient&ocirc;t rejouer des parties célèbres avec ses amis.<br />Cela permet de se confronter virtuellement avec les meilleurs joueurs francophones.',
         'icon': 'repeat',
         'class': 'red'
       },
@@ -68,14 +68,14 @@ angular.module('lct')
       },
       {
         'title': 'Aider LCT',
-        'description': 'Nous avons plein d\'id&eacute;es pour am&eacute;liorer le site, mais pas que. Nous rêvons de proposer des projets novateurs comme par exemple un plateau connect&eacute; &agrave; LCT. Nous recherchons un m&eacute;c&egrave;ne pour nous soutenir dans nos ambitions.',
+        'description': 'Nous avons plein d\'id&eacute;es pour am&eacute;liorer le site, mais pas que. Nous rêvons de proposer des projets novateurs comme par exemple un "plateau connect&eacute;" &agrave; LCT. Nous recherchons un m&eacute;c&egrave;ne pour nous soutenir dans nos ambitions.',
         'icon': 'money',
         'class' : 'yellow',
         'url': '#/contact'
       },
       {
         'title': 'Amis du Plessis',
-        'description': 'Les bons sites sur le Scrabble ne sont pas légion, mais celui du <a href="http://www.scrabbleplesseen.fr/" class="deluxe">Scrabble Plesseen</a> se démarque par la qualité des d\'informations qu\'il propose.<br />',
+        'description': 'Les bons sites sur le Scrabble ne sont pas légion, mais celui du <a href="http://www.scrabbleplesseen.fr/" class="deluxe">Scrabble Plesseen</a> se démarque par la qualité des informations qu\'il propose.<br />',
         'icon': 'thumbs-o-up',
         'class' : 'yellow',
         'url': 'http://www.scrabbleplesseen.fr/'
