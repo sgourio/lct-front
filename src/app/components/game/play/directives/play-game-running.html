@@ -24,7 +24,7 @@
         <span data-ng-if="gameMetaData.creatorId !== 'auto'">(et créée par {{::gameMetaData.creator}})</span>
       </span><br />
       Tour #{{round.roundNumber}}
-      <timer play-game-id="gameMetaData.playGameId"></timer>
+
     </div>
   </div>
   <div class="row">
@@ -32,6 +32,7 @@
       <play-game-board round="round"></play-game-board>
     </div>
     <div class="col-md-4 col-lg-6">
+      <timer play-game-id="gameMetaData.playGameId"></timer>
       <play-text round="round"></play-text>
       <display-messages round="round"></display-messages>
       <chat id="{{gameMetaData.playGameId}}"></chat>
