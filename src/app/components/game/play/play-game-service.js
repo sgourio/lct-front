@@ -101,7 +101,7 @@ angular.module('lct')
             row--;
           }
           var i = row;
-          while( square.droppedTile !== null && i < board.squares.length - 1){
+          while( square.droppedTile !== null && i < board.squares.length){
             square = board.squares[i][column];
             if( square.droppedTile !== null ) {
               if( square.droppedTile.tile.tileType === 'wildcard' ){
