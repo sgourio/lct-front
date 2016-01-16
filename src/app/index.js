@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover','ngStomp', 'ngTable','ckeditor'])
+angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'satellizer', 'gameDrag', 'nsPopover','ngStomp', 'ngTable','ckeditor', 'cropme'])
   .config(function ($stateProvider, $urlRouterProvider, $provide, $httpProvider, $authProvider, $windowProvider) {
     $stateProvider
       .state('home', {
@@ -74,6 +74,13 @@ angular.module('lct', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
       .state('account', {
         url: '/account',
         template: '<account></account>',
+        authenticate: true
+      });
+
+    $stateProvider
+      .state('accountPicutre', {
+        url: '/account/picture',
+        template: '<account-picture></account-picture>',
         authenticate: true
       });
 

@@ -2,6 +2,7 @@
     <div class="row">
       <div class="col-md-3">
         <img data-ng-src="{{account.profilPictureURL}}?type=large" class="profilePicture"/>
+        <a ui-sref="accountPicutre">Modifier</a>
       </div>
       <div class="col-md-9">
         <h1>{{::account.name}} <span data-ng-show="account.nickname">&lt;&nbsp;{{ account.nickname }}&nbsp;&gt;</span></h1>

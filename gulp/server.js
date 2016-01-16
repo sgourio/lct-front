@@ -16,7 +16,8 @@ module.exports = function(options) {
     var routes = null;
     if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
       routes = {
-        '/bower_components': 'bower_components'
+        '/bower_components': 'bower_components',
+        '/account/picture': '/home/sgourio/workspace/scrabble/images'
       };
     }
 
@@ -69,7 +70,7 @@ module.exports = function(options) {
   //}));
 
   gulp.task('serve', ['watch'], function () {
-    browserSyncInit([options.tmp + '/serve', options.src]);
+    browserSyncInit([options.tmp + '/serve', '/home/sgourio/workspace/scrabble/images', options.src]);
   });
 
   gulp.task('serve:dist', ['build'], function () {

@@ -158,7 +158,29 @@ angular.module('lct')
               reject();
             });
         });
-      }
+      },
+
+      uploadPicture: function(blob){
+        return $q(function(resolve, reject) {
+          // get the list immediately
+          var req = {
+            method: 'POST',
+            url: apiRoot + '/account/user/picture',
+            headers: {
+              'Content-Type': blob.type
+            },
+            data: blob
+          };
+          $http(req).
+            success(function (data) {
+              resolve(data);
+            }).
+            error(function (data, status) {
+              $log.error('Service GET /account/user/picture respond ' + status);
+              reject();
+            });
+        });
+      },
     };
     return userService;
   }]);

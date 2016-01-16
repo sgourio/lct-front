@@ -236,6 +236,9 @@ ul{
       text-align: center;
       padding-top: 10px;
     }
+    a{
+      min-height: 8px;
+    }
   }
 
   .over{
@@ -493,6 +496,7 @@ td.reference{
     line-height: 34px;
     color: darkslategray;
     font-size: 30px;
+    font-weight: bold;
     display: block;
     &:after{
       clear: both;

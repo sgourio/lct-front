@@ -64,7 +64,7 @@ function proxyMiddleware(req, res, next) {
   if( /^\/$/.test(req.url)){
     next();
   }else
-  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur)(\?((r|v|rel|rev|t)=[\-\.\w]*)?)?$/.test(req.url)) {
+  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|woff2|cur)(\?((r|v|rel|rev|t|type)=[\-\.\w]*)?)?$/.test(req.url)) {
     next();
   } else {
     proxy.web(req, res);
