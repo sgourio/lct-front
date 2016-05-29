@@ -17,7 +17,7 @@ module.exports = function(options) {
     if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
       routes = {
         '/bower_components': 'bower_components',
-        '/account/picture': '/home/sgourio/workspace/scrabble/images'
+        '/picture': '/home/sgourio/workspace/scrabble/images'
       };
     }
 
