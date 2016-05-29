@@ -1,5 +1,5 @@
 <div>
-  <button class="btn btn-lct" ng-if="!isOwner" data-ng-click="unsubscribe(gameMetaData.playGameId)">Se retirer</button>
+  <button class="btn btn-lct" ng-if="!isOwner" data-ng-click="quitGame(gameMetaData.playGameId)">Se retirer</button>
   <div ng-if="isOwner">
 
     <div ng-if="displayStartDate()">
