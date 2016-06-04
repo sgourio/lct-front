@@ -1,5 +1,12 @@
-<ul class="connectedUser">
-  <li ng-repeat="player in users">
-    <img data-ng-src="{{::player.pictureURL}}" width="40px" /><span>{{::player.name}}</span>
-  </li>
-</ul>
+<div>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-filter"></i></span>
+    <input type="text" class="form-control" placeholder="Filtrer" data-ng-model="searchUser">
+  </div>
+  <br />
+  <ul class="connectedUser">
+    <li ng-repeat="player in users | filter:searchUser : false">
+      <img data-ng-src="{{::player.pictureURL}}" width="40px" /><span>{{::player.name}}</span>
+    </li>
+  </ul>
+</div>

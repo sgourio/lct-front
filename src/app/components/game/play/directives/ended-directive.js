@@ -20,6 +20,8 @@ angular.module('lct')
           for( var i = 0 ; i < gameScore.playerGameScoreList.length; i++ ){
             if( gameScore.playerGameScoreList[i].total < points ){
               break;
+            }else if ( gameScore.playerGameScoreList[i].total > points ){
+              winners = '';
             }
             points = gameScore.playerGameScoreList[i].total;
             $scope.percentageFromTop = gameScore.playerGameScoreList[i].percentageFromTop;
