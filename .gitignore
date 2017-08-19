@@ -5,3 +5,4 @@ bower_components/
 dist/
 .idea/
 .DS_Store
+.vscode/
